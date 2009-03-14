@@ -1,0 +1,1 @@
+Experimenting with a DM adapter for redis
