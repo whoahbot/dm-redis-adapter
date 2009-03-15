@@ -3,29 +3,20 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/redis_adap
 
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
+    DataMapper::Adapters::RedisAdapter.redis.select_db(15)
+    
     class Post
       include DataMapper::Resource
       
       property :id,   Serial
-      property :text, String
-    end
-  end
-  
-  describe "Repository" do
-    it "should return the correct adapter name" do
-      DataMapper.repository.adapter.uri[:adapter].should == 'redis'
+      property :text, Text
     end
     
-    it "should allow the user to configure the port" do
-      DataMapper.repository.adapter.uri[:port].should == 6379
-    end
+    @post   = Post.create(:text => "I'm a stupid blog!")
+    @post2  = Post.create(:text => "I'm another stupid blog!")
   end
   
-  describe "creating new records" do
-    before(:each) do
-      @post = Post.create(:text => "I'm a stupid blog!")
-    end
-    
+  describe "create" do
     it "should create an instance of the specified class" do
       @post.should be_an_instance_of(Post)
     end
@@ -35,14 +26,14 @@ describe DataMapper::Adapters::RedisAdapter do
     end
     
     it "should increment the serial field on each create" do
-      @post.save
       new_post_id = Post.create(:text => "Hey, I'm a cretin!").id
-      new_post_id.should == @post.id + 1
+      new_post_id.should == @post2.id + 1
     end
-    
-    it "should save the attributes for the new record" do
-      pending
-      Post.get(@post.id).text.should == "I'm a stupid blog!"
+  end
+  
+  describe "get" do
+    it "should return all records" do
+      Post.all.should include(@post, @post2)
     end
   end
 end

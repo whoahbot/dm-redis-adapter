@@ -1,1 +1,14 @@
-Experimenting with a DM adapter for redis
+h1. DM-Redis
+
+This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value db.
+
+h2. Install
+
+Prerequisites
+  Redis:
+    <a href="http://code.google.com/p/redis/">Redis</a>
+  Gems:
+    <a href="http://github.com/ezmobius/redis-rb">redis-rb</a>By the excellent Ezra Zygmuntowicz
+    <a href="http://github.com/datamapper/extlib">extlib</a>
+    <a href="http://github.com/datamapper/do/">data-objects</a>, dependency for dm-cores
+    <a href="http://github.com/datamapper/dm-core/tree/next">dm-core</a> next branch

@@ -8,25 +8,46 @@ module DataMapper
     Extlib::Inflection.word 'redis'
     
     class RedisAdapter < AbstractAdapter
+      cattr_accessor :redis
+      
       @@redis = Redis.new
       
       def create(resources)
-        created = 0
         resources.each do |resource|
-          identity_field = resource.model.key(repository.name).detect { |p| p.serial? }
+          model = resource.model
           
-          if identity_field
+          if identity_field = model.identity_field(name)
             identity_field.set!(resource, @@redis.incr("#{resource.model}:serial"))
-            created += 1
           end
           
-          resource.dirty_attributes.each do |property, value|
-            property.set!(resource, value)
-            @@redis["#{resource.model}:#{resource.id}:#{property.name}"] = value
+          resource.attributes.each do |property, value|
+            @@redis["#{model}:#{resource.key}:#{property}"] = value
+            @@redis.push_tail("#{model}:all", resource.key.to_s)
           end
         end
-        created
+        
+        resources.size
+      end
+      
+      def read_one(query)
+        read_many(query).first
+      end
+
+      def read_many(query)
+        model   = query.model
+        fields  = query.fields
+        
+        records_for(model).map do |record|
+          model.load(fields.map { |p| record[p.name] }, query)
+        end
+      end
+      
+      private
+      
+      def records_for(model)
+        @@redis.list_range("#{model}:all", 0, -1)
       end
     end # class RedisAdapter
+    const_added(:RedisAdapter)
   end # module Adapters
 end # module DataMapper

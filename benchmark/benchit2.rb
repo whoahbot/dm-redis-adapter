@@ -7,11 +7,11 @@ class Post
   include DataMapper::Resource
   
   property :id,   Serial
-  property :text, String
+  property :text, Text
 end
 
 Post.auto_migrate!
 
-Benchmark.bmbm do |x|
+Benchmark.benchmark do |x|
   x.report { 1000.times { Post.create(:text => "I like ice cream")}}
 end
