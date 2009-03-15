@@ -23,9 +23,8 @@ module DataMapper
             @redis.push_tail("#{model}:all", resource.key.to_s)
           end
           
-          resource.attributes.each do |property, value|
-            @redis["#{model}:#{resource.key}:#{property}"] = value
-          end
+          update_attributes(resource, resource.attributes)
+          @redis.push_tail("#{model}:all", resource.key.to_s)
         end
         
         resources.size
@@ -45,6 +44,12 @@ module DataMapper
       end
       
       private
+      
+      def update_attributes(resource, attributes)
+        attributes.each do |property, value|
+          @redis["#{resource.model}:#{resource.key}:#{property}"] = value
+        end
+      end
       
       def records_for(model)
         record_ids = @redis.list_range("#{model}:all", 0, -1)
