@@ -1,10 +1,7 @@
 require 'benchmark'
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/redis_adapter.rb'))
 
-DataMapper.setup(:default, {
-  :adapter  => "redis",
-  :database => 15
-})
+DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
 
 class Post
   include DataMapper::Resource
@@ -12,6 +9,8 @@ class Post
   property :id,   Serial
   property :text, Text
 end
+
+Post.auto_migrate!
 
 Benchmark.benchmark do |x|
   x.report { 1000.times { Post.create(:text => "I like ice cream")}}

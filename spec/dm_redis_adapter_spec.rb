@@ -3,17 +3,23 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/redis_adap
 
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
-    DataMapper::Adapters::RedisAdapter.redis.select_db(15)
-    
     class Post
       include DataMapper::Resource
       
       property :id,   Serial
       property :text, Text
     end
-    
+  end
+  
+  before(:each) do
     @post   = Post.create(:text => "I'm a stupid blog!")
     @post2  = Post.create(:text => "I'm another stupid blog!")
+  end
+  
+  after(:each) do
+    # Ghetto delete all
+    r = Redis.new
+    r.keys('*').each {|k| r.delete k }
   end
   
   describe "create" do

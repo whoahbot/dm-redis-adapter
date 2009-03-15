@@ -8,21 +8,23 @@ module DataMapper
     Extlib::Inflection.word 'redis'
     
     class RedisAdapter < AbstractAdapter
-      cattr_accessor :redis
-      
-      @@redis = Redis.new
+      def initialize(name, uri_or_options)
+        super
+        @redis = Redis.new
+        @redis.select_db(@options[:database]) if @options[:database]
+      end
       
       def create(resources)
         resources.each do |resource|
           model = resource.model
           
           if identity_field = model.identity_field(name)
-            identity_field.set!(resource, @@redis.incr("#{resource.model}:serial"))
+            identity_field.set!(resource, @redis.incr("#{resource.model}:serial"))
           end
           
           resource.attributes.each do |property, value|
-            @@redis["#{model}:#{resource.key}:#{property}"] = value
-            @@redis.push_tail("#{model}:all", resource.key.to_s)
+            @redis["#{model}:#{resource.key}:#{property}"] = value
+            @redis.push_tail("#{model}:all", resource.key.to_s)
           end
         end
         
@@ -45,7 +47,7 @@ module DataMapper
       private
       
       def records_for(model)
-        @@redis.list_range("#{model}:all", 0, -1)
+        @redis.list_range("#{model}:all", 0, -1)
       end
     end # class RedisAdapter
     const_added(:RedisAdapter)
