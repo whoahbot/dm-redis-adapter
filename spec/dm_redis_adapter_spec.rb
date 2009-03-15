@@ -20,7 +20,7 @@ describe DataMapper::Adapters::RedisAdapter do
     @resource = @model.new(:text => "I'm a stupid blog!")
   end
   
-  after(:all) do
+  after(:each) do
     # Ghetto delete all
     r = Redis.new
     r.keys('*').each {|k| r.delete k }
@@ -51,6 +51,7 @@ describe DataMapper::Adapters::RedisAdapter do
   describe "#read_many" do
     before(:each) do
       @resource.save
+      @resource2 = @model.create(:text => "I'm yet another stupid blog!")
       @return = @adapter.read_many(DataMapper::Query.new(@repository, @model, :id => @resource.id))
     end
     
@@ -59,7 +60,7 @@ describe DataMapper::Adapters::RedisAdapter do
     end
     
     it "should return all records" do
-      @return.should include(@resource)
+      @return.should == [@resource, @resource2]
     end
   end
 end

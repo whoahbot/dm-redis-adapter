@@ -14,5 +14,10 @@ class Post
 end
 
 Benchmark.benchmark do |x|
-  x.report { 1000.times { Post.create(:text => "I like ice cream")}}
+  x.report { 1000.times { Post.create(:text => "I like ice cream") } }
+end
+
+Benchmark.benchmark do |x|
+  1000.times { Post.create(:text => "I like ice cream") }
+  x.report { Post.all }
 end
