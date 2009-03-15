@@ -24,8 +24,8 @@ module DataMapper
           
           resource.attributes.each do |property, value|
             @redis["#{model}:#{resource.key}:#{property}"] = value
-            @redis.push_tail("#{model}:all", resource.key.to_s)
           end
+          @redis.push_tail("#{model}:all", resource.key.to_s)
         end
         
         resources.size
