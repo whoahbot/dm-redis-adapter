@@ -20,12 +20,12 @@ module DataMapper
           
           if identity_field = model.identity_field(name)
             identity_field.set!(resource, @redis.incr("#{resource.model}:serial"))
+            @redis.push_tail("#{model}:all", resource.key.to_s)
           end
           
           resource.attributes.each do |property, value|
             @redis["#{model}:#{resource.key}:#{property}"] = value
           end
-          @redis.push_tail("#{model}:all", resource.key.to_s)
         end
         
         resources.size
@@ -40,15 +40,16 @@ module DataMapper
         fields  = query.fields
         
         records_for(model).map do |record|
-          model.load(fields.map { |p| record[p.name] }, query)
+          model.load(fields.map {|property| property.typecast(@redis["#{model}:#{record}:#{property.name}"]) }, query)
         end
       end
       
       private
       
       def records_for(model)
-        @redis.list_range("#{model}:all", 0, -1)
+        record_ids = @redis.list_range("#{model}:all", 0, -1)
       end
+      
     end # class RedisAdapter
     const_added(:RedisAdapter)
   end # module Adapters
