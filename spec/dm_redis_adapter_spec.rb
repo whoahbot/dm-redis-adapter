@@ -63,4 +63,18 @@ describe DataMapper::Adapters::RedisAdapter do
       @return.should == [@resource, @resource2]
     end
   end
+  
+  it { @adapter.should respond_to(:read_one) }
+  
+  describe "#read_one" do
+    before(:each) do
+      @resource.save
+      @resource2 = @model.create(:text => "I'm the biggest stupidest blog ever!")
+      @return = @adapter.read_one(DataMapper::Query.new(@repository, @model, :id => @resource2.id))
+    end
+    
+    it "should return the correct record" do
+      @return.should == @resource2
+    end
+  end
 end

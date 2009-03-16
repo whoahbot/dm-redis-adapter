@@ -38,7 +38,9 @@ module DataMapper
         model   = query.model
         fields  = query.fields
         
-        records_for(model).map do |record|
+        records = records_for(model)
+        
+        filter_records(records, query).map! do |record|
           model.load(fields.map {|property| property.typecast(@redis["#{model}:#{record}:#{property.name}"]) }, query)
         end
       end
@@ -52,9 +54,37 @@ module DataMapper
       end
       
       def records_for(model)
-        record_ids = @redis.list_range("#{model}:all", 0, -1)
+        @redis.list_range("#{model}:all", 0, -1)
       end
       
+      def match_records(records, query)
+        conditions = query.conditions
+
+        # Be destructive by using #delete_if
+        records.delete_if do |record|
+          not conditions.all? do |condition|
+            operator, property, bind_value = *condition
+
+            value = property.typecast(@redis["#{query.model}:#{record}:#{property.name}"])
+
+            case operator
+              when :eql, :in then equality_comparison(bind_value, value)
+              when :not      then !equality_comparison(bind_value, value)
+              when :like     then Regexp.new(bind_value) =~ value
+              when :gt       then !value.nil? && value >  bind_value
+              when :gte      then !value.nil? && value >= bind_value
+              when :lt       then !value.nil? && value <  bind_value
+              when :lte      then !value.nil? && value <= bind_value
+            end
+          end
+        end
+
+        records
+      end
+      
+      def sort_records(records, query)
+        records
+      end
     end # class RedisAdapter
     const_added(:RedisAdapter)
   end # module Adapters
