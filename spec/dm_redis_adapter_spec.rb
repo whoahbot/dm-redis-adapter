@@ -20,7 +20,7 @@ describe DataMapper::Adapters::RedisAdapter do
     @resource = @model.new(:text => "I'm a stupid blog!")
   end
   
-  after(:each) do
+  after(:all) do
     # Ghetto delete all
     r = Redis.new
     r.keys('*').each {|k| r.delete k }
@@ -59,8 +59,8 @@ describe DataMapper::Adapters::RedisAdapter do
       @return.should be_a_kind_of(Array)
     end
     
-    it "should return all records" do
-      @return.should == [@resource, @resource2]
+    it "should return an array of matching records" do
+      @return.should == [@resource]
     end
   end
   
@@ -77,4 +77,22 @@ describe DataMapper::Adapters::RedisAdapter do
       @return.should == @resource2
     end
   end
+  
+  it { @adapter.should respond_to(:update) }
+  
+  describe "#update" do
+    before(:each) do
+      @resource.save
+      @return = @adapter.update({Post.text => 'I lament my stupid blog post'}, DataMapper::Query.new(@repository, Post, :id => @resource.id))
+    end
+    
+    it "should return the number of records that were updated" do
+      @return.should == 1
+    end
+
+    it "should update the specified properties" do
+      @resource.reload.text.should == 'I lament my stupid blog post'
+    end
+  end
+
 end

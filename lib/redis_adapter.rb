@@ -24,7 +24,6 @@ module DataMapper
           end
           
           update_attributes(resource, resource.attributes)
-          @redis.push_tail("#{model}:all", resource.key.to_s)
         end
         
         resources.size
@@ -39,10 +38,19 @@ module DataMapper
         fields  = query.fields
         
         records = records_for(model)
-        
         filter_records(records, query).map! do |record|
           model.load(fields.map {|property| property.typecast(@redis["#{model}:#{record}:#{property.name}"]) }, query)
         end
+      end
+      
+      def update(attributes, query)
+        attributes = attributes.map { |p,v| [ p.name, v ] }.to_hash
+        
+        updated = read_many(query).each do |r|
+          update_attributes(r, attributes)
+        end
+        
+        updated.size
       end
       
       private
@@ -83,6 +91,7 @@ module DataMapper
       end
       
       def sort_records(records, query)
+        # TODO: sort
         records
       end
     end # class RedisAdapter
