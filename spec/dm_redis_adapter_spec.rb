@@ -83,7 +83,7 @@ describe DataMapper::Adapters::RedisAdapter do
   describe "#update" do
     before(:each) do
       @resource.save
-      @return = @adapter.update({Post.text => 'I lament my stupid blog post'}, DataMapper::Query.new(@repository, Post, :id => @resource.id))
+      @return = @adapter.update({@model.text => 'I lament my stupid blog post'}, DataMapper::Query.new(@repository, Post, :id => @resource.id))
     end
     
     it "should return the number of records that were updated" do
@@ -94,5 +94,21 @@ describe DataMapper::Adapters::RedisAdapter do
       @resource.reload.text.should == 'I lament my stupid blog post'
     end
   end
+  
+  it { @adapter.should respond_to(:delete) }
 
+  describe '#delete' do
+    before :all do
+      @resource.save
+      @return = @adapter.delete(DataMapper::Query.new(@repository, @model, :id => @resource.id))
+    end
+
+    it 'should return the number of records deleted' do
+      @return.should == 1
+    end
+
+    it 'should delete the requested resource' do
+      Post.get(@resource.id).should be_nil
+    end
+  end
 end

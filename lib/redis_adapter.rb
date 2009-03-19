@@ -20,7 +20,7 @@ module DataMapper
           
           if identity_field = model.identity_field(name)
             identity_field.set!(resource, @redis.incr("#{resource.model}:serial"))
-            @redis.push_tail("#{model}:all", resource.key.to_s)
+            @redis.set_add("#{model}:all", resource.key.to_s)
           end
           
           update_attributes(resource, resource.attributes)
@@ -53,6 +53,17 @@ module DataMapper
         updated.size
       end
       
+      def delete(query)
+        records = records_for(query.model)
+        deleted = filter_records(records, query).map do |record|
+          query.model.properties.each do |p|
+            @redis.delete("#{query.model}:#{record}:#{p}")
+          end
+          @redis.set_delete("#{query.model}:all", record)
+        end
+        deleted.size
+      end
+      
       private
       
       def update_attributes(resource, attributes)
@@ -62,7 +73,7 @@ module DataMapper
       end
       
       def records_for(model)
-        @redis.list_range("#{model}:all", 0, -1)
+        @redis.set_members("#{model}:all").to_a
       end
       
       def match_records(records, query)
