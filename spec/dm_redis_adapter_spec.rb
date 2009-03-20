@@ -98,7 +98,7 @@ describe DataMapper::Adapters::RedisAdapter do
   it { @adapter.should respond_to(:delete) }
 
   describe '#delete' do
-    before :all do
+    before(:each) do
       @resource.save
       @return = @adapter.delete(DataMapper::Query.new(@repository, @model, :id => @resource.id))
     end
@@ -109,6 +109,19 @@ describe DataMapper::Adapters::RedisAdapter do
 
     it 'should delete the requested resource' do
       Post.get(@resource.id).should be_nil
+    end
+  end
+  
+  describe 'limits' do
+    before(:each) do
+      @resource.save
+      @model.create(:text => "I'm the biggest stupidest blog ever!")
+      @model.create(:text => "No, really, I AM the biggest stupidest blog ever!")
+    end
+    
+    
+    it 'should be able to limit the objects' do
+      @model.all(:limit => 2).length.should == 2
     end
   end
 end
