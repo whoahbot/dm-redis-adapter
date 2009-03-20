@@ -1,8 +1,15 @@
 h1. DM-Redis
 
-This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value db.
+This is an datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value db.
 
-h2. Install
+* Supported so far:
+** Create
+** Read
+** Update
+** Delete
+** Limit
+
+h1. Install
 
 Prerequisites
 * Redis:
