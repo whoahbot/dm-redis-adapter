@@ -13,48 +13,42 @@ module DataMapper
         @redis = Redis.new
         @redis.select_db(@options[:database]) if @options[:database]
       end
-      
+
       def create(resources)
+        records = records_for(resources.first.model)
+        
         resources.each do |resource|
-          model = resource.model
-          
-          if identity_field = model.identity_field(name)
-            identity_field.set!(resource, @redis.incr("#{resource.model}:serial"))
-            @redis.set_add("#{model}:all", resource.key.to_s)
-          end
-          
+          initialize_identity_field(resource, @redis.incr("#{resource.model}:serial"))
+          @redis.set_add("#{resource.model}:all", resource.key.to_s)
           update_attributes(resource, resource.attributes)
         end
-        
-        resources.size
       end
       
-      def read_one(query)
-        read_many(query).first
-      end
-
-      def read_many(query)
-        model   = query.model
-        fields  = query.fields
+      def read(query)
+        model = query.model
         
         records = records_for(model)
-        filter_records(records, query).map! do |record|
-          model.load(fields.map {|property| property.typecast(@redis["#{model}:#{record}:#{property.name}"]) }, query)
-        end
+        filter_records(records, query)
       end
       
-      def update(attributes, query)
-        attributes = attributes.map { |p,v| [ p.name, v ] }.to_hash
+      def update(attributes, collection)
+        model = collection.model
+        query = collection.query
         
-        updated = read_many(query).each do |r|
-          update_attributes(r, attributes)
-        end
         
-        updated.size
+        records    = records_for(model)
+        attributes = attributes_as_fields(attributes)
+        # attributes = attributes.map { |p,v| [ p.name, v ] }.to_hash
+        
+        updated = filter_records(records, query)
+        updated.each { |r| r.update(attributes) }
       end
       
-      def delete(query)
-        records = records_for(query.model)
+      def delete(collection)
+        model = collection.model
+        query = collection.query
+        
+        records = records_for(model)
         deleted = filter_records(records, query).map do |record|
           query.model.properties.each do |p|
             @redis.delete("#{query.model}:#{record}:#{p}")
@@ -66,44 +60,18 @@ module DataMapper
       
       private
       
+      def sort_records(records, query)
+        records
+      end
+      
       def update_attributes(resource, attributes)
         attributes.each do |property, value|
           @redis["#{resource.model}:#{resource.key}:#{property}"] = value
         end
       end
       
-      def records_for(model)
+      def records_for(model)  
         @redis.set_members("#{model}:all").to_a
-      end
-      
-      def match_records(records, query)
-        conditions = query.conditions
-
-        # Be destructive by using #delete_if
-        records.delete_if do |record|
-          not conditions.all? do |condition|
-            operator, property, bind_value = *condition
-
-            value = property.typecast(@redis["#{query.model}:#{record}:#{property.name}"])
-
-            case operator
-              when :eql, :in then equality_comparison(bind_value, value)
-              when :not      then !equality_comparison(bind_value, value)
-              when :like     then Regexp.new(bind_value) =~ value
-              when :gt       then !value.nil? && value >  bind_value
-              when :gte      then !value.nil? && value >= bind_value
-              when :lt       then !value.nil? && value <  bind_value
-              when :lte      then !value.nil? && value <= bind_value
-            end
-          end
-        end
-
-        records
-      end
-      
-      def sort_records(records, query)
-        # TODO: sort
-        records
       end
     end # class RedisAdapter
     const_added(:RedisAdapter)
