@@ -1,21 +1,21 @@
 h1. DM-Redis
 
-This is an datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value db.
+This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value db.  The primary goal is to get all shared adapter specs to pass, then optimize for speed.
 
-* Supported so far:
+* Working so far:
 ** Create
 ** Read
 ** Update
-** Delete
 ** Limit
 
 h1. Install
 
 Prerequisites
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis</a>
+** <a href="http://code.google.com/p/redis/">Redis 0.096</a>
 * Gems:
-** <a href="http://github.com/ezmobius/redis-rb">redis-rb</a> By the excellent Ezra Zygmuntowicz
-** <a href="http://github.com/datamapper/extlib">extlib</a>
+** <a href="http://github.com/ezmobius/redis-rb">redis-rb 0.03</a> By the excellent Ezra Zygmuntowicz
+  It's best to install the version of the redis gem that is available in the client-libraries dir of the redis distribution.
+** <a href="http://github.com/datamapper/extlib">extlib</a>, dependency for dm-core
 ** <a href="http://github.com/datamapper/do/">data-objects</a>, dependency for dm-core
 ** <a href="http://github.com/datamapper/dm-core/tree/next">dm-core</a> next branch

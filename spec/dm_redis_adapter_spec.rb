@@ -11,10 +11,4 @@ describe DataMapper::Adapters::RedisAdapter do
   end
   
   it_should_behave_like 'An Adapter'
-
-  after(:all) do
-    # Ghetto delete all
-    r = Redis.new
-    r.keys('*').each {|k| r.delete k }
-  end
 end

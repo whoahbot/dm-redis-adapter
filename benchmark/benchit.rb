@@ -19,5 +19,5 @@ end
 
 Benchmark.benchmark do |x|
   1000.times { Post.create(:text => "I like ice cream") }
-  x.report { Post.all }
+  x.report { Post.all.each { |p| p.text } }
 end
