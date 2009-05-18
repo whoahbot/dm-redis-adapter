@@ -30,8 +30,7 @@ module DataMapper
       end
       
       def delete(collection)
-        records = records_for(collection.model)
-        collection.query.filter_records(records).each do |record|
+        collection.query.filter_records(records_for(collection.model)).each do |record|
           collection.query.model.properties.each do |p|
             @redis.delete("#{collection.query.model}:#{record}:#{p}")
           end
@@ -40,13 +39,6 @@ module DataMapper
       end
       
       private
-      
-      def update_records(model)
-        resources = records_for(model)
-        result = yield resources
-        update_attributes(resources)
-        result
-      end
       
       def update_attributes(resources)
         resources.each do |resource|
@@ -57,6 +49,7 @@ module DataMapper
       end
       
       def records_for(resource)
+        # TODO: this needs to work if multiple keys are specified
         @redis.set_members("#{resource}:all").inject([]) do |a, val|
           a << {"#{resource.key.first.name}" => resource.key.first.typecast(val)}
         end
