@@ -24,11 +24,12 @@ module DataMapper
       
       def read(query)
         key = redis_key_for(query.model)
-        query.filter_records(records_for(query.model)).each do |record|
+        records = records_for(query.model).each do |record|
           query.fields.each do |property|
             record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[key]}:#{property.name}"])
           end
         end
+        query.filter_records(records)
       end
       
       def update(attributes, collection)
