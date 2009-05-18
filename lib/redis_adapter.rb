@@ -9,17 +9,24 @@ module DataMapper
     class RedisAdapter < AbstractAdapter
       def create(resources)
         resources.each do |resource|
-          initialize_identity_field(resource, @redis.incr("#{resource.model}:serial"))
-          @redis.set_add("#{resource.model}:all", resource.key)
+          resource.model.key.each do |k|
+            if k.serial?
+              initialize_identity_field(resource, @redis.incr("#{k}:serial"))
+              @redis.set_add("#{redis_key_for(resource.model)}:all", resource.key)
+            else
+              raise NotImplemented
+            end
+          end
         end
         
         update_attributes(resources)
       end
       
       def read(query)
+        key = redis_key_for(query.model)
         query.filter_records(records_for(query.model)).each do |record|
           query.fields.each do |property|
-            record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record["id"]}:#{property.name}"])
+            record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[key]}:#{property.name}"])
           end
         end
       end
@@ -34,11 +41,15 @@ module DataMapper
           collection.query.model.properties.each do |p|
             @redis.delete("#{collection.query.model}:#{record}:#{p}")
           end
-          @redis.set_delete("#{collection.query.model}:all", record)
+          @redis.set_delete("#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
         end
       end
       
       private
+      
+      def redis_key_for(model)
+        model.key.collect {|k| k.name}.join(":")
+      end
       
       def update_attributes(resources)
         resources.each do |resource|
@@ -49,16 +60,14 @@ module DataMapper
       end
       
       def records_for(resource)
-        # TODO: this needs to work if multiple keys are specified
-        @redis.set_members("#{resource}:all").inject([]) do |a, val|
-          a << {"#{resource.key.first.name}" => resource.key.first.typecast(val)}
+        @redis.set_members("#{redis_key_for(resource)}:all").inject([]) do |a, val|
+          a << {"#{redis_key_for(resource)}" => resource.key.first.typecast(val)}
         end
       end
       
       def initialize(name, uri_or_options)
         super
-        @redis = Redis.new
-        @redis.select_db(@options[:database]) if @options[:database]
+        @redis = Redis.new(@options)
       end
     end # class RedisAdapter
     
