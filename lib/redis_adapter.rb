@@ -11,8 +11,8 @@ module DataMapper
         resources.each do |resource|
           resource.model.key.each do |k|
             if k.serial?
-              initialize_identity_field(resource, @redis.incr("#{k}:serial"))
-              @redis.set_add("#{redis_key_for(resource.model)}:all", resource.key)
+              initialize_identity_field(resource, @redis.incr("#{resource.model}:#{k}:serial"))
+              @redis.set_add("#{resource.model}:#{redis_key_for(resource.model)}:all", resource.key)
             else
               raise NotImplemented
             end
@@ -42,7 +42,7 @@ module DataMapper
           collection.query.model.properties.each do |p|
             @redis.delete("#{collection.query.model}:#{record}:#{p}")
           end
-          @redis.set_delete("#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
+          @redis.set_delete("#{collection.query.model}:#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
         end
       end
       
@@ -55,15 +55,15 @@ module DataMapper
       def update_attributes(resources)
         resources.each do |resource|
           resource.attributes.each do |property, value|
-            #TODO: This will set attributes that are keys in nonsensical redis key/value pairs
+            next if resource.model.key.collect {|k| k.name}.any? == property
             @redis["#{resource.model}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
       end
       
       def records_for(query)
-        @redis.set_members("#{redis_key_for(query.model)}:all").inject(Set.new) do |a, val|
-          a << {"#{redis_key_for(query.model)}" => query.model.key.first.typecast(val)}
+        @redis.set_members("#{query.model}:#{redis_key_for(query.model)}:all").inject(Set.new) do |s, val|
+          s << {"#{redis_key_for(query.model)}" => query.model.key.first.typecast(val)}
         end
       end
       
