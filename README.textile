@@ -1,12 +1,8 @@
 h1. DM-Redis
 
-This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value db.  The primary goal is to get all shared adapter specs to pass, then optimize for speed.
+This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value database.
 
-* Working so far:
-** Create
-** Read
-** Update
-** Limit
+Please be aware that this is very alpha quality software!  It is not recommended for production use.  Oh, and it will be _slow_ for large sets of data until I'm finished refactoring, which sort of defeats the purpose, wouldn't you say?
 
 h1. Install
 

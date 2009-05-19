@@ -24,7 +24,7 @@ module DataMapper
       
       def read(query)
         key = redis_key_for(query.model)
-        records = records_for(query.model).each do |record|
+        records = records_for(query).each do |record|
           query.fields.each do |property|
             record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[key]}:#{property.name}"])
           end
@@ -38,7 +38,7 @@ module DataMapper
       end
       
       def delete(collection)
-        collection.query.filter_records(records_for(collection.model)).each do |record|
+        collection.query.filter_records(records_for(collection.query)).each do |record|
           collection.query.model.properties.each do |p|
             @redis.delete("#{collection.query.model}:#{record}:#{p}")
           end
@@ -55,14 +55,15 @@ module DataMapper
       def update_attributes(resources)
         resources.each do |resource|
           resource.attributes.each do |property, value|
+            #TODO: This will set attributes that are keys in nonsensical redis key/value pairs
             @redis["#{resource.model}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
       end
       
-      def records_for(resource)
-        @redis.set_members("#{redis_key_for(resource)}:all").inject([]) do |a, val|
-          a << {"#{redis_key_for(resource)}" => resource.key.first.typecast(val)}
+      def records_for(query)
+        @redis.set_members("#{redis_key_for(query.model)}:all").inject(Set.new) do |a, val|
+          a << {"#{redis_key_for(query.model)}" => query.model.key.first.typecast(val)}
         end
       end
       
