@@ -55,7 +55,7 @@ module DataMapper
       def update_attributes(resources)
         resources.each do |resource|
           resource.attributes.each do |property, value|
-            @redis["#{resource.model}:#{resource.key}:#{property}"] = value
+            @redis["#{resource.model}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
       end
