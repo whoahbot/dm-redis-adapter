@@ -54,7 +54,7 @@ module DataMapper
       
       def records_for(query)
         @redis.set_members("#{query.model}:#{redis_key_for(query.model)}:all").inject(Set.new) do |s, val|
-          s << {"#{redis_key_for(query.model)}" => query.model.key.first.typecast(val)}
+          s << {"#{redis_key_for(query.model)}" => val.to_i}
         end
       end
 
