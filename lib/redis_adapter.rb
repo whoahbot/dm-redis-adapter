@@ -40,7 +40,7 @@ module DataMapper
       def delete(collection)
         collection.query.filter_records(records_for(collection.query)).each do |record|
           collection.query.model.properties.each do |p|
-            @redis.delete("#{collection.query.model}:#{record}:#{p}")
+            @redis.delete("#{collection.query.model}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
           end
           @redis.set_delete("#{collection.query.model}:#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
         end
@@ -55,7 +55,6 @@ module DataMapper
       def update_attributes(resources)
         resources.each do |resource|
           resource.attributes.each do |property, value|
-            next if resource.model.key.collect {|k| k.name}.any? == property
             @redis["#{resource.model}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
