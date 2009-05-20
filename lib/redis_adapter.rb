@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'dm-core'
 require 'redis'
 
 module DataMapper
@@ -9,26 +7,20 @@ module DataMapper
     class RedisAdapter < AbstractAdapter
       def create(resources)
         resources.each do |resource|
-          resource.model.key.each do |k|
-            if k.serial?
-              initialize_identity_field(resource, @redis.incr("#{resource.model}:#{k}:serial"))
-              @redis.set_add("#{resource.model}:#{redis_key_for(resource.model)}:all", resource.key)
-            else
-              raise NotImplemented
-            end
-          end
+          initialize_identity_field(resource, @redis.incr("#{resource.model}:#{redis_key_for(resource.model)}:serial"))
+          @redis.set_add("#{resource.model}:#{redis_key_for(resource.model)}:all", resource.key)
         end
         
         update_attributes(resources)
       end
       
       def read(query)
-        key = redis_key_for(query.model)
         records = records_for(query).each do |record|
           query.fields.each do |property|
-            record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[key]}:#{property.name}"])
+            record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[redis_key_for(query.model)]}:#{property.name}"])
           end
         end
+
         query.filter_records(records)
       end
       
@@ -65,7 +57,7 @@ module DataMapper
           s << {"#{redis_key_for(query.model)}" => query.model.key.first.typecast(val)}
         end
       end
-      
+
       def initialize(name, uri_or_options)
         super
         @redis = Redis.new(@options)
