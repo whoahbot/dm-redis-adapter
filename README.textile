@@ -2,7 +2,11 @@ h1. DM-Redis
 
 This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value database.
 
-Please be aware that this is very alpha quality software!  It is not recommended for production use.  Oh, and it will be _slow_ for large sets of data until I'm finished refactoring, which sort of defeats the purpose, wouldn't you say?
+Please be aware that this is very alpha quality software!  It is not recommended for production use.
+
+h1. TODO
+
+Currently, the records_for(query) method returns a set of hashes of all of the 
 
 h1. Install
 
