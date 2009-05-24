@@ -1,4 +1,4 @@
-require 'redis'
+require File.expand_path(File.join(File.dirname(__FILE__), 'rubyredis'))
 
 module DataMapper
   module Adapters
@@ -39,11 +39,15 @@ module DataMapper
       def read(query)
         records = records_for(query).each do |record|
           query.fields.each do |property|
+            next if query.model.key.include?(property.name)
             record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[redis_key_for(query.model)]}:#{property.name}"])
           end
         end
 
-        query.filter_records(records)
+        records = query.match_records(records)
+        records = query.sort_records(records)
+        records = query.limit_records(records)
+        records
       end
       
       ##
@@ -116,7 +120,7 @@ module DataMapper
       end
       
       ##
-      # Retrieves all of the records for a particular model
+      # Retrieves records for a particular model.
       #
       # @param [DataMapper::Query] query
       #   The query used to locate the resources
@@ -126,13 +130,22 @@ module DataMapper
       #
       # @api private
       def records_for(query)
-        set = @redis.set_members("#{query.model}:#{redis_key_for(query.model)}:all")
-        arr = Array.new(set.size)
-        set.each_with_index do |val, i|
-          arr[i] = {"#{redis_key_for(query.model)}" => val.to_i}
+        keys = []
+        query.conditions.operands.select {|o| o.is_a?(Conditions::EqualToComparison) && query.model.key.include?(o.property)}.each  do |o|
+          if @redis.set_member?("#{query.model}:#{redis_key_for(query.model)}:all", o.value)
+            keys << {"#{redis_key_for(query.model)}" => o.value}
+          end
         end
-
-        arr
+        
+        # TODO: Implement other conditions to filter down the records retrieved
+        # Keys are empty, fall back and load all the values for this model
+        if keys.empty?
+          @redis.set_members("#{query.model}:#{redis_key_for(query.model)}:all").each do |val|
+            keys << {"#{redis_key_for(query.model)}" => val.to_i}
+          end
+        end
+        
+        keys
       end
 
       ##
@@ -148,7 +161,7 @@ module DataMapper
       # @api semipublic
       def initialize(name, uri_or_options)
         super
-        @redis = Redis.new(@options)
+        @redis = RedisClient.new(@options)
       end
     end # class RedisAdapter
     
