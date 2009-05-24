@@ -6,11 +6,11 @@ require 'spec/rake/spectask'
 
 GEM = 'dm-redis'
 GEM_NAME = 'dm-redis'
-GEM_VERSION = '0.0.1'
+GEM_VERSION = '0.0.2'
 AUTHORS = ['Dan Herrera']
 EMAIL = "whoahbot@gmail.com"
 HOMEPAGE = "http://github.com/whoahbot/dm-redis"
-SUMMARY = "Datamapper adapter for the Redis key-value database"
+SUMMARY = "DataMapper adapter for the Redis key-value database"
 
 spec = Gem::Specification.new do |s|
   s.name = GEM
@@ -24,7 +24,6 @@ spec = Gem::Specification.new do |s|
   s.email = EMAIL
   s.homepage = HOMEPAGE
   s.add_dependency "rspec"
-  s.add_dependency "redis", "0.0.3"
   s.add_dependency "dm-core", "0.10.0"
   s.require_path = 'lib'
   s.autorequire = GEM
