@@ -6,7 +6,7 @@ Please be aware that this is very alpha quality software!  It is not recommended
 
 h1. TODO
 
-Currently, the records_for(query) method returns a set of hashes of all of the 
+Currently, the records_for(query) method returns an array of hashes containing the key => id pairs.  Unfortunately, this gets run for every query(and subsequent lazy queries), which means that the more keys you have, the slower it is.  Boo!  I'm in the process of refactoring how this works.  If you have suggestions, please get in touch.
 
 h1. Install
 
