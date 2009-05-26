@@ -1,18 +1,12 @@
 h1. dm-redis-adapter
 
-This is an experimental <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value database.
-
-Please be aware that this is very alpha quality software!  It is not recommended for production use yet.  If you find a bug, or are using dm-redis, please let me know.
-
-h1. TODO
-
-Optimizing records for to move common queries server-side.
+This is a <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://github.com/antirez/redis/">Redis</a> key-value database.
 
 h1. Install
 
 Prerequisites:
 * Redis, git version:
-** <a href="http://github.com/antirez/redis/">Redis, git version</a>
+** <a href="http://github.com/antirez/redis/">Redis, v0.101</a>
 * Gems:
 ** <a href="http://github.com/datamapper/extlib">extlib</a>, dependency for dm-core
 ** <a href="http://github.com/datamapper/dm-core/tree/next">dm-core</a> next branch
