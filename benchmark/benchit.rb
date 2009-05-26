@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'dm-core'
 require 'benchmark'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/redis_adapter.rb'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis_adapter.rb'))
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/rubyredis.rb'))
 
 DataMapper.setup(:default, {
@@ -21,7 +21,7 @@ Benchmark.benchmark do |x|
 end
 
 Benchmark.benchmark do |x|
-  x.report { Post.all.each {|x| x.text } }
+  x.report { Post.get(500).text }
 end
 
 redis = RedisClient.new(:db => 15)

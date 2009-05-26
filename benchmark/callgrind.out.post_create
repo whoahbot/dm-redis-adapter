@@ -1,0 +1,2826 @@
+events: process_time
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::respond_to?
+0 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::new
+446 35
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::allocate
+calls=1 455
+455 9
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::assert_valid
+calls=1 447
+447 290
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::send
+calls=1 456
+456 619
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::discriminator
+calls=1 449
+449 36
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 449
+449 34
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=1 449
+449 48
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Proc::call
+0 274
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::write
+calls=1 131
+131 37
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::read
+calls=1 146
+146 44
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::to_i
+calls=1 474
+474 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::chomp
+calls=1 472
+472 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::gets
+calls=1 471
+471 7
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::write
+calls=1 131
+131 23
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::read
+calls=1 146
+146 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::to_i
+calls=1 474
+474 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::chomp
+calls=1 472
+472 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::gets
+calls=1 471
+471 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::write
+calls=2 131
+131 40
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::read
+calls=2 146
+146 28
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::read
+calls=8 146
+146 25
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::properties
+745 36
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository_name
+calls=1 746
+746 235
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 746
+746 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 746
+746 43
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository_name
+calls=1 746
+746 207
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 746
+746 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 746
+746 36
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository_name
+calls=1 746
+746 211
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 746
+746 2
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 746
+746 34
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::properties
+280 156
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 4
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 22
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 25
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 2
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 6
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 5
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 22
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 287
+287 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 281
+281 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=2 287
+287 5
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=2 281
+281 38
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::Integer
+0 11
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Enumerable::any?
+0 61
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 654
+654 7
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 654
+654 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 654
+654 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each
+calls=1 356
+356 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 654
+654 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 654
+654 6
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 654
+654 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 654
+654 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 58
+58 6
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::Thread>::current
+0 44
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Class::allocate
+0 6
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Object>::allocate
+calls=1 455
+455 3
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::set_add
+300 34
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::===
+calls=1 303
+303 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Fixnum::to_s
+calls=1 301
+301 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::to_s
+calls=2 301
+301 20
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::get_response
+calls=1 302
+302 237
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::write
+calls=1 301
+301 71
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::size
+calls=1 301
+301 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::_save
+706 23
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::child_associations
+calls=1 711
+711 178
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/hook.rb
+cfn=#<Module:0x1270eb0>::_create
+calls=1 707
+707 5346
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::new?
+calls=1 707
+707 21
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::all?
+calls=1 711
+711 7
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::===
+0 47
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=4 447
+447 9
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=4 447
+447 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=2 441
+441 5
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::read_proto
+469 15
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=1 470
+470 68
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=1 470
+470 62
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::single_line
+460 124
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::read
+calls=8 463
+463 386
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::<<
+calls=8 463
+463 23
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::==
+calls=4 463
+463 9
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=6 463
+463 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::[]
+calls=12 466
+466 37
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=IO::write
+0 100
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::IO>::allocate
+0 4
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::read
+144 83
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=1 145
+145 100
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=1 145
+145 58
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=2 145
+145 109
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=8 145
+145 334
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::get_response
+433 125
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::integer_reply
+calls=1 448
+448 91
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::===
+calls=4 447
+447 28
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::get_reply
+calls=1 435
+435 149
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::integer_reply
+calls=1 448
+448 79
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::===
+calls=4 447
+447 27
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::get_reply
+calls=1 435
+435 94
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::===
+calls=2 441
+441 13
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::single_line
+calls=2 442
+442 593
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::get_reply
+calls=2 435
+435 176
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::send
+0 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=Post::text=
+calls=1 489
+489 553
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=Post::text=
+951 14
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::set
+calls=1 952
+952 169
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::properties
+calls=1 952
+952 293
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::[]
+calls=1 952
+952 77
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::collect
+0 17
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::base_model
+589 7
+
+fl=/Users/dph/projects/dm-redis-adapter/lib/redis_adapter.rb
+fn=DataMapper::Adapters::RedisAdapter::create
+10 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 11
+11 2497
+cfl=/Users/dph/projects/dm-redis-adapter/lib/redis_adapter.rb
+cfn=DataMapper::Adapters::RedisAdapter::update_attributes
+calls=1 22
+22 1752
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+fn=DataMapper::PropertySet::key
+70 43
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::freeze
+calls=1 71
+71 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::select
+calls=1 71
+71 23
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::send
+0 17
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::initialize
+calls=1 456
+456 613
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=Post::text
+calls=1 470
+470 9
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=Post::id
+calls=1 470
+470 8
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::==
+0 25
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Fixnum::to_s
+0 29
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=Post::id
+924 8
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=<Class::DataMapper::Repository>::context
+28 139
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=2 29
+29 7
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=2 29
+29 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 2
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=2 29
+29 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=2 29
+29 6
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=2 29
+29 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=2 29
+29 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 2
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Thread>::current
+calls=1 29
+29 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Thread::[]
+calls=1 29
+29 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=DataMapper::Repository::create
+128 11
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::adapter
+calls=1 129
+129 48
+cfl=/Users/dph/projects/dm-redis-adapter/lib/redis_adapter.rb
+cfn=DataMapper::Adapters::RedisAdapter::create
+calls=1 129
+129 4262
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=IO::closed?
+0 49
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::integer_reply
+456 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::Integer
+calls=1 457
+457 3
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::read_proto
+calls=1 457
+457 77
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::Integer
+calls=1 457
+457 3
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::read_proto
+calls=1 457
+457 68
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::nil?
+0 5
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::set
+403 61
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Fixnum::to_s
+calls=4 404
+404 12
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::get_response
+calls=2 405
+405 830
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::write
+calls=2 404
+404 129
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=2 405
+405 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::size
+calls=2 404
+404 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::to_s
+calls=1 404
+404 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+fn=DataMapper::PropertySet::discriminator
+76 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 77
+77 26
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::Socket>::getaddrinfo
+0 468
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=IO::read
+0 112
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Integer::to_int
+0 6
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::map
+0 20
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::get!
+calls=1 269
+269 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 269
+269 23
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::original_values
+calls=1 269
+269 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::loaded?
+calls=1 269
+269 11
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::to_s
+0 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::identity_map
+766 12
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::identity_map
+calls=1 767
+767 61
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 767
+767 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=1 767
+767 8
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::assert_valid
+769 53
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::empty?
+calls=2 777
+777 6
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::key
+calls=1 777
+777 89
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 773
+773 40
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=2 777
+777 98
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each_value
+calls=1 782
+782 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::serial?
+499 19
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::attributes=
+486 8
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each
+calls=1 487
+487 593
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::<<
+0 23
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::each_value
+0 7
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::value
+759 25
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/type.rb
+cfn=<Class::DataMapper::Type>::dump
+calls=1 760
+760 6
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::custom?
+calls=1 760
+760 6
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/type.rb
+cfn=<Class::DataMapper::Type>::dump
+calls=1 760
+760 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::custom?
+calls=1 760
+760 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=#<Module:0x5d6c18>::save
+556 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::_save
+calls=1 557
+557 5575
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::key
+304 65
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::key
+calls=1 305
+305 37
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 305
+305 41
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::key
+calls=1 305
+305 6
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 305
+305 35
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::key
+calls=1 305
+305 6
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 305
+305 40
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::key
+calls=1 305
+305 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 305
+305 34
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::key
+calls=1 305
+305 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=1 305
+305 35
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+cfn=DataMapper::PropertySet::key
+calls=2 305
+305 10
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::properties
+calls=2 305
+305 67
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=IO::gets
+0 12
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::key
+265 48
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::map
+calls=1 268
+268 70
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository_name
+calls=1 268
+268 213
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::key
+calls=1 268
+268 49
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 268
+268 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::all?
+calls=1 273
+273 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Module::public_method_defined?
+0 9
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::freeze
+0 6
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=<Class::DataMapper::Repository>::default_name
+41 66
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::Hash>::allocate
+0 7
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core.rb
+fn=<Module::DataMapper>::repository
+205 183
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 208
+208 9
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=1 208
+208 49
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 207
+207 22
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 213
+213 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 208
+208 16
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 208
+208 8
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=1 208
+208 43
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 207
+207 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 213
+213 2
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 208
+208 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=2 208
+208 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=2 208
+208 81
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=2 207
+207 36
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=2 213
+213 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=2 208
+208 28
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 208
+208 9
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=1 208
+208 44
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 207
+207 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 213
+213 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 208
+208 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 208
+208 8
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=1 208
+208 43
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 207
+207 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 213
+213 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 208
+208 15
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::dirty_attributes
+338 16
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::original_values
+calls=1 341
+341 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each_key
+calls=1 341
+341 63
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::initialize
+780 12
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::attributes=
+calls=1 782
+782 601
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+fn=Server::socket
+64 195
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=BasicSocket::setsockopt
+calls=1 75
+75 7
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::connect_to
+calls=1 74
+74 925
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=1 65
+65 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=1 65
+65 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=1 65
+65 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=1 65
+65 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=1 65
+65 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=2 65
+65 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=2 65
+65 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=IO::closed?
+calls=8 65
+65 17
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/type.rb
+fn=<Class::DataMapper::Type>::dump
+170 11
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::get_reply
+388 98
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::read
+calls=1 390
+390 109
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=2 391
+391 7
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::read
+calls=1 390
+390 66
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=2 391
+391 6
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::read
+calls=2 390
+390 123
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=4 391
+391 10
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::[]=
+398 17
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::set
+calls=2 399
+399 1046
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::pack
+0 26
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Integer::to_int
+calls=2 97
+97 6
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property_set.rb
+fn=DataMapper::PropertySet::[]
+15 9
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 16
+16 68
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Fixnum::-
+0 4
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+fn=Mash::default
+25 18
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Symbol::to_s
+calls=1 26
+26 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 27
+27 8
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+cfn=Mash::include?
+calls=1 26
+26 28
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::is_a?
+calls=1 26
+26 4
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::instance_variable_defined?
+0 11
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::with_socket_management
+40 259
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=1 42
+42 968
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=1 42
+42 55
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=1 42
+42 21
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=1 42
+42 62
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=1 42
+42 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=1 42
+42 41
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=1 42
+42 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=1 42
+42 37
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=1 42
+42 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=1 42
+42 31
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=1 42
+42 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=1 42
+42 35
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=2 42
+42 23
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=2 42
+42 63
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=2 42
+42 23
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=2 42
+42 56
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+cfn=Server::socket
+calls=8 42
+42 90
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Proc::call
+calls=8 42
+42 135
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::each_key
+0 13
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::get!
+calls=1 342
+342 13
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::value
+calls=1 342
+342 22
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]=
+calls=1 342
+342 15
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::chomp
+0 9
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::join
+0 8
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Symbol::to_s
+calls=1 52
+52 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=Post::text
+924 9
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=BasicSocket::setsockopt
+0 41
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Enumerable::detect
+0 50
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 77
+77 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 208
+208 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 208
+208 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 208
+208 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 92
+92 64
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 312
+312 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 208
+208 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 208
+208 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::dirty?
+355 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=1 356
+356 10
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::dirty_attributes
+calls=1 356
+356 84
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::loaded?
+643 23
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_defined?
+calls=1 644
+644 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_defined?
+calls=1 644
+644 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_defined?
+calls=1 644
+644 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::hash
+428 37
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 429
+429 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 429
+429 2
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 429
+429 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 429
+429 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 429
+429 4
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Module::to_s
+0 16
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::new?
+433 16
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::saved?
+calls=1 434
+434 12
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::saved?
+calls=1 434
+434 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::default
+0 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::[]
+0 37
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::hash
+0 6
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 659
+659 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::repository_name
+653 122
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=2 654
+654 23
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=2 654
+654 16
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=2 654
+654 30
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 654
+654 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=1 654
+654 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 654
+654 15
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 654
+654 17
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=1 654
+654 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 654
+654 16
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 654
+654 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=1 654
+654 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 654
+654 16
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=2 654
+654 24
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=2 654
+654 15
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=2 654
+654 28
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 654
+654 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=1 654
+654 9
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 654
+654 18
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 654
+654 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=1 654
+654 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::context
+calls=1 654
+654 14
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::class
+0 6
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::empty?
+0 6
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+fn=Extlib::Assertions::assert_kind_of
+3 172
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 4
+4 24
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 4
+4 24
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=2 4
+4 25
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 4
+4 12
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::default_repository_name
+604 107
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=2 605
+605 10
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=2 605
+605 9
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 4
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=2 605
+605 10
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::default_name
+calls=1 605
+605 5
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::hash
+0 24
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Thread::[]
+0 43
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::repository_name
+735 39
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=1 736
+736 226
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=1 736
+736 200
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=1 736
+736 205
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=1 736
+736 204
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=1 736
+736 7
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::key?
+0 13
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::hash
+calls=1 580
+580 12
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::each
+0 109
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Module::public_method_defined?
+calls=1 488
+488 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Symbol::to_s
+calls=1 488
+488 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 488
+488 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::send
+calls=1 489
+489 558
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::[]=
+calls=2 59
+59 1063
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::to_s
+calls=2 59
+59 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::collect
+calls=2 58
+58 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Module::to_s
+calls=2 59
+59 7
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::nil?
+calls=2 59
+59 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Symbol::to_s
+calls=2 59
+59 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::key
+calls=2 58
+58 95
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=4 59
+59 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=2 58
+58 24
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::any?
+calls=2 58
+58 18
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::key
+calls=2 59
+59 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::==
+calls=2 58
+58 6
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::model
+0 65
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::saved?
+444 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::==
+calls=1 445
+445 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::==
+calls=1 445
+445 3
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::each
+0 279
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Module::to_s
+calls=2 15
+15 9
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/adapters/abstract_adapter.rb
+cfn=DataMapper::Adapters::AbstractAdapter::initialize_identity_field
+calls=1 14
+14 120
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=3 15
+15 7
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::serial?
+calls=1 13
+13 4
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::key
+calls=1 15
+15 370
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::set_add
+calls=1 15
+15 372
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::to_s
+calls=1 14
+14 8
+cfl=/Users/dph/projects/dm-redis-adapter/lib/redis_adapter.rb
+cfn=DataMapper::Adapters::RedisAdapter::redis_key_for
+calls=1 15
+15 97
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::incr
+calls=1 14
+14 1381
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::[]
+calls=5 92
+92 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=String::==
+calls=5 92
+92 13
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::serial?
+calls=1 312
+312 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 2
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Module::public_method_defined?
+calls=2 463
+463 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::send
+calls=2 470
+470 28
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=2 463
+463 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Symbol::===
+calls=2 465
+465 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]=
+calls=2 470
+470 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=2 4
+4 4
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::size
+0 9
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::each_pair
+0 4
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::catch
+0 24
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::hookable___create_nan_before_advised
+calls=1 299
+299 5305
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/hook.rb
+cfn=Post::execute_after__create_nan_hook_stack
+calls=1 300
+300 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/hook.rb
+cfn=Post::execute_before__create_nan_hook_stack
+calls=1 298
+298 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::key?
+489 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::each
+0 239
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Module::==
+calls=2 77
+77 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::serial?
+calls=2 647
+647 10
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::loaded?
+calls=1 647
+647 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=2 4
+4 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=2 4
+4 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 12
+12 2417
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::key
+calls=1 12
+12 50
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 12
+12 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 12
+12 12
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::attributes
+calls=1 57
+57 375
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each
+calls=1 57
+57 1357
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 4
+4 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::set!
+630 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_set
+calls=1 631
+631 7
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_set
+calls=1 631
+631 4
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Symbol::to_s
+0 17
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::attributes
+460 17
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 462
+462 99
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::properties
+calls=1 462
+462 259
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::set
+601 31
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::typecast
+calls=1 604
+604 23
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::set!
+calls=1 612
+612 15
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::set_original_value
+calls=1 610
+610 87
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::loaded?
+calls=1 602
+602 13
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::Socket>::pack_sockaddr_in
+0 35
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::get!
+559 17
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_get
+calls=1 560
+560 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::instance_variable_get
+calls=1 560
+560 3
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::to_i
+0 8
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+fn=Mash::initialize
+11 19
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::initialize
+calls=1 13
+13 3
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+cfn=Mash::update
+calls=1 14
+14 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::is_a?
+calls=1 12
+12 3
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/server.rb
+fn=Server::connect_to
+90 77
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::[]
+calls=1 101
+101 2
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Socket::connect
+calls=1 101
+101 111
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 92
+92 72
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=BasicSocket::setsockopt
+calls=2 99
+99 34
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::IO>::new
+calls=1 93
+93 81
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::Integer
+calls=2 96
+96 5
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Socket>::pack_sockaddr_in
+calls=1 101
+101 35
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::pack
+calls=1 97
+97 32
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Fixnum::*
+calls=1 96
+96 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Fixnum::-
+calls=1 96
+96 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Socket>::getaddrinfo
+calls=1 91
+91 468
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::hookable___create_nan_before_advised
+639 52
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 646
+646 41
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::create
+calls=1 652
+652 4321
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::new?
+calls=1 641
+641 17
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::clear
+calls=1 657
+657 18
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::dirty?
+calls=1 641
+641 108
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::key
+calls=1 659
+659 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::identity_map
+calls=1 659
+659 84
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository
+calls=2 654
+654 377
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]=
+calls=1 659
+659 15
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::original_values
+calls=1 657
+657 6
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::properties
+calls=1 646
+646 258
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::child_associations
+799 18
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::freeze
+calls=1 807
+807 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::relationships
+calls=1 802
+802 154
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each_value
+calls=1 802
+802 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::original_values
+327 23
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::create
+470 17
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=#<Module:0x5d6c18>::save
+calls=1 472
+472 5583
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::new
+calls=1 471
+471 1071
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Socket::connect
+0 111
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/hook.rb
+fn=Post::execute_before__create_nan_hook_stack
+247 3
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+fn=Mash::include?
+61 10
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+cfn=Mash::convert_key
+calls=1 62
+62 14
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::key?
+calls=1 62
+62 4
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=String::==
+0 79
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::typecast
+686 17
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::respond_to?
+calls=1 687
+687 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 688
+688 2
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::initialize
+0 6
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=DataMapper::Repository::adapter
+63 27
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=<Class::DataMapper::Repository>::adapters
+calls=2 71
+71 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 71
+71 2
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::class
+calls=2 71
+71 6
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::key?
+calls=1 69
+69 3
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::IO>::new
+0 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::IO>::allocate
+calls=1 93
+93 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Socket::initialize
+calls=1 93
+93 67
+
+fl=/Users/dph/projects/dm-redis-adapter/lib/redis_adapter.rb
+fn=DataMapper::Adapters::RedisAdapter::redis_key_for
+51 17
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::collect
+calls=1 52
+52 7
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::key
+calls=1 52
+52 49
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 52
+52 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::join
+calls=1 52
+52 12
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::to_s
+0 26
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Fixnum::to_s
+calls=2 301
+301 7
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Fixnum::to_s
+calls=2 59
+59 7
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::relationships
+755 12
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::repository_name
+calls=1 756
+756 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 756
+756 4
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/associations.rb
+cfn=DataMapper::Associations::relationships
+calls=1 756
+756 123
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/associations.rb
+fn=DataMapper::Associations::relationships
+60 27
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 67
+67 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::default_repository_name
+calls=1 67
+67 12
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=1 68
+68 50
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 61
+61 20
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]=
+calls=1 68
+68 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::==
+calls=1 67
+67 3
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::to_s
+0 8
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::block_given?
+0 32
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Fixnum::*
+0 4
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+fn=DataMapper::Resource::repository
+249 82
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository
+calls=1 251
+251 210
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 251
+251 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository
+calls=1 251
+251 187
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 251
+251 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository
+calls=2 251
+251 352
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=2 251
+251 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository
+calls=1 251
+251 191
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 251
+251 2
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository
+calls=1 251
+251 189
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 251
+251 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::repository
+631 101
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core.rb
+cfn=<Module::DataMapper>::repository
+calls=1 640
+640 135
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 637
+637 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=1 640
+640 53
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core.rb
+cfn=<Module::DataMapper>::repository
+calls=1 640
+640 117
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 637
+637 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=1 640
+640 50
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core.rb
+cfn=<Module::DataMapper>::repository
+calls=2 640
+640 223
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=2 637
+637 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=2 640
+640 93
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core.rb
+cfn=<Module::DataMapper>::repository
+calls=1 640
+640 120
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 637
+637 2
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=1 640
+640 52
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core.rb
+cfn=<Module::DataMapper>::repository
+calls=1 640
+640 119
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::block_given?
+calls=1 637
+637 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::repository_name
+calls=1 640
+640 50
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=DataMapper::Repository::identity_map
+90 16
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]
+calls=1 91
+91 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Class::new
+calls=1 91
+91 15
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]=
+calls=1 91
+91 8
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::base_model
+calls=1 91
+91 7
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Class::new
+0 60
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::initialize
+calls=1 208
+208 37
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Object>::allocate
+calls=1 208
+208 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::initialize
+calls=1 208
+208 33
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Object>::allocate
+calls=1 208
+208 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::initialize
+calls=2 208
+208 63
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Object>::allocate
+calls=2 208
+208 5
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::initialize
+calls=1 208
+208 33
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Object>::allocate
+calls=1 208
+208 3
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+cfn=DataMapper::Repository::initialize
+calls=1 208
+208 33
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Object>::allocate
+calls=1 208
+208 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::initialize
+calls=1 91
+91 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Hash>::allocate
+calls=1 91
+91 4
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+cfn=Mash::initialize
+calls=1 68
+68 39
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=<Class::Hash>::allocate
+calls=1 68
+68 3
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=<Class::DataMapper::Repository>::adapters
+15 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::[]=
+0 30
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::hash
+calls=1 584
+584 9
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::hash
+calls=1 342
+342 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 91
+91 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::hash
+calls=1 659
+659 9
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=<Class::Object>::allocate
+0 20
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::instance_variable_get
+0 7
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/hook.rb
+fn=Post::execute_after__create_nan_hook_stack
+252 3
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::kind_of?
+0 80
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::select
+0 13
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::key?
+calls=2 71
+71 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Socket::initialize
+0 67
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::[]
+0 8
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+fn=DataMapper::Model::identity_field
+310 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Enumerable::detect
+calls=1 312
+312 20
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::key
+calls=1 312
+312 54
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::clear
+0 7
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::hash
+calls=1 657
+657 11
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+fn=Mash::convert_key
+135 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::kind_of?
+calls=1 136
+136 3
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::incr
+200 24
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::get_response
+calls=1 206
+206 308
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::write
+calls=1 204
+204 1049
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/hook.rb
+fn=#<Module:0x1270eb0>::_create
+295 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::catch
+calls=1 297
+297 5335
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::set_original_value
+576 23
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::value
+calls=1 578
+578 24
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::key?
+calls=1 580
+580 18
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::[]=
+calls=1 584
+584 15
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/resource.rb
+cfn=DataMapper::Resource::original_values
+calls=1 577
+577 7
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/repository.rb
+fn=DataMapper::Repository::initialize
+270 84
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 271
+271 21
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 271
+271 20
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=2 271
+271 36
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 271
+271 20
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/assertions.rb
+cfn=Extlib::Assertions::assert_kind_of
+calls=1 271
+271 18
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Hash::[]
+0 71
+cfl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+cfn=Mash::default
+calls=1 16
+16 62
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::hash
+calls=1 269
+269 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::default
+calls=1 269
+269 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::hash
+calls=1 91
+91 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::default
+calls=1 91
+91 3
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::default
+calls=1 67
+67 3
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Enumerable::all?
+0 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 273
+273 4
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 711
+711 2
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+fn=DataMapper::Property::custom?
+519 10
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Module::==
+0 5
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Symbol::===
+0 5
+
+fl=/Library/Ruby/Gems/1.8/gems/extlib-0.9.12/lib/extlib/mash.rb
+fn=Mash::update
+51 10
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Hash::each_pair
+calls=1 52
+52 4
+
+fl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+fn=Redis::write
+128 30
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=1 129
+129 1040
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=1 129
+129 63
+cfl=/Library/Ruby/Gems/1.8/gems/redis-0.0.3/lib/redis.rb
+cfn=Redis::with_socket_management
+calls=2 129
+129 116
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::instance_variable_set
+0 11
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Array::[]
+0 14
+
+fl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/adapters/abstract_adapter.rb
+fn=DataMapper::Adapters::AbstractAdapter::initialize_identity_field
+100 20
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/property.rb
+cfn=DataMapper::Property::set!
+calls=1 102
+102 11
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Kernel::model
+calls=1 101
+101 4
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::identity_field
+calls=1 101
+101 85
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/buh.rb
+fn=Global::[No method]
+27 54
+cfl=/Library/Ruby/Gems/1.8/gems/dm-core-0.10.0/lib/dm-core/model.rb
+cfn=DataMapper::Model::create
+calls=1 27
+27 6671
+
+fl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+fn=Kernel::is_a?
+0 7
+
+fl=/Users/dph/projects/dm-redis-adapter/lib/redis_adapter.rb
+fn=DataMapper::Adapters::RedisAdapter::update_attributes
+55 8
+cfl=/Users/dph/projects/dm-redis-adapter/benchmark/ruby_runtime
+cfn=Array::each
+calls=1 56
+56 1744
+

@@ -1,5 +1,5 @@
 require 'benchmark'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/redis_adapter.rb'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis_adapter.rb'))
 
 DataMapper.setup(:default, 'sqlite3::memory:')
 

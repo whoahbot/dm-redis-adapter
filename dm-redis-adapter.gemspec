@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{dm-redis}
-  s.version = "0.0.2"
+  s.name = %q{dm-redis-adapter}
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Herrera"]
-  s.autorequire = %q{dm-redis}
-  s.date = %q{2009-05-24}
+  s.autorequire = %q{dm-redis-adapter}
+  s.date = %q{2009-05-26}
   s.description = %q{DataMapper adapter for the Redis key-value database}
   s.email = %q{whoahbot@gmail.com}
   s.extra_rdoc_files = ["MIT-LICENSE"]
-  s.files = ["MIT-LICENSE", "README.textile", "Rakefile", "lib/redis_adapter.rb", "lib/rubyredis.rb", "spec/dm_redis_adapter_spec.rb", "spec/spec_helper.rb"]
+  s.files = ["MIT-LICENSE", "README.textile", "Rakefile", "lib/dm_redis_adapter.rb", "lib/rubyredis.rb", "spec/dm_redis_adapter_spec.rb", "spec/spec_helper.rb"]
   s.homepage = %q{http://github.com/whoahbot/dm-redis}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.3}

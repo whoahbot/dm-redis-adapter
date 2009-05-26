@@ -59,12 +59,15 @@ module DataMapper
       # @param [Hash] attributes
       #   A set of key-value pairs of the attributes to update the resources with.
       # @param [DataMapper::Collection] collection
-      #   The query that should be used to find the resource(s) to update.
+      #   The collection object that should be used to find the resource(s) to update.
       #
       # @api semipublic
       def update(attributes, collection)
         attributes = attributes_as_fields(attributes)
-        read(collection.query).each { |r| r.update(attributes) }
+        
+        records_to_update = records_for(collection.query)
+        records_to_update.each { |r| r.update(attributes) }
+        update_attributes(collection)
       end
       
       ##
@@ -114,6 +117,7 @@ module DataMapper
       def update_attributes(resources)
         resources.each do |resource|
           resource.attributes.each do |property, value|
+            next if resource.key.include?(property)
             @redis["#{resource.model}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
@@ -131,7 +135,7 @@ module DataMapper
       # @api private
       def records_for(query)
         keys = []
-        query.conditions.operands.select {|o| o.is_a?(Conditions::EqualToComparison) && query.model.key.include?(o.property)}.each  do |o|
+        query.conditions.operands.select {|o| o.is_a?(Conditions::EqualToComparison) && query.model.key.include?(o.property)}.each do |o|
           if @redis.set_member?("#{query.model}:#{redis_key_for(query.model)}:all", o.value)
             keys << {"#{redis_key_for(query.model)}" => o.value}
           end

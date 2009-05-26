@@ -4,9 +4,9 @@ require 'rubygems/specification'
 require 'date'
 require 'spec/rake/spectask'
 
-GEM = 'dm-redis'
-GEM_NAME = 'dm-redis'
-GEM_VERSION = '0.0.2'
+GEM = 'dm-redis-adapter'
+GEM_NAME = 'dm-redis-adapter'
+GEM_VERSION = '0.0.3'
 AUTHORS = ['Dan Herrera']
 EMAIL = "whoahbot@gmail.com"
 HOMEPAGE = "http://github.com/whoahbot/dm-redis"

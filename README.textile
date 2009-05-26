@@ -1,12 +1,12 @@
-h1. DM-Redis
+h1. dm-redis-adapter
 
-This is an experimental datamapper adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value database.
+This is an experimental <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://code.google.com/p/redis/wiki/README">Redis</a> key-value database.
 
 Please be aware that this is very alpha quality software!  It is not recommended for production use yet.  If you find a bug, or are using dm-redis, please let me know.
 
 h1. TODO
 
-Refactoring +records_for+ to filter down the set of records returned.
+Optimizing records for to move common queries server-side.
 
 h1. Install
 
