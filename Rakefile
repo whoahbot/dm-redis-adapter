@@ -9,7 +9,7 @@ GEM_NAME = 'dm-redis-adapter'
 GEM_VERSION = '0.0.3'
 AUTHORS = ['Dan Herrera']
 EMAIL = "whoahbot@gmail.com"
-HOMEPAGE = "http://github.com/whoahbot/dm-redis"
+HOMEPAGE = "http://github.com/whoahbot/dm-redis-adapter"
 SUMMARY = "DataMapper adapter for the Redis key-value database"
 
 spec = Gem::Specification.new do |s|
