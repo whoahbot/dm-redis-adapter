@@ -6,7 +6,7 @@ require 'spec/rake/spectask'
 
 GEM = 'dm-redis-adapter'
 GEM_NAME = 'dm-redis-adapter'
-GEM_VERSION = '0.0.3'
+GEM_VERSION = '0.0.4'
 AUTHORS = ['Dan Herrera']
 EMAIL = "whoahbot@gmail.com"
 HOMEPAGE = "http://github.com/whoahbot/dm-redis-adapter"
@@ -25,6 +25,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = HOMEPAGE
   s.add_dependency "rspec"
   s.add_dependency "dm-core", "0.10.0"
+  s.add_dependency "redis",   "0.0.3.4"
   s.require_path = 'lib'
   s.autorequire = GEM
   s.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")

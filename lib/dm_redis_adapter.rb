@@ -1,4 +1,4 @@
-require File.expand_path(File.join(File.dirname(__FILE__), 'rubyredis'))
+require 'redis'
 
 module DataMapper
   module Adapters
@@ -17,8 +17,9 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_identity_field(resource, @redis.incr("#{resource.model}:#{redis_key_for(resource.model)}:serial"))
-          @redis.set_add("#{resource.model}:#{redis_key_for(resource.model)}:all", resource.key)
+          # model.each {|c| c.to_s}.join(":")
+          initialize_identity_field(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
+          @redis.set_add("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:all", resource.key)
         end
         
         update_attributes(resources)
@@ -40,13 +41,13 @@ module DataMapper
         records = records_for(query).each do |record|
           query.fields.each do |property|
             next if query.model.key.include?(property.name)
-            record[property.name.to_s] = property.typecast(@redis["#{query.model}:#{record[redis_key_for(query.model)]}:#{property.name}"])
+            record[property.name.to_s] = property.typecast(@redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"])
           end
         end
 
         records = query.match_records(records)
-        records = query.sort_records(records)
         records = query.limit_records(records)
+        records = query.sort_records(records)
         records
       end
       
@@ -84,9 +85,9 @@ module DataMapper
       def delete(collection)
         collection.query.filter_records(records_for(collection.query)).each do |record|
           collection.query.model.properties.each do |p|
-            @redis.delete("#{collection.query.model}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
+            @redis.delete("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
           end
-          @redis.set_delete("#{collection.query.model}:#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
+          @redis.set_delete("#{collection.query.model.to_s.downcase}:#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
         end
       end
       
@@ -118,7 +119,7 @@ module DataMapper
         resources.each do |resource|
           resource.attributes.each do |property, value|
             next if resource.key.include?(property)
-            @redis["#{resource.model}:#{resource.key}:#{property}"] = value unless value.nil?
+            @redis["#{resource.model.to_s.downcase}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
       end
@@ -135,16 +136,21 @@ module DataMapper
       # @api private
       def records_for(query)
         keys = []
-        query.conditions.operands.select {|o| o.is_a?(Conditions::EqualToComparison) && query.model.key.include?(o.property)}.each do |o|
-          if @redis.set_member?("#{query.model}:#{redis_key_for(query.model)}:all", o.value)
+        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison) && query.model.key.include?(o.property)}.each do |o|
+          if @redis.set_member?("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", o.value)
             keys << {"#{redis_key_for(query.model)}" => o.value}
           end
         end
         
-        # TODO: Implement other conditions to filter down the records retrieved
+        # if query.limit
+        #   @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", :limit => [query.offset, query.limit]).each do |val|
+        #     keys << {"#{redis_key_for(query.model)}" => val.to_i}
+        #   end
+        # end
+        
         # Keys are empty, fall back and load all the values for this model
         if keys.empty?
-          @redis.set_members("#{query.model}:#{redis_key_for(query.model)}:all").each do |val|
+          @redis.set_members("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all").each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end
@@ -165,7 +171,7 @@ module DataMapper
       # @api semipublic
       def initialize(name, uri_or_options)
         super
-        @redis = RedisClient.new(@options)
+        @redis = Redis.new(@options)
       end
     end # class RedisAdapter
     

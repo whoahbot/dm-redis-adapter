@@ -14,9 +14,19 @@ Prerequisites:
 * Redis:
 ** <a href="http://code.google.com/p/redis/">Redis, v0.100</a>
 * Gems:
+** <a href="http://code.google.com/p/redis/">redis (0.0.3.4)</a>
 ** <a href="http://github.com/datamapper/extlib">extlib</a>, dependency for dm-core
 ** <a href="http://github.com/datamapper/dm-core/tree/next">dm-core</a> next branch
 
+I installed the redis gem from the redis .tgz file like so:
+
+<pre>
+  <code>
+    > tar -xvzf redis-0.100.tar.gz
+    > cd redis-0.100/client-libraries/ruby
+    > sudo rake install
+  </code>
+</pre>
 
 h1. Usage
 

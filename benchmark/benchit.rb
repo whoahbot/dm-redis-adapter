@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'dm-core'
 require 'benchmark'
+require 'redis'
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis_adapter.rb'))
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/rubyredis.rb'))
 
 class Post
   include DataMapper::Resource
@@ -11,7 +11,7 @@ class Post
   property :text, Text
 end
 
-redis = RedisClient.new(:db => 15)
+redis = Redis.new(:db => 15)
 
 Benchmark.bm(50) do |x|
   DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })
@@ -21,7 +21,7 @@ Benchmark.bm(50) do |x|
   Post.auto_migrate!
   x.report("Create 1000 posts with DM and Postgres") { 1000.times { Post.create(:text => "I love coffee") } }
 
-  x.report("Create 1000 posts with RedisClient") do 
+  x.report("Create 1000 posts with Redis") do 
     1000.times do
       i = redis.incr("Post:serial")
       redis.set_add("Post:id:all", i)
@@ -35,7 +35,7 @@ Benchmark.bm(50) do |x|
   x.report("Fetch the 500th post with DM and Redis") { Post.get(500).text }
   DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
   x.report("Fetch the 500th post's text with DM and Postgres") { Post.get(500).text }
-  x.report("Fetch the 500th post's text with RedisClient") { redis.set_member?("Post:id:all", 500); redis["Post:500:text"] }
+  x.report("Fetch the 500th post's text with Redis") { redis.set_member?("Post:id:all", 500); redis["Post:500:text"] }
 end
 
 Benchmark.bm(50) do |x|
@@ -43,7 +43,7 @@ Benchmark.bm(50) do |x|
   x.report("Fetch the 500th post's text with DM and Redis") { Post.get(500).text }
   DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
   x.report("Fetch the 500th post's text with DM and Postgres") { Post.get(500).text }
-  x.report("Fetch the 500th post's text with RedisClient") { redis.set_member?("Post:id:all", 500); redis["Post:500:text"] }
+  x.report("Fetch the 500th post's text with Redis") { redis.set_member?("Post:id:all", 500); redis["Post:500:text"] }
 end
 
 Benchmark.bm(50) do |x|
@@ -51,7 +51,7 @@ Benchmark.bm(50) do |x|
   x.report("Fetch the text of all posts with DM and Redis") { Post.all.each {|p| p.text} }
   DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
   x.report("Fetch the text of all posts with DM and Postgres") { Post.all.each {|p| p.text} }
-  x.report("Fetch the text of all posts with RedisClient") { 1000.times {|n| redis["Post:#{n}:text"]} }
+  x.report("Fetch the text of all posts with Redis") { 1000.times {|n| redis["Post:#{n}:text"]} }
 end
 
 redis.flushdb

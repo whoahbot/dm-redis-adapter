@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis_adapter'))
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/rubyredis'))
+require 'redis'
 
 require 'dm-core/spec/adapter_shared_spec'
 
@@ -13,7 +13,7 @@ describe DataMapper::Adapters::RedisAdapter do
   end
   
   after(:all) do
-    redis = RedisClient.new(:db => 15)
+    redis = Redis.new(:db => 15)
     redis.flushdb
   end
   

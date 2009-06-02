@@ -14,9 +14,9 @@ end
 Post.auto_migrate!
 
 Benchmark.benchmark do |x|
-  x.report { 1000.times { Post.create(:text => "I like ice cream") } }
+  x.report { 1000.times { Post.create(:text => "I love coffee") } }
 end
 
 Benchmark.benchmark do |x|
-  x.report { Post.all.each { |p| p.text } }
+  x.report { Post.get(500).text }
 end
