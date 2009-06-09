@@ -17,7 +17,6 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          # model.each {|c| c.to_s}.join(":")
           initialize_identity_field(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
           @redis.set_add("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:all", resource.key)
         end
@@ -136,7 +135,7 @@ module DataMapper
       # @api private
       def records_for(query)
         keys = []
-        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison) && query.model.key.include?(o.property)}.each do |o|
+        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison) && query.model.key.include?(o.subject)}.each do |o|
           if @redis.set_member?("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", o.value)
             keys << {"#{redis_key_for(query.model)}" => o.value}
           end
