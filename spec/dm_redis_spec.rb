@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/spec_helper'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis_adapter'))
 require 'redis'
 
 require 'dm-core/spec/adapter_shared_spec'
