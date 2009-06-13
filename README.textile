@@ -34,8 +34,9 @@ Setup your adapter, define your models and properties:
 
 <pre>
   <code>
+    require 'rubygems'
     require 'dm-core'
-    require 'dm_redis_adapter'
+    require 'dm_redis'
     
     DataMapper.setup(:default, {:adapter  => "redis"})
     
