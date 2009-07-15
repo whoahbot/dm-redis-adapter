@@ -17,7 +17,7 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_identity_field(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
+          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
           @redis.set_add("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:all", resource.key)
         end
         
@@ -39,7 +39,7 @@ module DataMapper
       def read(query)
         records = records_for(query).each do |record|
           query.fields.each do |property|
-            next if query.model.key.include?(property.name)
+            next if query.model.key.include?(property)
             record[property.name.to_s] = property.typecast(@redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"])
           end
         end
