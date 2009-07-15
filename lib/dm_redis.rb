@@ -3,7 +3,7 @@ require 'redis'
 module DataMapper
   module Adapters
     Extlib::Inflection.word 'redis'
-    
+
     class RedisAdapter < AbstractAdapter
       ##
       # Used by DataMapper to put records into the redis data-store: "INSERT" in SQL-speak.
@@ -20,10 +20,10 @@ module DataMapper
           initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
           @redis.set_add("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:all", resource.key)
         end
-        
+
         update_attributes(resources)
       end
-      
+
       ##
       # Looks up one record or a collection of records from the data-store:
       # "SELECT" in SQL.
@@ -49,7 +49,7 @@ module DataMapper
         records = query.sort_records(records)
         records
       end
-      
+
       ##
       # Used by DataMapper to update the attributes on existing records in the redis
       # data-store: "UPDATE" in SQL-speak. It takes a hash of the attributes
@@ -64,12 +64,12 @@ module DataMapper
       # @api semipublic
       def update(attributes, collection)
         attributes = attributes_as_fields(attributes)
-        
+
         records_to_update = records_for(collection.query)
         records_to_update.each { |r| r.update(attributes) }
         update_attributes(collection)
       end
-      
+
       ##
       # Destroys all the records matching the given query. "DELETE" in SQL.
       #
@@ -89,9 +89,9 @@ module DataMapper
           @redis.set_delete("#{collection.query.model.to_s.downcase}:#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
         end
       end
-      
+
       private
-      
+
       ##
       # Creates a string representation for the keys in a given model
       #
@@ -106,7 +106,7 @@ module DataMapper
       def redis_key_for(model)
         model.key.collect {|k| k.name}.join(":")
       end
-      
+
       ##
       # Saves each key value pair to the redis data store
       #
@@ -122,7 +122,7 @@ module DataMapper
           end
         end
       end
-      
+
       ##
       # Retrieves records for a particular model.
       #
@@ -140,20 +140,20 @@ module DataMapper
             keys << {"#{redis_key_for(query.model)}" => o.value}
           end
         end
-        
+
         # if query.limit
         #   @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", :limit => [query.offset, query.limit]).each do |val|
         #     keys << {"#{redis_key_for(query.model)}" => val.to_i}
         #   end
         # end
-        
+
         # Keys are empty, fall back and load all the values for this model
         if keys.empty?
           @redis.set_members("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all").each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end
-        
+
         keys
       end
 
@@ -173,7 +173,7 @@ module DataMapper
         @redis = Redis.new(@options)
       end
     end # class RedisAdapter
-    
+
     const_added(:RedisAdapter)
   end # module Adapters
 end # module DataMapper
