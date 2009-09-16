@@ -25,7 +25,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = HOMEPAGE
   s.add_dependency "rspec"
   s.add_dependency "dm-core", "0.10.0"
-  s.add_dependency "redis",   "0.0.3.4"
+  s.add_dependency "ezmobius-redis"
   s.require_path = 'lib'
   s.autorequire = GEM
   s.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")
