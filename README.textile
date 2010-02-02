@@ -20,7 +20,6 @@ Prerequisites:
 Install the dm-redis adapter:
 <pre>
   <code>
-    > gem sources -a http://gems.github.com
     > sudo gem install whoahbot-dm-redis-adapter
   </code>
 </pre>
