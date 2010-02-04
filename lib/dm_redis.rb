@@ -45,7 +45,6 @@ module DataMapper
         end
 
         records = query.match_records(records)
-        records = query.limit_records(records)
         records = query.sort_records(records)
         records
       end
@@ -141,11 +140,11 @@ module DataMapper
           end
         end
 
-        # if query.limit
-        #   @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", :limit => [query.offset, query.limit]).each do |val|
-        #     keys << {"#{redis_key_for(query.model)}" => val.to_i}
-        #   end
-        # end
+        if query.limit
+          @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", :limit => [query.offset, query.limit]).each do |val|
+            keys << {"#{redis_key_for(query.model)}" => val.to_i}
+          end
+        end
 
         # Keys are empty, fall back and load all the values for this model
         if keys.empty?
