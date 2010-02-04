@@ -12,15 +12,14 @@ h1. Install
 
 Prerequisites:
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis, v1.0</a>
+** <a href="http://code.google.com/p/redis/">Redis, v1.2.1</a>
 * Gems:
-** <a href="http://github.com/datamapper/extlib">extlib</a>, dependency for dm-core
-** <a href="http://github.com/datamapper/dm-core/">dm-core</a> v0.10
+** <a href="http://github.com/datamapper/dm-core/">dm-core</a> v0.10.2
 
 Install the dm-redis adapter:
 <pre>
   <code>
-    > sudo gem install whoahbot-dm-redis-adapter
+    > gem install dm-redis-adapter
   </code>
 </pre>
 

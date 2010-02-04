@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'dm-core'
 require 'benchmark'
-require 'redis'
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis.rb'))
 
 class Post
