@@ -134,9 +134,15 @@ module DataMapper
       # @api private
       def records_for(query)
         keys = []
-        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison) && query.model.key.include?(o.subject)}.each do |o|
-          if @redis.set_member?("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", o.value)
-            keys << {"#{redis_key_for(query.model)}" => o.value}
+        
+        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison)}.each do |o|
+          if query.model.key.include?(o.subject)
+            if @redis.set_member?("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", o.value)
+              keys << {"#{redis_key_for(query.model)}" => o.value}
+            end
+          end
+          if query.limit == 1 && find_match(query, o)
+            keys << {"#{o.subject.name}" => o.value}
           end
         end
 
@@ -156,6 +162,19 @@ module DataMapper
         keys
       end
 
+      ##
+      # Find a matching entry for a query
+      # 
+      # @return Bool
+      #   True if there was a matching entry for that query
+      # @api private
+      def find_match(query, operand)
+        @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", 
+          :by => "#{query.model.to_s.downcase}:*:id", 
+          :get => "#{query.model.to_s.downcase}:*:#{operand.subject.name}"
+        ).any? {|v| v == operand.value}
+      end
+      
       ##
       # Make a new instance of the adapter. The @redis ivar is the 'data-store'
       # for this adapter.
