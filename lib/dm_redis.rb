@@ -1,4 +1,5 @@
 require 'redis'
+require "base64"
 
 module DataMapper
   module Adapters
@@ -17,8 +18,8 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
-          @redis.set_add("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:all", resource.key)
+          initialize_serial(resource, @redis.incr(serial_key_for(resource.model)))
+          @redis.set_add(key_set_for(resource.model), resource.key)
         end
 
         update_attributes(resources)
@@ -85,10 +86,13 @@ module DataMapper
           collection.query.model.properties.each do |p|
             @redis.delete("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
           end
-          @redis.set_delete("#{collection.query.model.to_s.downcase}:#{redis_key_for(collection.query.model)}:all", record[redis_key_for(collection.query.model)])
+          @redis.set_delete(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
+          collection.query.model.properties.select {|p| p.index}.each do |p|
+            @redis.set_delete("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
+          end
         end
       end
-
+      
       private
 
       ##
@@ -115,9 +119,12 @@ module DataMapper
       # @api private
       def update_attributes(resources)
         resources.each do |resource|
+          resource.model.properties.select {|p| p.index}.each do |p|
+            @redis.set_add("#{resource.model.to_s.downcase}:#{p.name}:#{encode(resource[p.name])}", resource.key)
+          end
           resource.attributes.each do |property, value|
             next if resource.key.include?(property)
-            @redis["#{resource.model.to_s.downcase}:#{resource.key}:#{property}"] = value unless value.nil?
+            @redis[key_for_property(resource, property)] = value unless value.nil?
           end
         end
       end
@@ -137,42 +144,79 @@ module DataMapper
         
         query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison)}.each do |o|
           if query.model.key.include?(o.subject)
-            if @redis.set_member?("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", o.value)
+            if @redis.set_member?(key_set_for(query.model), o.value)
               keys << {"#{redis_key_for(query.model)}" => o.value}
             end
           end
-          if query.limit == 1 && find_match(query, o)
-            keys << {"#{o.subject.name}" => o.value}
+          find_matches(query, o).each do |k|
+            keys << {"#{redis_key_for(query.model)}" => k, "#{o.subject.name}" => o.value}
           end
         end
 
         if query.limit
-          @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", :limit => [query.offset, query.limit]).each do |val|
+          @redis.sort(key_set_for(query.model), :limit => [query.offset, query.limit]).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end
 
         # Keys are empty, fall back and load all the values for this model
         if keys.empty?
-          @redis.set_members("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all").each do |val|
+          @redis.set_members(key_set_for(query.model)).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end
 
         keys
       end
+      
+      ##
+      # Return the serial key for a resource
+      # 
+      # @return String
+      #   The string key used to hold the serial integer for this resource
+      # @api private
+      def serial_key_for(model)
+        "#{model.to_s.downcase}:#{redis_key_for(model)}:serial"
+      end
+
+      ##
+      # Return the key string for the set that contains all keys for a particular resource
+      # 
+      # @return String
+      #   The string key for the :all set
+      # @api private
+      def key_set_for(model)
+        "#{model.to_s.downcase}:#{redis_key_for(model)}:all"
+      end
+      
+      ##
+      # Return the key string for the model property
+      # 
+      # @return String
+      #   The string key for the model property
+      # @api private
+      def key_for_property(resource, property)
+        "#{resource.model.to_s.downcase}:#{resource.key}:#{property}"
+      end
 
       ##
       # Find a matching entry for a query
       # 
-      # @return Bool
-      #   True if there was a matching entry for that query
+      # @return [Array]
+      #   Array of id's of all members matching the query
       # @api private
-      def find_match(query, operand)
-        @redis.sort("#{query.model.to_s.downcase}:#{redis_key_for(query.model)}:all", 
-          :by => "#{query.model.to_s.downcase}:*:id", 
-          :get => "#{query.model.to_s.downcase}:*:#{operand.subject.name}"
-        ).any? {|v| v == operand.value}
+      def find_matches(query, operand)
+        @redis.set_members("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value)}")
+      end
+
+      ##
+      # Base64 encode a value as a string key for an index
+      # 
+      # @return String
+      #   Base64 representation of a value
+      # @api private
+      def encode(value)
+        Base64.encode64(value.to_s).gsub("\n", "")
       end
       
       ##
