@@ -3,8 +3,6 @@ require "base64"
 
 module DataMapper
   module Adapters
-    Extlib::Inflection.word 'redis'
-
     class RedisAdapter < AbstractAdapter
       ##
       # Used by DataMapper to put records into the redis data-store: "INSERT" in SQL-speak.
@@ -147,16 +145,19 @@ module DataMapper
             if @redis.set_member?(key_set_for(query.model), o.value)
               keys << {"#{redis_key_for(query.model)}" => o.value}
             end
+            return keys
           end
           find_matches(query, o).each do |k|
             keys << {"#{redis_key_for(query.model)}" => k, "#{o.subject.name}" => o.value}
           end
+          return keys
         end
 
         if query.limit
           @redis.sort(key_set_for(query.model), :limit => [query.offset, query.limit]).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
+          return keys
         end
 
         # Keys are empty, fall back and load all the values for this model
