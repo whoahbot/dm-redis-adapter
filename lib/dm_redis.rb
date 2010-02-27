@@ -120,7 +120,7 @@ module DataMapper
           resource.model.properties.select {|p| p.index}.each do |p|
             @redis.set_add("#{resource.model.to_s.downcase}:#{p.name}:#{encode(resource[p.name])}", resource.key)
           end
-          resource.attributes.each do |property, value|
+          resource.attributes(:field).each do |property, value|
             next if resource.key.include?(property)
             @redis[key_for_property(resource, property)] = value unless value.nil?
           end
