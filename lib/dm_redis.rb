@@ -16,10 +16,9 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr(serial_key_for(resource.model)))
+          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
           @redis.set_add(key_set_for(resource.model), resource.key)
         end
-
         update_attributes(resources)
       end
 
@@ -62,9 +61,9 @@ module DataMapper
       # @api semipublic
       def update(attributes, collection)
         attributes = attributes_as_fields(attributes)
-
+        
         records_to_update = records_for(collection.query)
-        records_to_update.each { |r| r.update(attributes) }
+        records_to_update.each {|r| r.update(attributes)}
         update_attributes(collection)
       end
 
@@ -80,7 +79,7 @@ module DataMapper
       #
       # @api semipublic
       def delete(collection)
-        collection.query.filter_records(records_for(collection.query)).each do |record|
+        records_for(collection.query).each do |record|
           collection.query.model.properties.each do |p|
             @redis.delete("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
           end
@@ -99,9 +98,8 @@ module DataMapper
       # @param [DataMapper::Model] model
       #   The query used to locate the resources to be deleted.
       #
-      # @return [Array]
-      #   An Array of Hashes containing the key-value pairs for
-      #   each record
+      # @return [String]
+      #   A string representation of the string key for this model
       #
       # @api private
       def redis_key_for(model)
@@ -109,20 +107,21 @@ module DataMapper
       end
 
       ##
-      # Saves each key value pair to the redis data store
+      # Saves each resource to the redis data store
       #
-      # @param [Array] resources
-      #   An array of resources to save
+      # @param [Array] Resources
+      #   An array of resource to save
       #
       # @api private
       def update_attributes(resources)
         resources.each do |resource|
-          resource.model.properties.select {|p| p.index}.each do |p|
-            @redis.set_add("#{resource.model.to_s.downcase}:#{p.name}:#{encode(resource[p.name])}", resource.key)
+          resource.model.properties.select {|p| p.index}.each do |property|
+            @redis.set_add("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key)
           end
+          
           resource.attributes(:field).each do |property, value|
             next if resource.key.include?(property)
-            @redis[key_for_property(resource, property)] = value unless value.nil?
+            @redis["#{resource.model.to_s.downcase}:#{resource.key}:#{property}"] = value unless value.nil?
           end
         end
       end
@@ -169,16 +168,6 @@ module DataMapper
 
         keys
       end
-      
-      ##
-      # Return the serial key for a resource
-      # 
-      # @return String
-      #   The string key used to hold the serial integer for this resource
-      # @api private
-      def serial_key_for(model)
-        "#{model.to_s.downcase}:#{redis_key_for(model)}:serial"
-      end
 
       ##
       # Return the key string for the set that contains all keys for a particular resource
@@ -188,16 +177,6 @@ module DataMapper
       # @api private
       def key_set_for(model)
         "#{model.to_s.downcase}:#{redis_key_for(model)}:all"
-      end
-      
-      ##
-      # Return the key string for the model property
-      # 
-      # @return String
-      #   The string key for the model property
-      # @api private
-      def key_for_property(resource, property)
-        "#{resource.model.to_s.downcase}:#{resource.key}:#{property}"
       end
 
       ##

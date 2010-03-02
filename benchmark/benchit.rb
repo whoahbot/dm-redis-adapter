@@ -6,11 +6,15 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis.r
 class Post
   include DataMapper::Resource
   
-  property :id,   Serial
-  property :text, Text
+  property :id,     Serial
+  property :text,   String
+  property :points, Integer
 end
 
 redis = Redis.new(:db => 15)
+
+# DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })
+# DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
 
 Benchmark.bm(50) do |x|
   DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })

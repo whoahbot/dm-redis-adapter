@@ -9,19 +9,19 @@ describe DataMapper::Adapters::RedisAdapter do
       :adapter  => "redis",
       :db => 15
     })
-  end
-  
-  class Post
-    include DataMapper::Resource
-    validates_is_unique :text
+    
+    class Crumblecake
+      include DataMapper::Resource
+      validates_is_unique :flavor
 
-    property :id,     Serial
-    property :title,  String, :index => true, :unique => true
+      property :id,      Serial
+      property :flavor,  String, :index => true
+    end
   end
   
   it "should validate unique entries that are indexed" do
-    Post.create(:title => "tea")
-    Post.new(:title => "tea").valid?.should be_false
+    Crumblecake.create(:flavor => "snozzbler")
+    Crumblecake.new(:flavor => "snozzbler").valid?.should be_false
   end
 
   after(:all) do

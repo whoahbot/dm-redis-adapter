@@ -48,6 +48,39 @@ Setup your adapter, define your models and properties:
 
 Now you can use redis in a ORM style, and take advantage of all of the amazing things that DataMapper offers.
 
+If you want to do finds on specific String fields, add an index:
+
+<pre>
+  <code>
+    class Coffee
+      include DataMapper::Resource
+      
+      property :id,            Serial
+      property :description,   String, :index => true
+    end
+    
+    Coffee.create(:description => "Notes of crude oil and sulphur")
+    Coffee.first(:description => "Notes of crude oil and sulphur") # will now work
+  </code>
+</pre>
+
+Validations on unique fields are now supported through indices and dm-validations:
+
+<pre>
+  <code>
+    class Crumblecake
+      include DataMapper::Resource
+      validates_is_unique :flavor
+
+      property :id,      Serial
+      property :flavor,  String, :index => true
+    end
+    
+    Crumblecake.create(:flavor => "snozzbler")
+    Crumblecake.new(:flavor => "snozzbler").valid? # false (of course!  Who ever heard of a snozzbler crumblecake?)
+  </code>
+</pre>
+
 h1. Badass contributors
 
 * <a href="http://github.com/aeden">Anthony Eden (aeden)</a> Gem cleanup, update to jeweler

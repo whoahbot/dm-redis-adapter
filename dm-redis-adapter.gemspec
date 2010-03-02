@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-redis-adapter}
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Herrera"]
-  s.date = %q{2010-02-04}
+  s.date = %q{2010-03-01}
   s.description = %q{DataMapper adapter for the Redis key-value database}
   s.email = %q{whoahbot@gmail.com}
   s.extra_rdoc_files = [
