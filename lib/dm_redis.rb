@@ -93,20 +93,6 @@ module DataMapper
       private
 
       ##
-      # Creates a string representation for the keys in a given model
-      #
-      # @param [DataMapper::Model] model
-      #   The query used to locate the resources to be deleted.
-      #
-      # @return [String]
-      #   A string representation of the string key for this model
-      #
-      # @api private
-      def redis_key_for(model)
-        model.key.collect {|k| k.name}.join(":")
-      end
-
-      ##
       # Saves each resource to the redis data store
       #
       # @param [Array] Resources
@@ -144,19 +130,16 @@ module DataMapper
             if @redis.set_member?(key_set_for(query.model), o.value)
               keys << {"#{redis_key_for(query.model)}" => o.value}
             end
-            return keys
           end
           find_matches(query, o).each do |k|
             keys << {"#{redis_key_for(query.model)}" => k, "#{o.subject.name}" => o.value}
           end
-          return keys
         end
 
         if query.limit
           @redis.sort(key_set_for(query.model), :limit => [query.offset, query.limit]).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
-          return keys
         end
 
         # Keys are empty, fall back and load all the values for this model
@@ -167,6 +150,20 @@ module DataMapper
         end
 
         keys
+      end
+      
+      ##
+      # Creates a string representation for the keys in a given model
+      #
+      # @param [DataMapper::Model] model
+      #   The query used to locate the resources to be deleted.
+      #
+      # @return [String]
+      #   A string representation of the string key for this model
+      #
+      # @api private
+      def redis_key_for(model)
+        model.key.collect {|k| k.name}.join(":")
       end
 
       ##
