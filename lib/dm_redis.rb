@@ -16,8 +16,8 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
-          @redis.set_add(key_set_for(resource.model), resource.key)
+          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial") - 1)
+          @redis.set_add(key_set_for(resource.model), resource.key.join)
         end
         update_attributes(resources)
       end
@@ -107,7 +107,7 @@ module DataMapper
           
           resource.attributes(:field).each do |property, value|
             next if resource.key.include?(property)
-            @redis["#{resource.model.to_s.downcase}:#{resource.key}:#{property}"] = value unless value.nil?
+            @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property}"] = value unless value.nil?
           end
         end
       end
