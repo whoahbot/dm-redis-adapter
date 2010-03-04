@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require File.expand_path("../spec_helper", __FILE__)
 require 'redis'
 
 require 'dm-core/spec/adapter_shared_spec'

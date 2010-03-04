@@ -61,7 +61,7 @@ module DataMapper
       # @api semipublic
       def update(attributes, collection)
         attributes = attributes_as_fields(attributes)
-        
+
         records_to_update = records_for(collection.query)
         records_to_update.each {|r| r.update(attributes)}
         update_attributes(collection)
@@ -89,7 +89,7 @@ module DataMapper
           end
         end
       end
-      
+
       private
 
       ##
@@ -104,7 +104,7 @@ module DataMapper
           resource.model.properties.select {|p| p.index}.each do |property|
             @redis.set_add("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key)
           end
-          
+
           resource.attributes(:field).each do |property, value|
             next if resource.key.include?(property)
             @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property}"] = value unless value.nil?
@@ -124,7 +124,7 @@ module DataMapper
       # @api private
       def records_for(query)
         keys = []
-        
+
         query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison)}.each do |o|
           if query.model.key.include?(o.subject)
             if @redis.set_member?(key_set_for(query.model), o.value)
@@ -151,7 +151,7 @@ module DataMapper
 
         keys
       end
-      
+
       ##
       # Creates a string representation for the keys in a given model
       #
@@ -168,7 +168,7 @@ module DataMapper
 
       ##
       # Return the key string for the set that contains all keys for a particular resource
-      # 
+      #
       # @return String
       #   The string key for the :all set
       # @api private
@@ -178,7 +178,7 @@ module DataMapper
 
       ##
       # Find a matching entry for a query
-      # 
+      #
       # @return [Array]
       #   Array of id's of all members matching the query
       # @api private
@@ -188,14 +188,14 @@ module DataMapper
 
       ##
       # Base64 encode a value as a string key for an index
-      # 
+      #
       # @return String
       #   Base64 representation of a value
       # @api private
       def encode(value)
         Base64.encode64(value.to_s).gsub("\n", "")
       end
-      
+
       ##
       # Make a new instance of the adapter. The @redis ivar is the 'data-store'
       # for this adapter.

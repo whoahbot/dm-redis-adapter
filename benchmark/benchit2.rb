@@ -5,7 +5,7 @@ DataMapper.setup(:default, 'sqlite3::memory:')
 
 class Post
   include DataMapper::Resource
-  
+
   property :id,   Serial
   property :text, Text
 end

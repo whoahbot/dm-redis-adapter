@@ -32,16 +32,16 @@ Setup your adapter, define your models and properties:
     require 'rubygems'
     require 'dm-core'
     require 'dm_redis'
-    
+
     DataMapper.setup(:default, {:adapter  => "redis"})
-    
+
     class Cafe
       include DataMapper::Resource
-      
+
       property :id,     Serial
       property :name,   Text
     end
-    
+
     Cafe.create(:name => "Whoahbot's Caffienitorium")
   </code>
 </pre>
@@ -54,11 +54,11 @@ If you want to do finds on specific String fields, add an index:
   <code>
     class Coffee
       include DataMapper::Resource
-      
+
       property :id,            Serial
       property :description,   String, :index => true
     end
-    
+
     Coffee.create(:description => "Notes of crude oil and sulphur")
     Coffee.first(:description => "Notes of crude oil and sulphur") # will now work
   </code>
@@ -75,7 +75,7 @@ Validations on unique fields are now supported through indices and dm-validation
       property :id,      Serial
       property :flavor,  String, :index => true
     end
-    
+
     Crumblecake.create(:flavor => "snozzbler")
     Crumblecake.new(:flavor => "snozzbler").valid? # false (of course!  Who ever heard of a snozzbler crumblecake?)
   </code>

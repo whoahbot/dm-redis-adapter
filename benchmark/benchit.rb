@@ -5,7 +5,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis.r
 
 class Post
   include DataMapper::Resource
-  
+
   property :id,     Serial
   property :text,   String
   property :points, Integer
@@ -24,7 +24,7 @@ Benchmark.bm(50) do |x|
   Post.auto_migrate!
   x.report("Create 1000 posts with DM and Postgres") { 1000.times { Post.create(:text => "I love coffee") } }
 
-  x.report("Create 1000 posts with Redis") do 
+  x.report("Create 1000 posts with Redis") do
     1000.times do
       i = redis.incr("Post:serial")
       redis.set_add("Post:id:all", i)

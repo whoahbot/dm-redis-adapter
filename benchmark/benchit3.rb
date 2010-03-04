@@ -6,7 +6,7 @@ DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
 
 class Post
   include DataMapper::Resource
-  
+
   property :id,   Serial
   property :text, Text
 end

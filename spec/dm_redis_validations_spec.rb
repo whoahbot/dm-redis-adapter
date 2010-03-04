@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require File.expand_path("../spec_helper", __FILE__)
 require 'redis'
 require 'dm-validations'
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis.rb'))
@@ -9,7 +9,7 @@ describe DataMapper::Adapters::RedisAdapter do
       :adapter  => "redis",
       :db => 15
     })
-    
+
     class Crumblecake
       include DataMapper::Resource
       validates_is_unique :flavor
@@ -18,7 +18,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :flavor,  String, :index => true
     end
   end
-  
+
   it "should validate unique entries that are indexed" do
     Crumblecake.create(:flavor => "snozzbler")
     Crumblecake.new(:flavor => "snozzbler").valid?.should be_false
