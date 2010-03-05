@@ -85,3 +85,4 @@ h1. Badass contributors
 
 * <a href="http://github.com/aeden">Anthony Eden (aeden)</a> Gem cleanup, update to jeweler
 * <a href="http://github.com/sr">Simon Roset (sr)</a> Fixes for edge dm-core
+* <a href="http://github.com/">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps 

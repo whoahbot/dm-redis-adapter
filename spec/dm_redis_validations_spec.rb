@@ -9,7 +9,9 @@ describe DataMapper::Adapters::RedisAdapter do
       :adapter  => "redis",
       :db => 15
     })
+  end
 
+  it "should validate unique entries that are indexed" do
     class Crumblecake
       include DataMapper::Resource
       validates_is_unique :flavor
@@ -17,9 +19,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :id,      Serial
       property :flavor,  String, :index => true
     end
-  end
-
-  it "should validate unique entries that are indexed" do
+    
     Crumblecake.create(:flavor => "snozzbler")
     Crumblecake.new(:flavor => "snozzbler").valid?.should be_false
   end
