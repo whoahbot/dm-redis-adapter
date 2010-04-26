@@ -8,11 +8,15 @@ Redis is a very fast key-value store with some interesting data structures added
 
 Marrying DataMapper to Redis allows for schema-less models, you can add fields at any time without having to create a migration.  DataMapper also allows us to store non-native Redis types in the db, like Date fields.
 
+h1. Changelog
+
+* v0.0.11 Updates to support newer versions of the redis client, support for JSON datatypes
+
 h1. Install
 
 Prerequisites:
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis, v1.2.1</a>
+** <a href="http://code.google.com/p/redis/">Redis, v1.3.8</a>
 * Gems:
 ** <a href="http://github.com/datamapper/dm-core/">dm-core</a> v0.10.2
 
@@ -85,4 +89,5 @@ h1. Badass contributors
 
 * <a href="http://github.com/aeden">Anthony Eden (aeden)</a> Gem cleanup, update to jeweler
 * <a href="http://github.com/sr">Simon Roset (sr)</a> Fixes for edge dm-core
-* <a href="http://github.com/">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps 
+* <a href="http://github.com/cehoffman">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps 
+* <a href="http://github.com/bpo">brian p o'rourke (bpo)</a> Updates for newer versions of redis client and DM JSON type support
