@@ -52,6 +52,21 @@ describe DataMapper::Adapters::RedisAdapter do
     end
   end
 
+  it "should allow me to delete properties" do
+    class User
+      include DataMapper::Resource
+
+      property :id,   Serial
+      property :name, String
+    end
+
+    u = User.create :name => "bpo"
+    u.reload.name.should == "bpo"
+    u.name = nil
+    u.save
+    u.reload.name.should == nil
+  end
+
   after(:all) do
     redis = Redis.new(:db => 15)
     redis.flushdb

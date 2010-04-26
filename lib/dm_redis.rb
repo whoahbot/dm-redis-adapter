@@ -119,7 +119,11 @@ module DataMapper
           model.properties(self.name).each do |property|
             next unless attributes.key?(property)
             value = attributes[property]
-            @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property.name}"] = value unless value.nil?
+            if value.nil?
+              @redis.del "#{resource.model.to_s.downcase}:#{resource.key.join}:#{property.name}"
+            else
+              @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property.name}"] = value
+            end
           end
         end
       end
