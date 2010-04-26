@@ -26,8 +26,8 @@ begin
     gemspec.homepage = HOMEPAGE
     gemspec.description = SUMMARY
     gemspec.authors = AUTHORS
-    gemspec.add_dependency "dm-core", "0.10.0"
-    gemspec.add_dependency "ezmobius-redis"
+    gemspec.add_dependency "dm-core", ">= 0.10.2"
+    gemspec.add_dependency "redis"
     gemspec.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")
     gemspec.has_rdoc = true
     gemspec.extra_rdoc_files = ["MIT-LICENSE"]

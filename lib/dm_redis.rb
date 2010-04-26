@@ -17,7 +17,7 @@ module DataMapper
       def create(resources)
         resources.each do |resource|
           initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
-          @redis.set_add(key_set_for(resource.model), resource.key.join)
+          @redis.sadd(key_set_for(resource.model), resource.key.join)
         end
         update_attributes(resources)
       end
@@ -38,10 +38,18 @@ module DataMapper
         records = records_for(query).each do |record|
           query.fields.each do |property|
             next if query.model.key.include?(property)
-            record[property.name.to_s] = property.typecast(@redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"])
+
+            # Integers are stored as Strings in Redis. If there's a
+            # string coming out that should be an integer, convert it
+            # now. All other typecasting is handled by datamapper
+            # separately.
+            if property.primitive == Integer
+              record[property.name.to_s] = property.typecast(@redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"])
+            else
+              record[property.name.to_s] = @redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"]
+            end
           end
         end
-
         records = query.match_records(records)
         records = query.sort_records(records)
         records
@@ -81,11 +89,11 @@ module DataMapper
       def delete(collection)
         records_for(collection.query).each do |record|
           collection.query.model.properties.each do |p|
-            @redis.delete("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
+            @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
           end
-          @redis.set_delete(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
+          @redis.srem(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
           collection.query.model.properties.select {|p| p.index}.each do |p|
-            @redis.set_delete("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
+            @redis.srem("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
           end
         end
       end
@@ -101,13 +109,17 @@ module DataMapper
       # @api private
       def update_attributes(resources)
         resources.each do |resource|
+          model = resource.model
+          attributes = resource.dirty_attributes
+
           resource.model.properties.select {|p| p.index}.each do |property|
-            @redis.set_add("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key)
+            @redis.sadd("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key)
           end
 
-          resource.attributes(:field).each do |property, value|
-            next if resource.key.include?(property)
-            @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property}"] = value unless value.nil?
+          model.properties(self.name).each do |property|
+            next unless attributes.key?(property)
+            value = attributes[property]
+            @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property.name}"] = value unless value.nil?
           end
         end
       end
@@ -127,7 +139,7 @@ module DataMapper
 
         query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison)}.each do |o|
           if query.model.key.include?(o.subject)
-            if @redis.set_member?(key_set_for(query.model), o.value)
+            if @redis.sismember(key_set_for(query.model), o.value)
               keys << {"#{redis_key_for(query.model)}" => o.value}
             end
           end
@@ -144,7 +156,7 @@ module DataMapper
 
         # Keys are empty, fall back and load all the values for this model
         if keys.empty?
-          @redis.set_members(key_set_for(query.model)).each do |val|
+          @redis.smembers(key_set_for(query.model)).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end
@@ -183,7 +195,7 @@ module DataMapper
       #   Array of id's of all members matching the query
       # @api private
       def find_matches(query, operand)
-        @redis.set_members("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value)}")
+        @redis.smembers("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value)}")
       end
 
       ##

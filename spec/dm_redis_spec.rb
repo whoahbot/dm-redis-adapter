@@ -13,7 +13,7 @@ describe DataMapper::Adapters::RedisAdapter do
 
   after(:all) do
     redis = Redis.new(:db => 15)
-    redis.flush_db
+    redis.flushdb
   end
 
   it_should_behave_like 'An Adapter'
