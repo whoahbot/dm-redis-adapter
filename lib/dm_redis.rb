@@ -36,18 +36,19 @@ module DataMapper
       # @api semipublic
       def read(query)
         records = records_for(query).each do |record|
+          record_data = @redis.hgetall( "#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}" )
+
           query.fields.each do |property|
             next if query.model.key.include?(property)
+
+            name = property.name.to_s
+            value = record_data[name]
 
             # Integers are stored as Strings in Redis. If there's a
             # string coming out that should be an integer, convert it
             # now. All other typecasting is handled by datamapper
             # separately.
-            if property.primitive == Integer
-              record[property.name.to_s] = property.typecast(@redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"])
-            else
-              record[property.name.to_s] = @redis["#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}:#{property.name}"]
-            end
+            record[name] = property.primitive == Integer ? property.typecast( value ) : value
           end
         end
         records = query.match_records(records)
@@ -88,9 +89,7 @@ module DataMapper
       # @api semipublic
       def delete(collection)
         records_for(collection.query).each do |record|
-          collection.query.model.properties.each do |p|
-            @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}:#{p.name}")
-          end
+          @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}")
           @redis.srem(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
           collection.query.model.properties.select {|p| p.index}.each do |p|
             @redis.srem("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
@@ -116,15 +115,22 @@ module DataMapper
             @redis.sadd("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key)
           end
 
-          model.properties(self.name).each do |property|
-            next unless attributes.key?(property)
+          properties_to_set = []
+          properties_to_del = []
+
+          fields = model.properties(self.name).select {|property| attributes.key?(property) }
+          fields.each do |property|
             value = attributes[property]
             if value.nil?
-              @redis.del "#{resource.model.to_s.downcase}:#{resource.key.join}:#{property.name}"
+              properties_to_del << property.name
             else
-              @redis["#{resource.model.to_s.downcase}:#{resource.key.join}:#{property.name}"] = value
+              properties_to_set << property.name << attributes[property]
             end
           end
+          
+          hash_key = "#{resource.model.to_s.downcase}:#{resource.key.join}"
+          properties_to_del.each {|prop| @redis.hdel(hash_key, prop) }
+          @redis.hmset(hash_key, *properties_to_set) unless properties_to_set.empty?
         end
       end
 
