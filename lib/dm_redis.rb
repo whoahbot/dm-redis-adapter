@@ -48,7 +48,7 @@ module DataMapper
             # string coming out that should be an integer, convert it
             # now. All other typecasting is handled by datamapper
             # separately.
-            record[name] = property.primitive == Integer ? property.typecast( value ) : value
+            record[name] = [Integer, Date].include?(property.primitive) ? property.typecast( value ) : value
           end
         end
         records = query.match_records(records)

@@ -20,14 +20,14 @@ Benchmark.bm(50) do |x|
   DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })
   x.report("Create 1000 posts with DM and Redis") { 1000.times { Post.create(:text => "I love coffee") } }
 
-  DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
-  Post.auto_migrate!
-  x.report("Create 1000 posts with DM and Postgres") { 1000.times { Post.create(:text => "I love coffee") } }
+  # DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
+  # Post.auto_migrate!
+  # x.report("Create 1000 posts with DM and Postgres") { 1000.times { Post.create(:text => "I love coffee") } }
 
   x.report("Create 1000 posts with Redis") do
     1000.times do
       i = redis.incr("Post:serial")
-      redis.set_add("Post:id:all", i)
+      redis.sadd("Post:id:all", i)
       redis["Post:#{i}:text"] = "I love coffee"
     end
   end

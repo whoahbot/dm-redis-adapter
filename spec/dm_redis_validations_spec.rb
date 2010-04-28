@@ -66,6 +66,19 @@ describe DataMapper::Adapters::RedisAdapter do
     u.save
     u.reload.name.should == nil
   end
+  
+  it "should store Date fields" do
+    class Post
+      include DataMapper::Resource
+      
+      property :id,        Serial
+      property :posted_at, Date
+    end
+    
+    p = Post.create :posted_at => Date.today
+    
+    Post.first.posted_at.should be_a(Date)
+  end
 
   after(:all) do
     redis = Redis.new(:db => 15)
