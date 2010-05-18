@@ -1,7 +1,5 @@
 h1. dm-redis-adapter
 
-
-
 This is a <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://github.com/antirez/redis/">Redis</a> key-value database.
 
 Redis is a very fast key-value store with some interesting data structures added.  You can have a key that is a SET, LIST, STRING or HASH that is binary safe.  Data structures like SET and LIST allow for even more interesting things.  Redis is a fabulous and fast engine for data structures, and you can read more about it here: <a href="http://code.google.com/p/redis/">redis</a>.  Redis is also a persistent data store, and can be used in large-scale environments with master-slave replication and consistent hashing on the client side.
@@ -12,10 +10,11 @@ Marrying DataMapper to Redis allows for schema-less models, you can add fields a
 
 h1. Upgrading
 
-v0.1 is not compatible with data created with previous versions!  The new storage schema is designed to be more VM friendly.  I won't be releasing a gem version of v0.1 until a stable version of redis that includes hash support has been released.
+> v0.1 is not compatible with data created with previous versions!  The new storage schema is designed to be more VM friendly.  I won't be releasing a gem version of v0.1 until a stable version of redis that includes hash support has been released.
 
 h1. Changelog
 
+* v0.1.1  Update to redis-rb v2.0.0
 * v0.1    Update to store records as redis hash values
 * v0.0.11 Updates to support newer versions of the redis client, support for JSON datatypes
 
