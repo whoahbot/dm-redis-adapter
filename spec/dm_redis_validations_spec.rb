@@ -33,7 +33,7 @@ describe DataMapper::Adapters::RedisAdapter do
 
         property :id,     Serial
         property :name,   String
-        property :env,    DataMapper::Types::Json, :default => lambda { {} }
+        property :env,    DataMapper::Property::Json, :default => lambda { {} }
       end
     end
 

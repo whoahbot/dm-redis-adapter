@@ -36,24 +36,24 @@ end
 Benchmark.bm(50) do |x|
   DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })
   x.report("Fetch the 500th post with DM and Redis") { Post.get(500).text }
-  DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
-  x.report("Fetch the 500th post's text with DM and Postgres") { Post.get(500).text }
-  x.report("Fetch the 500th post's text with Redis") { redis.set_member?("Post:id:all", 500); redis["Post:500:text"] }
+  # DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
+  # x.report("Fetch the 500th post's text with DM and Postgres") { Post.get(500).text }
+  x.report("Fetch the 500th post's text with Redis") { redis.sismember("Post:id:all", 500); redis["Post:500:text"] }
 end
 
 Benchmark.bm(50) do |x|
   DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })
   x.report("Fetch the 500th post's text with DM and Redis") { Post.get(500).text }
-  DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
-  x.report("Fetch the 500th post's text with DM and Postgres") { Post.get(500).text }
-  x.report("Fetch the 500th post's text with Redis") { redis.set_member?("Post:id:all", 500); redis["Post:500:text"] }
+  # DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
+  # x.report("Fetch the 500th post's text with DM and Postgres") { Post.get(500).text }
+  x.report("Fetch the 500th post's text with Redis") { redis.sismember("Post:id:all", 500); redis["Post:500:text"] }
 end
 
 Benchmark.bm(50) do |x|
   DataMapper.setup(:default, {:adapter  => "redis", :db => 15 })
   x.report("Fetch the text of all posts with DM and Redis") { Post.all.each {|p| p.text} }
-  DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
-  x.report("Fetch the text of all posts with DM and Postgres") { Post.all.each {|p| p.text} }
+  # DataMapper.setup(:default, 'postgres://localhost/dm_redis_test')
+  # x.report("Fetch the text of all posts with DM and Postgres") { Post.all.each {|p| p.text} }
   x.report("Fetch the text of all posts with Redis") { 1000.times {|n| redis["Post:#{n}:text"]} }
 end
 
