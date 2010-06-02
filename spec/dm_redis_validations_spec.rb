@@ -15,7 +15,7 @@ describe DataMapper::Adapters::RedisAdapter do
   it "should validate unique entries that are indexed" do
     class Crumblecake
       include DataMapper::Resource
-      validates_is_unique :flavor
+      validates_uniqueness_of :flavor
 
       property :id,      Serial
       property :flavor,  String, :index => true
