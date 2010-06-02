@@ -1,8 +1,13 @@
-require File.expand_path("../spec_helper", __FILE__)
-require 'redis'
+require 'spec_helper'
 
-# require 'dm-core/spec/adapter_shared_spec'
-require DataMapper.root / 'lib' / 'dm-core' / 'spec' / 'shared' / 'adapter_spec'
+require 'dm-core'
+require 'dm-core/spec/shared/adapter_spec'
+
+require 'dm-migrations'
+require 'dm-redis-adapter/spec/setup'
+
+ENV['ADAPTER']          = 'redis'
+ENV['ADAPTER_SUPPORTS'] = 'all'
 
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
@@ -10,6 +15,7 @@ describe DataMapper::Adapters::RedisAdapter do
       :adapter  => "redis",
       :db => 15
     })
+    @repository = DataMapper.repository(@adapter.name)
   end
 
   it_should_behave_like 'An Adapter'

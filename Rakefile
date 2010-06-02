@@ -26,20 +26,12 @@ begin
     gemspec.homepage = HOMEPAGE
     gemspec.description = SUMMARY
     gemspec.authors = AUTHORS
-    gemspec.add_dependency "dm-core", ">= 0.10.2"
-    gemspec.add_dependency "dm-types", ">= 0.10.2"
-    gemspec.add_dependency "redis", ">= 2.0.0"
+    gemspec.add_dependency "dm-core", ">= 1.0.0.rc3"
+    gemspec.add_dependency "dm-types", ">= 1.0.0.rc3"
+    gemspec.add_dependency "redis", ">= 2.0.1"
     gemspec.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")
-    gemspec.has_rdoc = true
+    gemspec.has_rdoc = false
     gemspec.extra_rdoc_files = ["MIT-LICENSE"]
-    gemspec.post_install_message = <<-POST_INSTALL_MESSAGE
-
-                  !!!  U P G R A D I N G  AIEEE !!!
-
-      Please be sure to read http://wiki.github.com/whoahbot/dm-redis-adapter/upgrading-to-dm-redis-adapter-v01
-      for important information about upgrading.  This version breaks compatibility with previous revisions.
-
-      POST_INSTALL_MESSAGE
     end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"

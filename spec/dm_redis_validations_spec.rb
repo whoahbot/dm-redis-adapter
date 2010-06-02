@@ -3,7 +3,6 @@ require 'redis'
 require 'rubygems'
 require 'dm-validations'
 require 'dm-types'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis.rb'))
 
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do

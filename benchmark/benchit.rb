@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'dm-core'
 require 'benchmark'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/dm_redis.rb'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib/adapter.rb'))
 
 class Post
   include DataMapper::Resource
