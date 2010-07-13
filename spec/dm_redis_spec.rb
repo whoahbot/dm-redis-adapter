@@ -2,8 +2,6 @@ require 'spec_helper'
 
 require 'dm-core'
 require 'dm-core/spec/shared/adapter_spec'
-
-require 'dm-migrations'
 require 'dm-redis-adapter/spec/setup'
 
 ENV['ADAPTER']          = 'redis'

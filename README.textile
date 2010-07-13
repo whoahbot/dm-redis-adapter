@@ -14,6 +14,7 @@ h1. Upgrading
 
 h1. Changelog
 
+* v0.2.1  Fixes to sorting
 * v0.1.1  Update to redis-rb v2.0.0
 * v0.1    Update to store records as redis hash values
 * v0.0.11 Updates to support newer versions of the redis client, support for JSON datatypes
@@ -22,9 +23,9 @@ h1. Install
 
 Prerequisites:
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis, v1.3.x</a>
+** <a href="http://code.google.com/p/redis/">Redis, v2.0.x RC series</a>
 * Gems:
-** <a href="http://github.com/datamapper/dm-core/">dm-core</a> v0.10.2
+** <a href="http://github.com/datamapper/dm-core/">dm-core</a> v1.0.0
 
 Install the dm-redis adapter:
 <pre>
@@ -95,5 +96,5 @@ h1. Badass contributors
 
 * <a href="http://github.com/aeden">Anthony Eden (aeden)</a> Gem cleanup, update to jeweler
 * <a href="http://github.com/sr">Simon Roset (sr)</a> Fixes for edge dm-core
-* <a href="http://github.com/cehoffman">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps 
+* <a href="http://github.com/cehoffman">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps, fixes for sorting
 * <a href="http://github.com/bpo">brian p o'rourke (bpo)</a> Updates for newer versions of redis client and DM JSON type support, move to hash storage

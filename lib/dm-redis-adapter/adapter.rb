@@ -157,9 +157,17 @@ module DataMapper
             keys << {"#{redis_key_for(query.model)}" => k, "#{o.subject.name}" => o.value}
           end
         end
-
-        if query.limit
-          @redis.sort(key_set_for(query.model), :limit => [query.offset, query.limit]).each do |val|
+        
+        if query.order || query.limit
+          params = {}
+          params[:limit] = [query.offset, query.limit] if query.limit
+          
+          if query.order
+            order = query.order.first
+            params[:order] = order.operator.to_s
+          end
+          
+          @redis.sort(key_set_for(query.model), params).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end

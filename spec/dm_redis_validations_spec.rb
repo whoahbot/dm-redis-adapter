@@ -1,14 +1,14 @@
 require File.expand_path("../spec_helper", __FILE__)
-require 'redis'
-require 'rubygems'
 require 'dm-validations'
 require 'dm-types'
+require 'logger'
 
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
     @adapter = DataMapper.setup(:default, {
       :adapter  => "redis",
-      :db => 15
+      :db => 15,
+      # :logger => Logger.new(STDOUT)
     })
   end
 
@@ -74,11 +74,25 @@ describe DataMapper::Adapters::RedisAdapter do
       property :posted_at, Date
     end
     
-    p = Post.create :posted_at => Date.today
-    
+    Post.create :posted_at => Date.today
     Post.first.posted_at.should be_a(Date)
   end
 
+  it "should get the first and last model inserted" do
+    class GangMember
+      include DataMapper::Resource
+
+      property :id,       Serial
+      property :nickname, String
+    end
+
+    joey = GangMember.create(:nickname => "Joey 'two-times'")
+    bobby = GangMember.create(:nickname => "Bobby 'three-fingers'")
+
+    GangMember.first.should == joey
+    GangMember.last.should == bobby
+  end
+  
   after(:all) do
     redis = Redis.new(:db => 15)
     redis.flushdb
