@@ -36,6 +36,22 @@ Gem::Specification.new do |s|
      "spec/dm_redis_validations_spec.rb",
      "spec/spec_helper.rb"
   ]
+  
+  s.post_install_message = %q{
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                       (!!)   U P G R A D I N G    (!!)
+
+                         WAAAAAAAAAAAAAAAAAAAAAAAAIT!
+
+                     Earlier versions of dm-redis-adapter
+                 use a different method of storing properties
+               which means that this version of dm-redis-adapter
+                          won't read them properly.
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  }
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
