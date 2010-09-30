@@ -20,7 +20,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :id,      Serial
       property :flavor,  String, :index => true
     end
-    
+
     Crumblecake.create(:flavor => "snozzbler")
     Crumblecake.new(:flavor => "snozzbler").valid?.should be_false
   end
@@ -65,15 +65,15 @@ describe DataMapper::Adapters::RedisAdapter do
     u.save
     u.reload.name.should == nil
   end
-  
+
   it "should store Date fields" do
     class Post
       include DataMapper::Resource
-      
+
       property :id,        Serial
       property :posted_at, Date
     end
-    
+
     Post.create :posted_at => Date.today
     Post.first.posted_at.should be_a(Date)
   end
@@ -92,7 +92,20 @@ describe DataMapper::Adapters::RedisAdapter do
     GangMember.first.should == joey
     GangMember.last.should == bobby
   end
-  
+
+  it "should pull up the first pirate that matches the nickname" do
+    class Blackguard
+      include DataMapper::Resource
+
+      property :id,       Serial
+      property :nickname, String, :index => true
+    end
+
+    petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
+    james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
+    Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should == james
+  end
+
   after(:all) do
     redis = Redis.new(:db => 15)
     redis.flushdb
