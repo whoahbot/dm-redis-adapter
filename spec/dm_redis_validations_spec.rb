@@ -106,7 +106,21 @@ describe DataMapper::Adapters::RedisAdapter do
     Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should == james
   end
 
-  after(:all) do
+  it "should not mark the first pirate as destroyed" do
+    class Blackguard
+      include DataMapper::Resource
+
+      property :id,       Serial
+      property :nickname, String, :index => true
+    end
+
+    petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
+    james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
+    Blackguard.get(petey.id).should_not be_destroyed
+    #Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should_not be_destroyed
+  end
+
+  after(:each) do
     redis = Redis.new(:db => 15)
     redis.flushdb
   end

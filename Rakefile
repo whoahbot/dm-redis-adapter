@@ -32,6 +32,20 @@ begin
     gemspec.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")
     gemspec.has_rdoc = false
     gemspec.extra_rdoc_files = ["MIT-LICENSE"]
+    gemspec.post_install_message = <<-POST_INSTALL_MESSAGE
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                       (!!)   U P G R A D I N G    (!!)
+
+                         WAAAAAAAAAAAAAAAAAAAAAAAAIT!
+
+                  Versions of dm-redis-adapter prior to v0.1
+                 use a different method of storing properties
+               which means that this version of dm-redis-adapter
+                          won't read them properly.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+POST_INSTALL_MESSAGE
     end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-redis-adapter}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Herrera"]
-  s.date = %q{2010-10-03}
+  s.date = %q{2010-10-13}
   s.description = %q{DataMapper adapter for the Redis key-value database}
   s.email = %q{whoahbot@gmail.com}
   s.extra_rdoc_files = [
@@ -27,6 +27,19 @@ Gem::Specification.new do |s|
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/whoahbot/dm-redis-adapter}
+  s.post_install_message = %q{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                       (!!)   U P G R A D I N G    (!!)
+
+                         WAAAAAAAAAAAAAAAAAAAAAAAAIT!
+
+                  Versions of dm-redis-adapter prior to v0.1
+                 use a different method of storing properties
+               which means that this version of dm-redis-adapter
+                          won't read them properly.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}

@@ -36,7 +36,7 @@ module DataMapper
       # @api semipublic
       def read(query)
         records = records_for(query).each do |record|
-          record_data = @redis.hgetall( "#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}" )
+          record_data = @redis.hgetall("#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
             next if query.model.key.include?(property)
@@ -154,7 +154,7 @@ module DataMapper
             end
           end
           find_matches(query, o).each do |k|
-            keys << {"#{redis_key_for(query.model)}" => k, "#{o.subject.name}" => o.value}
+            keys << {"#{redis_key_for(query.model)}" => k.to_i, "#{o.subject.name}" => o.value}
           end
         end
 
