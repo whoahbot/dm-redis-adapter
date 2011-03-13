@@ -214,7 +214,7 @@ module DataMapper
       #   Array of id's of all members matching the query
       # @api private
       def find_matches(query, operand)
-        @redis.smembers("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value)}")
+        @redis.smembers("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value.to_s)}")
       end
 
       ##
