@@ -88,10 +88,11 @@ module DataMapper
       #
       # @api semipublic
       def delete(collection)
-        records_for(collection.query).each do |record|
+        collection.count.times do |x|
+          record = collection[x]
           @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}")
           @redis.srem(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
-          collection.query.model.properties.select {|p| p.index}.each do |p|
+          record.model.properties.select {|p| p.index}.each do |p|
             @redis.srem("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
           end
         end
@@ -112,7 +113,7 @@ module DataMapper
           attributes = resource.dirty_attributes
 
           resource.model.properties.select {|p| p.index}.each do |property|
-            @redis.sadd("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key)
+            @redis.sadd("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.first.to_s)
           end
 
           properties_to_set = []
@@ -213,7 +214,7 @@ module DataMapper
       #   Array of id's of all members matching the query
       # @api private
       def find_matches(query, operand)
-        @redis.smembers("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value)}")
+        @redis.smembers("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value.to_s)}")
       end
 
       ##
