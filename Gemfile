@@ -1,9 +1,9 @@
 source :gemcutter
 
-gem "dm-core", ">= 1.0.0"
-gem "dm-validations", ">= 1.0.0"
-gem "dm-migrations", ">= 1.0.0"
-gem "dm-types", ">= 1.0.0"
+gem "dm-core", ">= 1.0.2"
+gem "dm-validations", ">= 1.0.2"
+gem "dm-migrations", ">= 1.0.2"
+gem "dm-types", ">= 1.0.2"
 gem "redis", ">= 2.0.3"
 gem "jeweler", ">= 1.4.0"
 gem "rspec", "~> 1.3.0"
