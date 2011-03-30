@@ -1,5 +1,5 @@
 require 'redis'
-require "base64"
+require 'base64'
 
 module DataMapper
   module Adapters
@@ -35,7 +35,7 @@ module DataMapper
       #
       # @api semipublic
       def read(query)
-        records = records_for(query).each do |record|
+        records_for(query).each do |record|
           record_data = @redis.hgetall("#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
@@ -51,9 +51,6 @@ module DataMapper
             record[name] = [Integer, Date].include?(property.primitive) ? property.typecast( value ) : value
           end
         end
-        records = query.match_records(records)
-        records = query.sort_records(records)
-        records
       end
 
       ##
@@ -119,7 +116,7 @@ module DataMapper
           properties_to_set = []
           properties_to_del = []
 
-          fields = model.properties(self.name).select {|property| attributes.key?(property) }
+          fields = model.properties(self.name).select {|property| attributes.key?(property)}
           fields.each do |property|
             value = attributes[property]
             if value.nil?
@@ -154,8 +151,24 @@ module DataMapper
               keys << {"#{redis_key_for(query.model)}" => o.value}
             end
           end
+
+          if o.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
+            if @redis.sismember("#{o.subject.child_model.to_s.downcase}:#{o.subject.child_key.first.name}:#{encode(o.value[o.subject.parent_key.first.name])}", o.value[o.subject.parent_key.first.name])
+              keys << {o.subject.parent_key.first.name.to_s => o.value[o.subject.parent_key.first.name]}
+            end
+          end
+
           find_matches(query, o).each do |k|
             keys << {"#{redis_key_for(query.model)}" => k.to_i, "#{o.subject.name}" => o.value}
+          end
+        end
+
+        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::InclusionComparison)}.each do |o|
+          @redis.smembers(key_set_for(query.model)).each do |key|
+            hash_key = "#{query.model.to_s.downcase}:#{key}"
+            if (o.value).include?(o.subject.typecast(@redis.hget(hash_key, o.subject.name)))
+              keys << {"#{redis_key_for(query.model)}" => key.to_i}
+            end
           end
         end
 
@@ -169,13 +182,6 @@ module DataMapper
           end
 
           @redis.sort(key_set_for(query.model), params).each do |val|
-            keys << {"#{redis_key_for(query.model)}" => val.to_i}
-          end
-        end
-
-        # Keys are empty, fall back and load all the values for this model
-        if keys.empty?
-          @redis.smembers(key_set_for(query.model)).each do |val|
             keys << {"#{redis_key_for(query.model)}" => val.to_i}
           end
         end

@@ -1,14 +1,12 @@
 require File.expand_path("../spec_helper", __FILE__)
 require 'dm-validations'
 require 'dm-types'
-require 'logger'
 
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
     @adapter = DataMapper.setup(:default, {
       :adapter  => "redis",
       :db => 15,
-      # :logger => Logger.new(STDOUT)
     })
   end
 
@@ -117,7 +115,7 @@ describe DataMapper::Adapters::RedisAdapter do
     petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
     james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
     Blackguard.get(petey.id).should_not be_destroyed
-    #Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should_not be_destroyed
+    Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should_not be_destroyed
   end
 
   after(:each) do
