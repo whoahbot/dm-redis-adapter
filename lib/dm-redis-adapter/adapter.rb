@@ -145,29 +145,23 @@ module DataMapper
       def records_for(query)
         keys = []
 
-        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::EqualToComparison)}.each do |o|
-          if query.model.key.include?(o.subject)
-            if @redis.sismember(key_set_for(query.model), o.value)
-              keys << {"#{redis_key_for(query.model)}" => o.value}
+        query.conditions.operands.each do |operand|
+          subject = operand.is_a?(DataMapper::Query::Conditions::NotOperation) ? operand.first.subject : operand.subject
+          value = operand.is_a?(DataMapper::Query::Conditions::NotOperation) ? operand.first.value : operand.value
+
+          if query.model.key.include?(subject)
+            if @redis.sismember(key_set_for(query.model), value)
+              keys << {"#{redis_key_for(query.model)}" => value}
             end
-          end
-
-          if o.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
-            if @redis.sismember("#{o.subject.child_model.to_s.downcase}:#{o.subject.child_key.first.name}:#{encode(o.value[o.subject.parent_key.first.name])}", o.value[o.subject.parent_key.first.name])
-              keys << {o.subject.parent_key.first.name.to_s => o.value[o.subject.parent_key.first.name]}
+            # search for any indexed properties
+            find_matches(query, subject, value).each do |k|
+              keys << {"#{redis_key_for(query.model)}" => k.to_i, "#{subject.name}" => value}
             end
-          end
-
-          find_matches(query, o).each do |k|
-            keys << {"#{redis_key_for(query.model)}" => k.to_i, "#{o.subject.name}" => o.value}
-          end
-        end
-
-        query.conditions.operands.select {|o| o.is_a?(DataMapper::Query::Conditions::InclusionComparison)}.each do |o|
-          @redis.smembers(key_set_for(query.model)).each do |key|
-            hash_key = "#{query.model.to_s.downcase}:#{key}"
-            if (o.value).include?(o.subject.typecast(@redis.hget(hash_key, o.subject.name)))
-              keys << {"#{redis_key_for(query.model)}" => key.to_i}
+          else # worst case, loop through each record and match
+            @redis.smembers(key_set_for(query.model)).each do |key|
+              if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
+                keys << {"#{redis_key_for(query.model)}" => key.to_i}
+              end
             end
           end
         end
@@ -219,8 +213,8 @@ module DataMapper
       # @return [Array]
       #   Array of id's of all members matching the query
       # @api private
-      def find_matches(query, operand)
-        @redis.smembers("#{query.model.to_s.downcase}:#{operand.subject.name}:#{encode(operand.value.to_s)}")
+      def find_matches(query, subject, value)
+        @redis.smembers("#{query.model.to_s.downcase}:#{subject.name}:#{encode(value)}")
       end
 
       ##
