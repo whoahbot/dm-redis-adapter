@@ -9,3 +9,8 @@ rescue LoadError
 end
 
 require 'dm-core'
+require 'dm-core/spec/shared/adapter_spec'
+require 'dm-redis-adapter/spec/setup'
+
+ENV['ADAPTER']          = 'redis'
+ENV['ADAPTER_SUPPORTS'] = 'all'

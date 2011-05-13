@@ -1,12 +1,5 @@
 require 'spec_helper'
 
-require 'dm-core'
-require 'dm-core/spec/shared/adapter_spec'
-require 'dm-redis-adapter/spec/setup'
-
-ENV['ADAPTER']          = 'redis'
-ENV['ADAPTER_SUPPORTS'] = 'all'
-
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
     @adapter = DataMapper.setup(:default, {

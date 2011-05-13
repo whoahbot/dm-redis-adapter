@@ -1,5 +1,7 @@
-require File.expand_path("../spec_helper", __FILE__)
+require 'spec_helper'
+
 require 'dm-core'
+require 'dm-core/spec/shared/adapter_spec'
 require 'dm-redis-adapter/spec/setup'
 
 describe DataMapper::Adapters::RedisAdapter do

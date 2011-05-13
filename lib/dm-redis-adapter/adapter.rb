@@ -36,7 +36,8 @@ module DataMapper
       #
       # @api semipublic
       def read(query)
-        records_for(query).each do |record|
+        records = records_for(query)
+        records.each do |record|
           record_data = @redis.hgetall("#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
@@ -50,8 +51,11 @@ module DataMapper
             # now. All other typecasting is handled by datamapper
             # separately.
             record[name] = [Integer, Date].include?(property.primitive) ? property.typecast( value ) : value
+            record
           end
         end
+        # This is in place until I can get limiting working or something similar
+        query.filter_records(records)
       end
 
       ##
@@ -157,7 +161,7 @@ module DataMapper
                 keys = keys + perform_query(query, op)
               end
             else
-              keys = keys + perform_query(query, operand)
+              keys = perform_query(query, operand)
             end
           end
         end
@@ -188,11 +192,17 @@ module DataMapper
         end
 
         if query.model.key.include?(subject)
-          if @redis.sismember(key_set_for(query.model), value)
+          if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
+            @redis.smembers(key_set_for(query.model)).each do |key|
+              if operand.matches?(subject.typecast(key))
+                matched_records << {redis_key_for(query.model) => key}
+              end
+            end
+          elsif @redis.sismember(key_set_for(query.model), value)
             matched_records << {redis_key_for(query.model) => value}
           end
-          # search for any indexed properties
-          find_matches(query, subject, value).each do |k|
+        elsif subject.index
+          find_indexed_matches(query, subject, value).each do |k|
             matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
           end
         else # worst case, loop through each record and match
@@ -233,9 +243,9 @@ module DataMapper
       # Find a matching entry for a query
       #
       # @return [Array]
-      #   Array of id's of all members matching the query
+      #   Array of id's of all members for an indexed field
       # @api private
-      def find_matches(query, subject, value)
+      def find_indexed_matches(query, subject, value)
         @redis.smembers("#{query.model.to_s.downcase}:#{subject.name}:#{encode(value)}")
       end
 
