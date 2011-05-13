@@ -48,7 +48,7 @@ describe DataMapper::Adapters::RedisAdapter do
     b.tags << t
     b.save
 
-    b2 = Book.get(1)
+    b2 = Book.get(b.id)
     b2.tags.should == [t]
   end
 end
