@@ -54,7 +54,6 @@ module DataMapper
             record
           end
         end
-        # This is in place until I can get limiting working or something similar
         query.filter_records(records)
       end
 
@@ -179,9 +178,13 @@ module DataMapper
       # @api private
       def perform_query(query, operand)
         matched_records = []
+
         if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
           subject = operand.first.subject
           value = operand.first.value
+        elsif operand.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
+          subject = operand.subject.child_key.first
+          value = operand.value[operand.subject.parent_key.first.name]
         else
           subject = operand.subject
           value =  operand.value
@@ -202,7 +205,7 @@ module DataMapper
             matched_records << {redis_key_for(query.model) => value}
           end
         elsif subject.index
-          find_indexed_matches(query, subject, value).each do |k|
+          find_indexed_matches(subject, value).each do |k|
             matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
           end
         else # worst case, loop through each record and match
@@ -245,8 +248,8 @@ module DataMapper
       # @return [Array]
       #   Array of id's of all members for an indexed field
       # @api private
-      def find_indexed_matches(query, subject, value)
-        @redis.smembers("#{query.model.to_s.downcase}:#{subject.name}:#{encode(value)}")
+      def find_indexed_matches(subject, value)
+        @redis.smembers("#{subject.model.to_s.downcase}:#{subject.name}:#{encode(value)}")
       end
 
       ##

@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-require 'dm-core'
-require 'dm-core/spec/shared/adapter_spec'
-require 'dm-redis-adapter/spec/setup'
-
 describe DataMapper::Adapters::RedisAdapter do
   before(:all) do
     @adapter = DataMapper.setup(:default, {
@@ -37,8 +33,6 @@ describe DataMapper::Adapters::RedisAdapter do
       include DataMapper::Resource
 
       property :id,   Serial
-      # property :book_id, Integer, :index => true
-      # property :tag_id,  Integer, :index => true
 
       belongs_to :book
       belongs_to :tag
