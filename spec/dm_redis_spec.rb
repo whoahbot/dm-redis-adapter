@@ -28,8 +28,8 @@ describe DataMapper::Adapters::RedisAdapter do
     end
 
     it "should save indexed fields in a set" do
-      h = Hooloovoo.create(:shade => '000080')
-      @redis.smembers("hooloovoo:shade:MDAwMDgw").should == [h.id.to_s]
+      h = Hooloovoo.create(:shade => '336699')
+      @redis.smembers("hooloovoo:shade:MzM2Njk5").should == [h.id.to_s]
     end
   end
 
