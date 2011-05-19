@@ -1,19 +1,16 @@
 h1. dm-redis-adapter
 
-This is a <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://github.com/antirez/redis/">Redis</a> key-value database.
+This is a <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://redis.io/">Redis</a> key-value store.
 
-Redis is a very fast key-value store with some interesting data structures added.  You can have a key that is a SET, LIST, STRING or HASH that is binary safe.  Data structures like SET and LIST allow for even more interesting things.  Redis is a fabulous and fast engine for data structures, and you can read more about it here: <a href="http://code.google.com/p/redis/">redis</a>.  Redis is also a persistent data store, and can be used in large-scale environments with master-slave replication and consistent hashing on the client side.
+Redis is a very fast key-value store with some interesting data structures added, and oh so much more. You can have a key that is a SET, LIST, STRING or HASH that is binary safe. Data structures like SET and LIST allow for even more interesting things. Redis is a fabulous and fast engine for data structures, and you can read more about it here: <a href="http://code.google.com/p/redis/">redis</a>. Redis is also a persistent data store, and can be used in large-scale environments with master-slave replication and consistent hashing on the client side. Redis makes everyone happy and has been known to cause sunshine to spontaneously break out in clouded areas.
 
-<a href="http://datamapper.org">DataMapper</a> is a brilliant ORM that is based on the <a href="http://www.martinfowler.com/eaaCatalog/identityMap.html">IdentityMap</a> pattern.  Usage of DataMapper resembles that of ActiveRecord, the popular ORM bundled with Ruby on Rails, but with some very important differences.  A quote from the DM wiki: "One row in the database should equal one object reference. Pretty simple idea. Pretty profound impact."  Having an identity map allows for very efficient queries to the database, as well as interesting forms of lazy loading of attributes or associations.
+<a href="http://datamapper.org">DataMapper</a> is a brilliant ORM that is based on the <a href="http://www.martinfowler.com/eaaCatalog/identityMap.html">IdentityMap</a> pattern.  Usage of DataMapper resembles that of ActiveRecord, the popular ORM bundled with Ruby on Rails, but with some very important differences. A quote from the DM wiki: "One row in the database should equal one object reference. Pretty simple idea. Pretty profound impact." Having an identity map allows for very efficient queries to the database, as well as interesting forms of lazy loading of attributes or associations.
 
 Marrying DataMapper to Redis allows for schema-less models, you can add fields at any time without having to create a migration.  DataMapper also allows us to store non-native Redis types in the db, like Date fields.
 
-h1. Upgrading
-
-> v0.1 is not compatible with data created with previous versions!  The new storage schema is designed to be more VM friendly.  I won't be releasing a gem version of v0.1 until a stable version of redis that includes hash support has been released.
-
 h1. Changelog
 
+* v0.4.0  Support for dm-core v1.1.0
 * v0.3.0  Updates to support ruby 1.9.2 (thanks arbarlow!)
 * v0.2.1  Fixes to sorting
 * v0.1.1  Update to redis-rb v2.0.0
@@ -24,9 +21,7 @@ h1. Install
 
 Prerequisites:
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis, v2.0.x RC series</a>
-* Gems:
-** <a href="http://github.com/datamapper/dm-core/">dm-core</a> v1.0.2
+** <a href="http://code.google.com/p/redis/">Redis, v2.2 series</a>
 
 Install the dm-redis adapter:
 <pre>
@@ -43,7 +38,7 @@ Setup your adapter, define your models and properties:
   <code>
     require 'rubygems'
     require 'dm-core'
-    require 'dm_redis'
+    require 'dm-redis-adapter'
 
     DataMapper.setup(:default, {:adapter  => "redis"})
 

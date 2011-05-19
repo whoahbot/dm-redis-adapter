@@ -17,8 +17,9 @@ describe DataMapper::Adapters::RedisAdapter do
       class Hooloovoo
         include DataMapper::Resource
 
-        property :id,      Serial
-        property :shade,   String, :index => true
+        property :id,         Serial
+        property :iq,         Integer
+        property :shade,      String, :index => true
       end
     end
 
@@ -27,9 +28,14 @@ describe DataMapper::Adapters::RedisAdapter do
       @redis.smembers("hooloovoo:id:all").should == [h.id.to_s]
     end
 
-    it "should save indexed fields in a set" do
+    it "should save indexed fields in a set by Base64 encoding the value" do
       h = Hooloovoo.create(:shade => '336699')
       @redis.smembers("hooloovoo:shade:MzM2Njk5").should == [h.id.to_s]
+    end
+
+    it "should create a hash of properties for the resource" do
+      h = Hooloovoo.create(:iq => '4069')
+      @redis.hmget("hooloovoo:#{h.id}", 'iq').should == ['4069']
     end
   end
 
