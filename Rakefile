@@ -26,8 +26,8 @@ begin
     gemspec.homepage = HOMEPAGE
     gemspec.description = SUMMARY
     gemspec.authors = AUTHORS
-    gemspec.add_dependency "dm-core", ">= 1.1.0"
-    gemspec.add_dependency "dm-types", ">= 1.1.0"
+    gemspec.add_dependency "dm-core", ">= 1.2.0"
+    gemspec.add_dependency "dm-types", ">= 1.2.0"
     gemspec.add_dependency "hiredis", "~> 0.3.0"
     gemspec.add_dependency "redis", "~> 2.2"
     gemspec.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")
