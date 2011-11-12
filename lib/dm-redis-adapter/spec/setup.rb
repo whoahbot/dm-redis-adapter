@@ -6,6 +6,9 @@ module DataMapper
     module Adapters
 
       class RedisAdapter < Adapter
+        def connection_uri
+          { :adapter  => "redis", :db => 15 }
+        end
       end
 
       use RedisAdapter

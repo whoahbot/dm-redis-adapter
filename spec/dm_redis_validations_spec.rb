@@ -18,6 +18,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :id,      Serial
       property :flavor,  String, :index => true
     end
+    DataMapper.finalize
 
     Crumblecake.create(:flavor => "snozzbler")
     Crumblecake.new(:flavor => "snozzbler").valid?.should be_false
@@ -32,6 +33,7 @@ describe DataMapper::Adapters::RedisAdapter do
         property :name,   String
         property :env,    DataMapper::Property::Json, :default => {}
       end
+      DataMapper.finalize
     end
 
     it "should be able to store json blocks" do
@@ -56,6 +58,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :id,   Serial
       property :name, String
     end
+    DataMapper.finalize
 
     u = User.create :name => "bpo"
     u.reload.name.should == "bpo"
@@ -71,6 +74,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :id,        Serial
       property :posted_at, Date
     end
+    DataMapper.finalize
 
     Post.create :posted_at => Date.today
     Post.first.posted_at.should be_a(Date)
@@ -83,6 +87,7 @@ describe DataMapper::Adapters::RedisAdapter do
       property :id,       Serial
       property :nickname, String
     end
+    DataMapper.finalize
 
     joey = GangMember.create(:nickname => "Joey 'two-times'")
     bobby = GangMember.create(:nickname => "Bobby 'three-fingers'")
@@ -91,31 +96,29 @@ describe DataMapper::Adapters::RedisAdapter do
     GangMember.last.should == bobby
   end
 
-  it "should pull up the first pirate that matches the nickname" do
-    class Blackguard
-      include DataMapper::Resource
+  describe "Finding a record by an indexed value" do
+    before(:each) do
+      class Blackguard
+        include DataMapper::Resource
 
-      property :id,       Serial
-      property :nickname, String, :index => true
+        property :id,       Serial
+        property :nickname, String, :index => true
+      end
+      DataMapper.finalize
     end
 
-    petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
-    james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
-    Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should == james
-  end
-
-  it "should not mark the first pirate as destroyed" do
-    class Blackguard
-      include DataMapper::Resource
-
-      property :id,       Serial
-      property :nickname, String, :index => true
+    it "should pull up the first pirate that matches the nickname" do
+      petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
+      james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
+      Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should == james
     end
 
-    petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
-    james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
-    Blackguard.get(petey.id).should_not be_destroyed
-    Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should_not be_destroyed
+    it "should not mark the first pirate as destroyed" do
+      petey = Blackguard.create(:nickname => "Petey 'one-eye' McGraw")
+      james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
+      Blackguard.get(petey.id).should_not be_destroyed
+      Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should_not be_destroyed
+    end
   end
 
   after(:each) do

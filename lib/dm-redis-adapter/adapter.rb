@@ -89,8 +89,7 @@ module DataMapper
       #
       # @api semipublic
       def delete(collection)
-        collection.count.times do |x|
-          record = collection[x]
+        collection.each do |record|
           @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}")
           @redis.srem(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
           record.model.properties.select {|p| p.index}.each do |p|

@@ -38,6 +38,8 @@ describe DataMapper::Adapters::RedisAdapter do
       belongs_to :tag
     end
 
+    DataMapper.finalize
+
     b = Book.create(:name => "Harry Potter")
     t = Tag.create(:name => "fiction")
 

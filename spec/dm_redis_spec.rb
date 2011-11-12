@@ -21,6 +21,7 @@ describe DataMapper::Adapters::RedisAdapter do
         property :iq,         Integer
         property :shade,      String, :index => true
       end
+      DataMapper.finalize
     end
 
     it "should save the id of the resource in a set" do
