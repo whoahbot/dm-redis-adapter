@@ -179,14 +179,18 @@ module DataMapper
         matched_records = []
 
         if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
+          p 'not'
           subject = operand.first.subject
           value = operand.first.value
         elsif operand.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
+          p 'rel'
+          p operand
           subject = operand.subject.child_key.first
           value = operand.value[operand.subject.parent_key.first.name]
         else
+          p 'els'
           subject = operand.subject
-          value =  operand.value
+          value = operand.value
         end
 
         if subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
@@ -194,20 +198,44 @@ module DataMapper
         end
 
         if query.model.key.include?(subject)
+          p 'query.model.key.include?(subject)'
           if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
             @redis.smembers(key_set_for(query.model)).each do |key|
               if operand.matches?(subject.typecast(key))
                 matched_records << {redis_key_for(query.model) => key}
               end
             end
+          elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
+            value.each do |val|
+              if @redis.sismember(key_set_for(query.model), val)
+                matched_records << {redis_key_for(query.model) => val}
+              end
+            end
           elsif @redis.sismember(key_set_for(query.model), value)
             matched_records << {redis_key_for(query.model) => value}
           end
         elsif subject.index
-          find_indexed_matches(subject, value).each do |k|
-            matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
+          p 'subject.index'
+          p subject
+          p operand
+          p value
+          if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
+            p 'not'
+          elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
+            p 'in'
+            value.each do |val|
+              find_indexed_matches(subject, val).each do |k|
+                matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => val}
+              end
+            end
+          else
+            p 'eq'
+            find_indexed_matches(subject, value).each do |k|
+              matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
+            end
           end
         else # worst case, loop through each record and match
+          p 'worst'
           @redis.smembers(key_set_for(query.model)).each do |key|
             if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
               matched_records << {redis_key_for(query.model) => key.to_i}
