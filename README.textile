@@ -49,6 +49,8 @@ Setup your adapter, define your models and properties:
       property :name,   Text
     end
 
+    Cafe.finalize
+
     Cafe.create(:name => "Whoahbot's Caffienitorium")
   </code>
 </pre>
