@@ -109,6 +109,7 @@ module DataMapper
       # @api private
       def update_attributes(resources)
         resources.each do |resource|
+
           model = resource.model
           attributes = resource.dirty_attributes
 
@@ -118,6 +119,7 @@ module DataMapper
 
           properties_to_set = []
           properties_to_del = []
+
 
           fields = model.properties(self.name).select {|property| attributes.key?(property)}
           fields.each do |property|
@@ -166,18 +168,7 @@ module DataMapper
         keys
       end
 
-      ##
-      # Find records that match have a matching value
-      #
-      # @param [DataMapper::Query] query
-      #   The query used to locate the resources to be deleted.
-      #
-      # @param [DataMapper::Operation] the operation for the query
-      #
-      # @api private
-      def perform_query(query, operand)
-        matched_records = []
-
+      def find_subject_and_value(query, operand)
         if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
           subject = operand.first.subject
           value = operand.first.value
@@ -197,6 +188,23 @@ module DataMapper
           subject = subject.child_key.first
         end
 
+        return subject, value
+      end
+
+      ##
+      # Find records that match have a matching value
+      #
+      # @param [DataMapper::Query] query
+      #   The query used to locate the resources to be deleted.
+      #
+      # @param [DataMapper::Operation] the operation for the query
+      #
+      # @api private
+      def perform_query(query, operand)
+        matched_records = []
+
+        subject, value = find_subject_and_value(query, operand)
+
         if query.model.key.include?(subject)
           if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
             @redis.smembers(key_set_for(query.model)).each do |key|
@@ -213,8 +221,9 @@ module DataMapper
           elsif @redis.sismember(key_set_for(query.model), value)
             matched_records << {redis_key_for(query.model) => value}
           end
-        elsif subject.respond_to?( :index ) && subject.index
+        elsif subject.respond_to?(:index) && subject.index
           if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
+            # noop branch?
           elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
             value.each do |val|
               find_indexed_matches(subject, val).each do |k|

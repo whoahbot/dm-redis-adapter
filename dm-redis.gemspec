@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{dm-redis-adapter}
+  s.name = %q{dm-redis}
   s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -19,16 +19,16 @@ Gem::Specification.new do |s|
     "MIT-LICENSE",
      "README.textile",
      "Rakefile",
-     "lib/dm-redis-adapter.rb",
-     "lib/dm-redis-adapter/adapter.rb",
-     "lib/dm-redis-adapter/spec/setup.rb",
+     "lib/dm-redis.rb",
+     "lib/dm-redis/adapter.rb",
+     "lib/dm-redis/spec/setup.rb",
      "spec/dm_redis_associations_spec.rb",
      "spec/dm_redis_finding_spec.rb",
      "spec/dm_redis_spec.rb",
      "spec/dm_redis_validations_spec.rb",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/whoahbot/dm-redis-adapter}
+  s.homepage = %q{http://github.com/whoahbot/dm-redis}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
