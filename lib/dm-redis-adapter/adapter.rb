@@ -17,7 +17,7 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
+          initialize_serial(resource, @redis.incr("#{redis_key_for(resource.model)}:serial"))
           @redis.sadd(key_set_for(resource.model), resource.key.join)
         end
         update_attributes(resources)
@@ -38,7 +38,9 @@ module DataMapper
       def read(query)
         records = records_for(query)
         records.each do |record|
-          record_data = @redis.hgetall("#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}")
+          record[:model] = query.model.to_s.downcase if not record[:model]
+
+                  record_data = @redis.hgetall("#{record[:model]}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
             next if query.model.key.include?(property)
@@ -51,6 +53,13 @@ module DataMapper
             # now. All other typecasting is handled by datamapper
             # separately.
             record[name] = [Integer, Date].include?(property.primitive) ? property.typecast( value ) : value
+            if (property.type == DataMapper::Property::Discriminator)
+              begin
+                record[name]=eval(value.to_s)
+              rescue NameError => e
+                DataMapper.logger <<  "unknown symbol #{e.to_s}"
+              end
+            end
             record
           end
         end
@@ -184,10 +193,10 @@ module DataMapper
         elsif operand.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
           subject = operand.subject.child_key.first
           value = if operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            operand.value.map{|v|v[operand.subject.parent_key.first.name]}
-          else
-            operand.value[operand.subject.parent_key.first.name]
-          end
+                    operand.value.map{|v|v[operand.subject.parent_key.first.name]}
+                  else
+                    operand.value[operand.subject.parent_key.first.name]
+                  end
         else
           subject = operand.subject
           value = operand.value
@@ -224,6 +233,15 @@ module DataMapper
           else
             find_indexed_matches(subject, value).each do |k|
               matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
+            end
+          end
+          # handling of discriminator
+        elsif subject.type == DataMapper::Property::Discriminator and  operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
+          value.each do |val|
+            @redis.smembers(key_set_for(val)).each do |key|
+              if operand.matches?(subject.typecast(@redis.hget("#{val.to_s.downcase}:#{key}", subject.name)))
+                matched_records << {:model => val.to_s.downcase, redis_key_for(val) => key.to_i}
+              end
             end
           end
         else # worst case, loop through each record and match
