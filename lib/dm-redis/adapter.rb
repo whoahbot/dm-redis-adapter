@@ -205,44 +205,57 @@ module DataMapper
 
         subject, value = find_subject_and_value(query, operand)
 
-        if query.model.key.include?(subject)
-          if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
-            @redis.smembers(key_set_for(query.model)).each do |key|
-              if operand.matches?(subject.typecast(key))
-                matched_records << {redis_key_for(query.model) => key}
+        case operand
+          when DataMapper::Query::Conditions::NotOperation
+            if query.model.key.include?(subject)
+              @redis.smembers(key_set_for(query.model)).each do |key|
+                if operand.matches?(subject.typecast(key))
+                  matched_records << {redis_key_for(query.model) => key}
+                end
+              end
+            else
+              search_all_resources(query, operand, subject, matched_records)
+            end
+          when DataMapper::Query::Conditions::InclusionComparison
+            if subject.respond_to?(:index) && subject.index
+              value.each do |val|
+                find_indexed_matches(subject, val).each do |k|
+                  matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => val}
+                end
+              end
+            else
+              value.each do |val|
+                if @redis.sismember(key_set_for(query.model), val)
+                  matched_records << {redis_key_for(query.model) => val}
+                end
               end
             end
-          elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            value.each do |val|
-              if @redis.sismember(key_set_for(query.model), val)
-                matched_records << {redis_key_for(query.model) => val}
+          when DataMapper::Query::Conditions::EqualToComparison
+            if query.model.key.include?(subject)
+              if @redis.sismember(key_set_for(query.model), value)
+                matched_records << {redis_key_for(query.model) => value}
+              end
+            elsif subject.respond_to?(:index) && subject.index
+              find_indexed_matches(subject, value).each do |k|
+                matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
               end
             end
-          elsif @redis.sismember(key_set_for(query.model), value)
-            matched_records << {redis_key_for(query.model) => value}
+          else # worst case here, loop through all members, typecast and match
+            search_all_resources(query, operand, subject, matched_records)
           end
-        elsif subject.respond_to?(:index) && subject.index
-          if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
-            # noop branch?
-          elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            value.each do |val|
-              find_indexed_matches(subject, val).each do |k|
-                matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => val}
-              end
-            end
-          else
-            find_indexed_matches(subject, value).each do |k|
-              matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
-            end
-          end
-        else # worst case, loop through each record and match
-          @redis.smembers(key_set_for(query.model)).each do |key|
-            if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
-              matched_records << {redis_key_for(query.model) => key.to_i}
-            end
+        matched_records
+      end
+
+      ##
+      # Searches through each key :(
+      #
+      # @api private
+      def search_all_resources(query, operand, subject, matched_records)
+        @redis.smembers(key_set_for(query.model)).each do |key|
+          if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
+            matched_records << {redis_key_for(query.model) => key.to_i}
           end
         end
-        matched_records
       end
 
       ##
