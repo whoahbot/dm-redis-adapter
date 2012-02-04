@@ -1,4 +1,4 @@
-h1. dm-redis-adapter
+h1. dm-redis
 
 This is a <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://redis.io/">Redis</a> key-value store.
 
@@ -26,7 +26,7 @@ Prerequisites:
 Install the dm-redis adapter:
 <pre>
   <code>
-    > gem install dm-redis-adapter
+    > gem install dm-redis
   </code>
 </pre>
 
@@ -38,7 +38,7 @@ Setup your adapter, define your models and properties:
   <code>
     require 'rubygems'
     require 'dm-core'
-    require 'dm-redis-adapter'
+    require 'dm-redis'
 
     DataMapper.setup(:default, {:adapter  => "redis"})
 
