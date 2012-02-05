@@ -216,18 +216,20 @@ module DataMapper
               search_all_resources(query, operand, subject, matched_records)
             end
           when DataMapper::Query::Conditions::InclusionComparison
-            if subject.respond_to?(:index) && subject.index
+            if query.model.key.include?(subject)
+              value.each do |val|
+                if @redis.sismember(key_set_for(query.model), val)
+                  matched_records << {redis_key_for(query.model) => val}
+                end
+              end
+            elsif subject.respond_to?(:index) && subject.index
               value.each do |val|
                 find_indexed_matches(subject, val).each do |k|
                   matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => val}
                 end
               end
             else
-              value.each do |val|
-                if @redis.sismember(key_set_for(query.model), val)
-                  matched_records << {redis_key_for(query.model) => val}
-                end
-              end
+              search_all_resources(query, operand, subject, matched_records)
             end
           when DataMapper::Query::Conditions::EqualToComparison
             if query.model.key.include?(subject)
@@ -235,7 +237,6 @@ module DataMapper
                 matched_records << {redis_key_for(query.model) => value}
               end
             elsif subject.respond_to?(:index) && subject.index
-
               find_indexed_matches(subject, value).each do |k|
                 matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
               end
