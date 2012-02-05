@@ -17,7 +17,7 @@ module DataMapper
       # @api semipublic
       def create(resources)
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr("#{resource.model.to_s.downcase}:#{redis_key_for(resource.model)}:serial"))
+          initialize_serial(resource, @redis.incr("#{redis_key_for(resource.model)}:serial"))
           @redis.sadd(key_set_for(resource.model), resource.key.join)
         end
         update_attributes(resources)
@@ -175,7 +175,7 @@ module DataMapper
         elsif operand.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
           subject = operand.subject.child_key.first
           value = if operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            operand.value.map{|v|v[operand.subject.parent_key.first.name]}
+            operand.value.map{|v| v[operand.subject.parent_key.first.name]}
           else
             operand.value[operand.subject.parent_key.first.name]
           end
@@ -202,7 +202,6 @@ module DataMapper
       # @api private
       def perform_query(query, operand)
         matched_records = []
-
         subject, value = find_subject_and_value(query, operand)
 
         case operand
@@ -236,6 +235,7 @@ module DataMapper
                 matched_records << {redis_key_for(query.model) => value}
               end
             elsif subject.respond_to?(:index) && subject.index
+
               find_indexed_matches(subject, value).each do |k|
                 matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
               end
