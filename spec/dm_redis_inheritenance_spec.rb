@@ -12,13 +12,13 @@ describe DataMapper::Adapters::RedisAdapter do
   describe 'Inheritance' do
 
     before :all do
-
+      module MINT
       class Person
         include DataMapper::Resource
 
         property :name, String
         property :job,  String,        :length => 1..255
-        property :type, Discriminator
+        property :classtype, Discriminator
         property :id, Serial
       end
 
@@ -29,35 +29,37 @@ describe DataMapper::Adapters::RedisAdapter do
       class Woman    < Person; end
       class Mother   < Woman;  end
       class Daughter < Woman;  end
-
+      end
       DataMapper.finalize
+
     end
 
     it 'should select all women, mothers, and daughters based on Woman query' do
-      w = Woman.create(:name => "woman")
-      m = Mother.create(:name => "mother")
-      d = Daughter.create(:name => "daughter")
 
-      r = Woman.all
+       w = MINT::Woman.create(:name => "woman")
+      m = MINT::Mother.create(:name => "mother")
+      d = MINT::Daughter.create(:name => "daughter")
+
+      r = MINT::Woman.all
       r.to_set.should == [w,m,d].to_set
       r.size.should == [w,m,d].size
     end
 
     it 'should select all women, mothers, and daughters based on Person query' do
-      w = Woman.create(:name => "woman")
-      m = Mother.create(:name => "mother")
-      d = Daughter.create(:name => "daughter")
-      p = Person.all
+      w = MINT::Woman.create(:name => "woman")
+      m = MINT::Mother.create(:name => "mother")
+      d = MINT::Daughter.create(:name => "daughter")
+      p = MINT::Person.all
       p.to_set.should == [w,m,d].to_set
       p.size.should == [w,m,d].size
     end
 
     it 'should select all mothers' do
-      w = Woman.create(:name => "woman")
-      m = Mother.create(:name => "mother")
-      d = Daughter.create(:name => "daughter")
+      w = MINT::Woman.create(:name => "woman")
+      m = MINT::Mother.create(:name => "mother")
+      d = MINT::Daughter.create(:name => "daughter")
 
-      mo = Mother.all
+      mo = MINT::Mother.all
       mo.to_set.should == [m].to_set
       mo.size.should == [m].size
     end

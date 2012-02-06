@@ -40,7 +40,7 @@ module DataMapper
         records.each do |record|
           record[:model] = query.model.to_s.downcase if not record[:model]
 
-                  record_data = @redis.hgetall("#{record[:model]}:#{record[redis_key_for(query.model)]}")
+          record_data = @redis.hgetall("#{record[:model]}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
             next if query.model.key.include?(property)
@@ -158,8 +158,24 @@ module DataMapper
         keys = []
 
         if query.conditions.nil?
-          @redis.smembers(key_set_for(query.model)).each do |key|
-            keys << {redis_key_for(query.model) => key.to_i}
+
+          # there might be a datamapper bug, which results in a condition==nil if an inheritance based query is
+          # performed on the base class - we handle this by collecting and querying all descendants - which is slow
+          # but works
+
+          if query.model.properties.discriminator
+            descendants = query.model.descendants
+            descendants.each do |d|
+              @redis.smembers(key_set_for(d)).each do |key|
+                keys << {:model => d.to_s.downcase,redis_key_for(d) => key.to_i}
+              end
+            end
+
+          ## end of dirty fix <---
+          else
+            @redis.smembers(key_set_for(query.model)).each do |key|
+              keys << {redis_key_for(query.model) => key.to_i}
+            end
           end
         else
           query.conditions.operands.each do |operand|
