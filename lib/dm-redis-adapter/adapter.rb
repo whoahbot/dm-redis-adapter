@@ -150,7 +150,7 @@ module DataMapper
 
         if query.conditions.nil?
           @redis.smembers(key_set_for(query.model)).each do |key|
-            keys << {redis_key_for(query.model) => key.to_i}
+            keys << {redis_key_for(query.model) => key}
           end
         else
           query.conditions.operands.each do |operand|
@@ -218,18 +218,18 @@ module DataMapper
           elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
             value.each do |val|
               find_indexed_matches(subject, val).each do |k|
-                matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => val}
+                matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => val}
               end
             end
           else
             find_indexed_matches(subject, value).each do |k|
-              matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
+              matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => value}
             end
           end
         else # worst case, loop through each record and match
           @redis.smembers(key_set_for(query.model)).each do |key|
             if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
-              matched_records << {redis_key_for(query.model) => key.to_i}
+              matched_records << {redis_key_for(query.model) => key}
             end
           end
         end
