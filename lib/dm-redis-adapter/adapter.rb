@@ -1,6 +1,7 @@
 require 'redis/connection/hiredis'
 require 'redis'
 require 'base64'
+require 'dm-core'
 
 module DataMapper
   module Adapters
@@ -16,8 +17,9 @@ module DataMapper
       #
       # @api semipublic
       def create(resources)
+        storage_name = resources.first.model.storage_name
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr("#{redis_key_for(resource.model)}:serial"))
+          initialize_serial(resource, @redis.incr("#{storage_name}:#{redis_key_for(resource.model)}:serial"))
           @redis.sadd(key_set_for(resource.model), resource.key.join)
         end
         update_attributes(resources)
@@ -36,11 +38,10 @@ module DataMapper
       #
       # @api semipublic
       def read(query)
+        storage_name = query.model.storage_name
         records = records_for(query)
         records.each do |record|
-          record[:model] = query.model.to_s.downcase if not record[:model]
-
-          record_data = @redis.hgetall("#{record[:model]}:#{record[redis_key_for(query.model)]}")
+          record_data = @redis.hgetall("#{storage_name}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
             next if query.model.key.include?(property)
@@ -53,13 +54,6 @@ module DataMapper
             # now. All other typecasting is handled by datamapper
             # separately.
             record[name] = [Integer, Date].include?(property.primitive) ? property.typecast( value ) : value
-            if (property.type == DataMapper::Property::Discriminator)
-              begin
-                record[name]=eval(value.to_s)
-              rescue NameError => e
-                DataMapper.logger <<  "unknown symbol #{e.to_s}"
-              end
-            end
             record
           end
         end
@@ -98,11 +92,12 @@ module DataMapper
       #
       # @api semipublic
       def delete(collection)
+        storage_name = collection.query.model.storage_name
         collection.each do |record|
-          @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}")
+          @redis.del("#{storage_name}:#{record[redis_key_for(collection.query.model)]}")
           @redis.srem(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
           record.model.properties.select {|p| p.index}.each do |p|
-            @redis.srem("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
+            @redis.srem("#{storage_name}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
           end
         end
       end
@@ -117,12 +112,13 @@ module DataMapper
       #
       # @api private
       def update_attributes(resources)
+        storage_name = resources.first.model.storage_name
         resources.each do |resource|
           model = resource.model
           attributes = resource.dirty_attributes
 
           resource.model.properties.select {|p| p.index}.each do |property|
-            @redis.sadd("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.first.to_s)
+            @redis.sadd("#{storage_name}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.first.to_s)
           end
 
           properties_to_set = []
@@ -138,7 +134,7 @@ module DataMapper
             end
           end
 
-          hash_key = "#{resource.model.to_s.downcase}:#{resource.key.join}"
+          hash_key = "#{storage_name}:#{resource.key.join}"
           properties_to_del.each {|prop| @redis.hdel(hash_key, prop) }
           @redis.hmset(hash_key, *properties_to_set) unless properties_to_set.empty?
         end
@@ -158,24 +154,8 @@ module DataMapper
         keys = []
 
         if query.conditions.nil?
-
-          # there might be a datamapper bug, which results in a condition==nil if an inheritance based query is
-          # performed on the base class - we handle this by collecting and querying all descendants - which is slow
-          # but works
-
-          if query.model.properties.discriminator
-            descendants = query.model.descendants
-            descendants.each do |d|
-              @redis.smembers(key_set_for(d)).each do |key|
-                keys << {:model => d.to_s.downcase,redis_key_for(d) => key.to_i}
-              end
-            end
-
-          ## end of dirty fix <---
-          else
-            @redis.smembers(key_set_for(query.model)).each do |key|
-              keys << {redis_key_for(query.model) => key.to_i}
-            end
+          @redis.smembers(key_set_for(query.model)).each do |key|
+            keys << {redis_key_for(query.model) => key.to_i}
           end
         else
           query.conditions.operands.each do |operand|
@@ -201,7 +181,11 @@ module DataMapper
       #
       # @api private
       def perform_query(query, operand)
+        storage_name = query.model.storage_name
+
         matched_records = []
+        #p 'query: ' + query.inspect
+        #p 'operand: ' + operand.inspect
 
         if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
           subject = operand.first.subject
@@ -209,10 +193,10 @@ module DataMapper
         elsif operand.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
           subject = operand.subject.child_key.first
           value = if operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-                    operand.value.map{|v|v[operand.subject.parent_key.first.name]}
-                  else
-                    operand.value[operand.subject.parent_key.first.name]
-                  end
+            operand.value.map{|v|v[operand.subject.parent_key.first.name]}
+          else
+            operand.value[operand.subject.parent_key.first.name]
+          end
         else
           subject = operand.subject
           value = operand.value
@@ -221,6 +205,9 @@ module DataMapper
         if subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
           subject = subject.child_key.first
         end
+
+        #p 'subject: ' + subject.inspect
+        #p 'value: ' + value.inspect
 
         if query.model.key.include?(subject)
           if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
@@ -251,18 +238,9 @@ module DataMapper
               matched_records << {redis_key_for(query.model) => k.to_i, "#{subject.name}" => value}
             end
           end
-          # handling of discriminator
-        elsif subject.type == DataMapper::Property::Discriminator and  operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-          value.each do |val|
-            @redis.smembers(key_set_for(val)).each do |key|
-              if operand.matches?(subject.typecast(@redis.hget("#{val.to_s.downcase}:#{key}", subject.name)))
-                matched_records << {:model => val.to_s.downcase, redis_key_for(val) => key.to_i}
-              end
-            end
-          end
         else # worst case, loop through each record and match
           @redis.smembers(key_set_for(query.model)).each do |key|
-            if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
+            if operand.matches?(subject.typecast(@redis.hget("#{storage_name}:#{key}", subject.name)))
               matched_records << {redis_key_for(query.model) => key.to_i}
             end
           end
@@ -291,7 +269,7 @@ module DataMapper
       #   The string key for the :all set
       # @api private
       def key_set_for(model)
-        "#{model.to_s.downcase}:#{redis_key_for(model)}:all"
+        "#{model.storage_name}:#{redis_key_for(model)}:all"
       end
 
       ##
@@ -301,7 +279,7 @@ module DataMapper
       #   Array of id's of all members for an indexed field
       # @api private
       def find_indexed_matches(subject, value)
-        @redis.smembers("#{subject.model.to_s.downcase}:#{subject.name}:#{encode(value)}")
+        @redis.smembers("#{subject.model.storage_name}:#{subject.name}:#{encode(value)}")
       end
 
       ##
