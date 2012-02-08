@@ -26,17 +26,17 @@ describe DataMapper::Adapters::RedisAdapter do
 
     it "should save the id of the resource in a set" do
       h = Hooloovoo.create
-      @redis.smembers("hooloovoo:id:all").should == [h.id.to_s]
+      @redis.smembers("hooloovoos:id:all").should == [h.id.to_s]
     end
 
     it "should save indexed fields in a set by Base64 encoding the value" do
       h = Hooloovoo.create(:shade => '336699')
-      @redis.smembers("hooloovoo:shade:MzM2Njk5").should == [h.id.to_s]
+      @redis.smembers("hooloovoos:shade:MzM2Njk5").should == [h.id.to_s]
     end
 
     it "should create a hash of properties for the resource" do
       h = Hooloovoo.create(:iq => '4069')
-      @redis.hmget("hooloovoo:#{h.id}", 'iq').should == ['4069']
+      @redis.hmget("hooloovoos:#{h.id}", 'iq').should == ['4069']
     end
   end
 
