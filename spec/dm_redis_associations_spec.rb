@@ -6,6 +6,8 @@ describe DataMapper::Adapters::RedisAdapter do
       :adapter  => "redis",
       :db => 15
     })
+     @redis = Redis.new(:db => 15)
+    @redis.flushdb
   end
 
   it "should allow has n :through" do
