@@ -97,4 +97,5 @@ h1. Badass contributors
 * <a href="http://github.com/cehoffman">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps, fixes for sorting
 * <a href="http://github.com/bpo">brian p o'rourke (bpo)</a> Updates for newer versions of redis client and DM JSON type support, move to hash storage
 * <a href="http://github.com/arbarlow">Alex Barlow (arbarlow)</a> Fixes for ruby 1.9.2
+* <a href="http://github.com/jof">Jonathan Lassoff (jof)</a> Fixes to support textual keys
 
