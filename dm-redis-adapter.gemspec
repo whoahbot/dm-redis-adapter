@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-redis-adapter}
-  s.version = "0.5.2"
+  s.version = "0.5.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Herrera"]
-  s.date = %q{2012-02-07}
+  s.date = %q{2012-02-08}
   s.description = %q{DataMapper adapter for the Redis key-value database}
   s.email = %q{whoahbot@gmail.com}
   s.extra_rdoc_files = [
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "lib/dm-redis-adapter/spec/setup.rb",
      "spec/dm_redis_associations_spec.rb",
      "spec/dm_redis_finding_spec.rb",
+     "spec/dm_redis_inheritenance_spec.rb",
      "spec/dm_redis_spec.rb",
      "spec/dm_redis_validations_spec.rb",
      "spec/spec_helper.rb",
@@ -37,6 +38,7 @@ Gem::Specification.new do |s|
   s.test_files = [
     "spec/dm_redis_associations_spec.rb",
      "spec/dm_redis_finding_spec.rb",
+     "spec/dm_redis_inheritenance_spec.rb",
      "spec/dm_redis_spec.rb",
      "spec/dm_redis_validations_spec.rb",
      "spec/spec_helper.rb",
