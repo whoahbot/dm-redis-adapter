@@ -16,8 +16,9 @@ module DataMapper
       #
       # @api semipublic
       def create(resources)
+        storage_name = resources.first.model.storage_name
         resources.each do |resource|
-          initialize_serial(resource, @redis.incr("#{redis_key_for(resource.model)}:serial"))
+          initialize_serial(resource, @redis.incr("#{storage_name}:#{redis_key_for(resource.model)}:serial"))
           @redis.sadd(key_set_for(resource.model), resource.key.join)
         end
         update_attributes(resources)
@@ -36,9 +37,10 @@ module DataMapper
       #
       # @api semipublic
       def read(query)
+        storage_name = query.model.storage_name
         records = records_for(query)
         records.each do |record|
-          record_data = @redis.hgetall("#{query.model.to_s.downcase}:#{record[redis_key_for(query.model)]}")
+          record_data = @redis.hgetall("#{storage_name}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
             next if query.model.key.include?(property)
@@ -108,13 +110,14 @@ module DataMapper
       #
       # @api private
       def update_attributes(resources)
+        storage_name = resources.first.model.storage_name
         resources.each do |resource|
 
           model = resource.model
           attributes = resource.dirty_attributes
 
           resource.model.properties.select {|p| p.index}.each do |property|
-            @redis.sadd("#{resource.model.to_s.downcase}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.first.to_s)
+            @redis.sadd("#{storage_name}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.first.to_s)
           end
 
           properties_to_set = []
@@ -131,7 +134,7 @@ module DataMapper
             end
           end
 
-          hash_key = "#{resource.model.to_s.downcase}:#{resource.key.join}"
+          hash_key = "#{storage_name}:#{resource.key.join}"
           properties_to_del.each {|prop| @redis.hdel(hash_key, prop) }
           @redis.hmset(hash_key, *properties_to_set) unless properties_to_set.empty?
         end
@@ -201,6 +204,7 @@ module DataMapper
       #
       # @api private
       def perform_query(query, operand)
+        storage_name = query.model.storage_name
         matched_records = []
         subject, value = find_subject_and_value(query, operand)
 
@@ -253,7 +257,7 @@ module DataMapper
       # @api private
       def search_all_resources(query, operand, subject, matched_records)
         @redis.smembers(key_set_for(query.model)).each do |key|
-          if operand.matches?(subject.typecast(@redis.hget("#{query.model.to_s.downcase}:#{key}", subject.name)))
+          if operand.matches?(subject.typecast(@redis.hget("#{subject.model.storage_name}:#{key}", subject.name)))
             matched_records << {redis_key_for(query.model) => key}
           end
         end
@@ -280,7 +284,7 @@ module DataMapper
       #   The string key for the :all set
       # @api private
       def key_set_for(model)
-        "#{model.to_s.downcase}:#{redis_key_for(model)}:all"
+        "#{model.storage_name}:#{redis_key_for(model)}:all"
       end
 
       ##
@@ -290,7 +294,7 @@ module DataMapper
       #   Array of id's of all members for an indexed field
       # @api private
       def find_indexed_matches(subject, value)
-        @redis.smembers("#{subject.model.to_s.downcase}:#{subject.name}:#{encode(value)}").map {|id| id.to_i}
+        @redis.smembers("#{subject.model.storage_name}:#{subject.name}:#{encode(value)}").map {|id| id.to_i}
       end
 
       ##
