@@ -4,8 +4,8 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{dm-redis-adapter}
-  s.version = "0.5.3"
+  s.name = %q{dm-redis}
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Herrera"]
@@ -19,18 +19,19 @@ Gem::Specification.new do |s|
     "MIT-LICENSE",
      "README.textile",
      "Rakefile",
-     "lib/dm-redis-adapter.rb",
-     "lib/dm-redis-adapter/adapter.rb",
-     "lib/dm-redis-adapter/spec/setup.rb",
+     "lib/dm-redis.rb",
+     "lib/dm-redis/adapter.rb",
+     "lib/dm-redis/spec/setup.rb",
      "spec/dm_redis_associations_spec.rb",
      "spec/dm_redis_finding_spec.rb",
      "spec/dm_redis_inheritenance_spec.rb",
      "spec/dm_redis_spec.rb",
      "spec/dm_redis_validations_spec.rb",
+     "spec/self_referential_spec.rb",
      "spec/spec_helper.rb",
      "spec/textual_keys_spec.rb"
   ]
-  s.homepage = %q{http://github.com/whoahbot/dm-redis-adapter}
+  s.homepage = %q{http://github.com/whoahbot/dm-redis}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
@@ -41,6 +42,7 @@ Gem::Specification.new do |s|
      "spec/dm_redis_inheritenance_spec.rb",
      "spec/dm_redis_spec.rb",
      "spec/dm_redis_validations_spec.rb",
+     "spec/self_referential_spec.rb",
      "spec/spec_helper.rb",
      "spec/textual_keys_spec.rb"
   ]

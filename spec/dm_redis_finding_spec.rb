@@ -38,11 +38,10 @@ describe DataMapper::Adapters::RedisAdapter do
       found.should == [@b,@c,@d]
     end
 
-    # it fails
-    #it 'should find Page.all :parent_id.not => @a.id' do
-    #  found = Page.all :parent_id.not => @a.id
-    #  found.should == [@a,@d]
-    #end
+    it 'should find Page.all :parent_id.not => @a.id' do
+      found = Page.all :parent_id.not => @a.id
+      found.should == [@a,@d]
+    end
 
     it 'should find Page.all :parent => @a' do
       found = Page.all :parent => @a

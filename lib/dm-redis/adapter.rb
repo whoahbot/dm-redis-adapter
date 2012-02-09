@@ -1,7 +1,6 @@
 require 'redis/connection/hiredis'
 require 'redis'
 require 'base64'
-require 'dm-core'
 
 module DataMapper
   module Adapters
@@ -92,12 +91,11 @@ module DataMapper
       #
       # @api semipublic
       def delete(collection)
-        storage_name = collection.query.model.storage_name
         collection.each do |record|
-          @redis.del("#{storage_name}:#{record[redis_key_for(collection.query.model)]}")
+          @redis.del("#{collection.query.model.to_s.downcase}:#{record[redis_key_for(collection.query.model)]}")
           @redis.srem(key_set_for(collection.query.model), record[redis_key_for(collection.query.model)])
           record.model.properties.select {|p| p.index}.each do |p|
-            @redis.srem("#{storage_name}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
+            @redis.srem("#{collection.query.model.to_s.downcase}:#{p.name}:#{encode(record[p.name])}", record[redis_key_for(collection.query.model)])
           end
         end
       end
@@ -114,6 +112,7 @@ module DataMapper
       def update_attributes(resources)
         storage_name = resources.first.model.storage_name
         resources.each do |resource|
+
           model = resource.model
           attributes = resource.dirty_attributes
 
@@ -123,6 +122,7 @@ module DataMapper
 
           properties_to_set = []
           properties_to_del = []
+
 
           fields = model.properties(self.name).select {|property| attributes.key?(property)}
           fields.each do |property|
@@ -171,29 +171,14 @@ module DataMapper
         keys
       end
 
-      ##
-      # Find records that match have a matching value
-      #
-      # @param [DataMapper::Query] query
-      #   The query used to locate the resources to be deleted.
-      #
-      # @param [DataMapper::Operation] the operation for the query
-      #
-      # @api private
-      def perform_query(query, operand)
-        storage_name = query.model.storage_name
-
-        matched_records = []
-        #p 'query: ' + query.inspect
-        #p 'operand: ' + operand.inspect
-
+      def find_subject_and_value(query, operand)
         if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
           subject = operand.first.subject
           value = operand.first.value
         elsif operand.subject.is_a?(DataMapper::Associations::ManyToOne::Relationship)
           subject = operand.subject.child_key.first
           value = if operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            operand.value.map{|v|v[operand.subject.parent_key.first.name]}
+            operand.value.map{|v| v[operand.subject.parent_key.first.name]}
           else
             operand.value[operand.subject.parent_key.first.name]
           end
@@ -206,46 +191,76 @@ module DataMapper
           subject = subject.child_key.first
         end
 
-        #p 'subject: ' + subject.inspect
-        #p 'value: ' + value.inspect
+        return subject, value
+      end
 
-        if query.model.key.include?(subject)
-          if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
-            @redis.smembers(key_set_for(query.model)).each do |key|
-              if operand.matches?(subject.typecast(key))
-                matched_records << {redis_key_for(query.model) => key}
+      ##
+      # Find records that match have a matching value
+      #
+      # @param [DataMapper::Query] query
+      #   The query used to locate the resources to be deleted.
+      #
+      # @param [DataMapper::Operation] the operation for the query
+      #
+      # @api private
+      def perform_query(query, operand)
+        storage_name = query.model.storage_name
+        matched_records = []
+        subject, value = find_subject_and_value(query, operand)
+
+        case operand
+          when DataMapper::Query::Conditions::NotOperation
+            if query.model.key.include?(subject)
+              @redis.smembers(key_set_for(query.model)).each do |key|
+                if operand.matches?(subject.typecast(key))
+                  matched_records << {redis_key_for(query.model) => key}
+                end
+              end
+            else
+              search_all_resources(query, operand, subject, matched_records)
+            end
+          when DataMapper::Query::Conditions::InclusionComparison
+            if query.model.key.include?(subject)
+              value.each do |val|
+                if @redis.sismember(key_set_for(query.model), val)
+                  matched_records << {redis_key_for(query.model) => val}
+                end
+              end
+            elsif subject.respond_to?(:index) && subject.index
+              value.each do |val|
+                find_indexed_matches(subject, val).each do |k|
+                  matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => val}
+                end
+              end
+            else
+              search_all_resources(query, operand, subject, matched_records)
+            end
+          when DataMapper::Query::Conditions::EqualToComparison
+            if query.model.key.include?(subject)
+              if @redis.sismember(key_set_for(query.model), value)
+                matched_records << {redis_key_for(query.model) => value}
+              end
+            elsif subject.respond_to?(:index) && subject.index
+              find_indexed_matches(subject, value).each do |k|
+                matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => value}
               end
             end
-          elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            value.each do |val|
-              if @redis.sismember(key_set_for(query.model), val)
-                matched_records << {redis_key_for(query.model) => val}
-              end
-            end
-          elsif @redis.sismember(key_set_for(query.model), value)
-            matched_records << {redis_key_for(query.model) => value}
+          else # worst case here, loop through all members, typecast and match
+            search_all_resources(query, operand, subject, matched_records)
           end
-        elsif subject.respond_to?( :index ) && subject.index
-          if operand.is_a?(DataMapper::Query::Conditions::NotOperation)
-          elsif operand.is_a?(DataMapper::Query::Conditions::InclusionComparison)
-            value.each do |val|
-              find_indexed_matches(subject, val).each do |k|
-                matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => val}
-              end
-            end
-          else
-            find_indexed_matches(subject, value).each do |k|
-              matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => value}
-            end
-          end
-        else # worst case, loop through each record and match
-          @redis.smembers(key_set_for(query.model)).each do |key|
-            if operand.matches?(subject.typecast(@redis.hget("#{storage_name}:#{key}", subject.name)))
-              matched_records << {redis_key_for(query.model) => key}
-            end
+        matched_records
+      end
+
+      ##
+      # Searches through each key :(
+      #
+      # @api private
+      def search_all_resources(query, operand, subject, matched_records)
+        @redis.smembers(key_set_for(query.model)).each do |key|
+          if operand.matches?(subject.typecast(@redis.hget("#{subject.model.storage_name}:#{key}", subject.name)))
+            matched_records << {redis_key_for(query.model) => key}
           end
         end
-        matched_records
       end
 
       ##
