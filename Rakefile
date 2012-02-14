@@ -10,11 +10,11 @@ end
 
 require 'spec/rake/spectask'
 
-GEM = 'dm-redis'
-GEM_NAME = 'dm-redis'
+GEM = 'dm-redis-adapter'
+GEM_NAME = 'dm-redis-adapter'
 AUTHORS = ['Dan Herrera']
 EMAIL = "whoahbot@gmail.com"
-HOMEPAGE = "http://github.com/whoahbot/dm-redis"
+HOMEPAGE = "http://github.com/whoahbot/dm-redis-adapter"
 SUMMARY = "DataMapper adapter for the Redis key-value database"
 
 begin

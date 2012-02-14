@@ -1,4 +1,4 @@
-h1. dm-redis
+h1. dm-redis-adapter
 
 This is a <a href="http://datamapper.org">DataMapper</a> adapter for the <a href="http://redis.io/">Redis</a> key-value store.
 
@@ -8,8 +8,13 @@ Redis is a very fast key-value store with some interesting data structures added
 
 Marrying DataMapper to Redis allows for schema-less models, you can add fields at any time without having to create a migration.  DataMapper also allows us to store non-native Redis types in the db, like Date fields.
 
+h1. Upgrading
+
+Please note that as of version 0.5.3 of the gem, the key names that are used for storage have changed and break compatibility with previous versions!
+
 h1. Changelog
 
+* v0.5.3  Support for inheritance via sfeu and ujifgc, this version *breaks compatibility* with previous versions of the gem
 * v0.4.0  Support for dm-core v1.1.0
 * v0.3.0  Updates to support ruby 1.9.2 (thanks arbarlow!)
 * v0.2.1  Fixes to sorting
@@ -21,12 +26,12 @@ h1. Install
 
 Prerequisites:
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis, v2.2 series</a>
+** <a href="http://code.google.com/p/redis/">Redis, >= v2.2 series</a>
 
-Install the dm-redis adapter:
+Install the dm-redis-adapter:
 <pre>
   <code>
-    > gem install dm-redis
+    > gem install dm-redis-adapter
   </code>
 </pre>
 
@@ -38,7 +43,7 @@ Setup your adapter, define your models and properties:
   <code>
     require 'rubygems'
     require 'dm-core'
-    require 'dm-redis'
+    require 'dm-redis-adapter'
 
     DataMapper.setup(:default, {:adapter  => "redis"})
 

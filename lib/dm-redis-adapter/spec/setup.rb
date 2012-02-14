@@ -1,4 +1,4 @@
-require 'dm-redis'
+require 'dm-redis-adapter'
 require 'dm-core/spec/setup'
 
 module DataMapper
