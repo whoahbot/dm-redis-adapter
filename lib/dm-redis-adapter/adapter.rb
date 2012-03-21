@@ -43,7 +43,7 @@ module DataMapper
           record_data = @redis.hgetall("#{storage_name}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
-            next if query.model.key.include?(property)
+            next if query.model.key.include?(property) and query.model.key.size == 1
 
             name = property.name.to_s
             value = record_data[name]
@@ -260,14 +260,15 @@ module DataMapper
               search_all_resources(query, operand, subject, matched_records)
             end
           when DataMapper::Query::Conditions::EqualToComparison
-            if query.model.key.include?(subject)
-              if @redis.sismember(key_set_for(query.model), value)
+            if query.model.key.include?(subject) and @redis.sismember(key_set_for(query.model), value)
                 matched_records << {redis_key_for(query.model) => value}
-              end
+
             elsif subject.respond_to?(:index) && subject.index
               find_indexed_matches(subject, value).each do |k|
                 matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => value}
               end
+            else
+              search_all_resources(query, operand, subject, matched_records)
             end
           else # worst case here, loop through all members, typecast and match
             search_all_resources(query, operand, subject, matched_records)
