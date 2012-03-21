@@ -38,6 +38,7 @@ describe DataMapper::Adapters::RedisAdapter do
 
       Foo.create(:key1 => "value1", :key2 => 'value2')
       Foo.first(:key1 => "value1").key2.should == 'value2'
+ #     Foo.get("value1","value2").key2.should == 'value2'
     end
 
   end
