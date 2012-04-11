@@ -64,18 +64,18 @@ EOF
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<dm-core>, [">= 1.2.0"])
       s.add_runtime_dependency(%q<dm-types>, [">= 1.2.0"])
-      s.add_runtime_dependency(%q<hiredis>, ["~> 0.3.0"])
+      s.add_runtime_dependency(%q<hiredis>, ["~> 0.4.0"])
       s.add_runtime_dependency(%q<redis>, ["~> 2.2"])
     else
       s.add_dependency(%q<dm-core>, [">= 1.2.0"])
       s.add_dependency(%q<dm-types>, [">= 1.2.0"])
-      s.add_dependency(%q<hiredis>, ["~> 0.3.0"])
+      s.add_dependency(%q<hiredis>, ["~> 0.4.0"])
       s.add_dependency(%q<redis>, ["~> 2.2"])
     end
   else
     s.add_dependency(%q<dm-core>, [">= 1.2.0"])
     s.add_dependency(%q<dm-types>, [">= 1.2.0"])
-    s.add_dependency(%q<hiredis>, ["~> 0.3.0"])
+    s.add_dependency(%q<hiredis>, ["~> 0.4.0"])
     s.add_dependency(%q<redis>, ["~> 2.2"])
   end
 end
