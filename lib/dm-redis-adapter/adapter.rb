@@ -155,6 +155,7 @@ module DataMapper
 
         if query.conditions.nil?
           @redis.smembers(key_set_for(query.model)).each do |key|
+            key = key.to_i if key =~ /^\d+$/
             keys << {redis_key_for(query.model) => key}
           end
         else

@@ -118,6 +118,9 @@ describe DataMapper::Adapters::RedisAdapter do
       james = Blackguard.create(:nickname => "James 'cannon-fingers' Doolittle")
       Blackguard.get(petey.id).should_not be_destroyed
       Blackguard.first(:nickname => "James 'cannon-fingers' Doolittle").should_not be_destroyed
+      Blackguard.first.should_not be_destroyed
+      Blackguard.last.should_not be_destroyed
+      Blackguard.all.first.should_not be_destroyed
     end
   end
 
