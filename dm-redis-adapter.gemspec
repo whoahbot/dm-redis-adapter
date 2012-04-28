@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "dm-redis-adapter"
-  s.version = "0.6.0"
+  s.version = "0.6.1"
 
   s.post_install_message = <<EOF
 ***********************************************************************************************
