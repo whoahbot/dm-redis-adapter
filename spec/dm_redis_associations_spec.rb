@@ -10,6 +10,47 @@ describe DataMapper::Adapters::RedisAdapter do
     @redis.flushdb
   end
 
+  it "should delete from association" do
+    class Book
+      include DataMapper::Resource
+
+      property :id,   Serial
+      property :name, String
+
+      has n, :book_tags
+      has n, :tags, :through => :book_tags
+    end
+
+    class Tag
+      include DataMapper::Resource
+
+      property :id,   Serial
+      property :name, String
+
+      has n, :book_tags
+      has n, :books, :through => :book_tags
+    end
+
+    class BookTag
+      include DataMapper::Resource
+
+      property :id,   Serial
+
+      belongs_to :book
+      belongs_to :tag
+    end
+
+    DataMapper.finalize
+
+    b = Book.create(:name => "Harry Potter")
+    t = b.tags.create(:name => "fiction")
+
+    t.destroy
+
+    b2 = Book.get(b.id)
+    b2.tags.should_not == [t]
+  end
+
   it "should allow has n :through" do
     class Book
       include DataMapper::Resource
