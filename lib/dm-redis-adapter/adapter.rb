@@ -43,7 +43,7 @@ module DataMapper
           record_data = @redis.hgetall("#{storage_name}:#{record[redis_key_for(query.model)]}")
 
           query.fields.each do |property|
-            next if query.model.key.include?(property)
+            next if query.model.key.include?(property) and query.model.key.size == 1
 
             name = property.name.to_s
             value = record_data[name]
@@ -140,6 +140,27 @@ module DataMapper
         end
       end
 
+      def is_composed_key_based_query?(query)
+        fields_length = query.model.key.size
+        is_key = query.condition_properties.select { |field| field.key? }
+        (fields_length >1 and fields_length == is_key.length)
+      end
+
+      def key_query(query)
+        matched_records = []
+        value =""
+        storage_name = query.model.storage_name
+        query.conditions.operands.each do |operand|
+          value += operand.value  if operand.subject.key?
+        end
+
+        if @redis.sismember(key_set_for(query.model), value)
+          #matched_records <<  @redis.hgetall("#{storage_name}:#{value}")
+          matched_records << {redis_key_for(query.model) => value}
+        end
+        matched_records
+      end
+
       ##
       # Retrieves records for a particular model.
       #
@@ -158,6 +179,8 @@ module DataMapper
             key = key.to_i if key =~ /^\d+$/
             keys << {redis_key_for(query.model) => key}
           end
+        elsif is_composed_key_based_query?(query)
+          keys = key_query(query)
         else
           query.conditions.operands.each do |operand|
             if operand.is_a?(DataMapper::Query::Conditions::OrOperation)
@@ -237,18 +260,19 @@ module DataMapper
               search_all_resources(query, operand, subject, matched_records)
             end
           when DataMapper::Query::Conditions::EqualToComparison
-            if query.model.key.include?(subject)
-              if @redis.sismember(key_set_for(query.model), value)
+            if query.model.key.include?(subject) and @redis.sismember(key_set_for(query.model), value)
                 matched_records << {redis_key_for(query.model) => value}
-              end
+
             elsif subject.respond_to?(:index) && subject.index
               find_indexed_matches(subject, value).each do |k|
                 matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => value}
               end
+            else
+              search_all_resources(query, operand, subject, matched_records)
             end
           else # worst case here, loop through all members, typecast and match
             search_all_resources(query, operand, subject, matched_records)
-          end
+        end
         matched_records
       end
 
