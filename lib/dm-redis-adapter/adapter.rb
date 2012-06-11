@@ -245,6 +245,8 @@ module DataMapper
               find_indexed_matches(subject, value).each do |k|
                 matched_records << {redis_key_for(query.model) => k, "#{subject.name}" => value}
               end
+            else # worst case here, loop through all members, typecast and match
+              search_all_resources(query, operand, subject, matched_records)
             end
           else # worst case here, loop through all members, typecast and match
             search_all_resources(query, operand, subject, matched_records)
