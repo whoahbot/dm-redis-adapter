@@ -5,24 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = "dm-redis-adapter"
-  s.version = "0.6.1"
-
-  s.post_install_message = <<EOF
-***********************************************************************************************
-
-  * IMPORTANT *
-  This version of dm-redis changes the key names for data in Redis.
-  If you have been using dm-redis-adapter in the past, using this gem will not allow you to
-  retreive your data!
-
-***********************************************************************************************
-EOF
+  s.version = "0.6.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Herrera"]
-  s.date = "2012-02-13"
+  s.date = "2012-06-12"
   s.description = "DataMapper adapter for the Redis key-value database"
   s.email = "whoahbot@gmail.com"
+  s.executables = ["autospec", "edit_json.rb", "jeweler", "minitar", "prettify_json.rb", "rake", "rdebug", "rubyforge", "spec"]
   s.extra_rdoc_files = [
     "MIT-LICENSE"
   ]
@@ -45,7 +35,7 @@ EOF
   s.homepage = "http://github.com/whoahbot/dm-redis-adapter"
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.16"
+  s.rubygems_version = "1.8.11"
   s.summary = "DataMapper adapter for the Redis key-value database"
   s.test_files = [
     "spec/dm_redis_associations_spec.rb",

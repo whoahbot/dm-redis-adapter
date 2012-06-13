@@ -15,7 +15,7 @@ Please note that as of version 0.5.3 of the gem, the key names that are used for
 h1. Changelog
 
 
-* v0.6.2  Fixes a problem with non-index, non-key queries (thanks @thecurator!)
+* v0.6.3  Fixes a problem with non-index, non-key queries (thanks @thecurator!)
 * v0.6.2  Fixes a problem with 'destroyed' objects (thanks @snovotny!)
 * v0.6.1  Fixes a problem with deleting an object and not having it deleted from an assosciation (thanks @sheur!)
 * v0.6.0  Refactor and change to the way that model names are stored in redis
