@@ -15,6 +15,7 @@ Please note that as of version 0.5.3 of the gem, the key names that are used for
 h1. Changelog
 
 
+* v0.6.2  Fixes a problem with non-index, non-key queries (thanks @thecurator!)
 * v0.6.2  Fixes a problem with 'destroyed' objects (thanks @snovotny!)
 * v0.6.1  Fixes a problem with deleting an object and not having it deleted from an assosciation (thanks @sheur!)
 * v0.6.0  Refactor and change to the way that model names are stored in redis
@@ -110,4 +111,4 @@ h1. Badass contributors
 * <a href="http://github.com/sfeu">Sebastian Feuerstack (sfeu)</a> Fixes to support inheritance
 * <a href="http://github.com/sheur">Stephen Heuer (@sheur)</a> Fixes to deleted assosciations
 * <a href="http://github.com/sheur">Steve Novotny (@snovotny)</a> Fixing a bug with 'destroyed' objects
-
+* <a href="http://github.com/sheur">Andrew Janssen (@thecurator)</a> Fixing a bug with non-index, non-key queries
