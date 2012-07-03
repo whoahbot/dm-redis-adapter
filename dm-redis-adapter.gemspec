@@ -30,7 +30,8 @@ Gem::Specification.new do |s|
      "spec/dm_redis_validations_spec.rb",
      "spec/self_referential_spec.rb",
      "spec/spec_helper.rb",
-     "spec/textual_keys_spec.rb"
+     "spec/textual_keys_spec.rb",
+     "Gemfile"
   ]
   s.homepage = "http://github.com/whoahbot/dm-redis-adapter"
   s.rdoc_options = ["--charset=UTF-8"]
