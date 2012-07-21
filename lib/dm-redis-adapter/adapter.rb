@@ -297,7 +297,7 @@ module DataMapper
       #   Array of id's of all members for an indexed field
       # @api private
       def find_indexed_matches(subject, value)
-        @redis.smembers("#{subject.model.storage_name}:#{subject.name}:#{encode(value)}").map {|id| id.to_i}
+        @redis.smembers("#{subject.model.storage_name}:#{subject.name}:#{encode(value)}").map {|id| id =~ /^\d+$/ ? id.to_i : id}
       end
 
       ##

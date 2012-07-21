@@ -18,7 +18,7 @@ h1. Changelog
 * v0.6.4  Adding the Gemfile so that rake commands work (thanks @kellydunn!)
 * v0.6.3  Fixes a problem with non-index, non-key queries (thanks @thecurator!)
 * v0.6.2  Fixes a problem with 'destroyed' objects (thanks @snovotny!)
-* v0.6.1  Fixes a problem with deleting an object and not having it deleted from an assosciation (thanks @sheur!)
+* v0.6.1  Fixes a problem with deleting an object and not having it deleted from an assosciation (thanks @sheuer!)
 * v0.6.0  Refactor and change to the way that model names are stored in redis
 * v0.5.3  Support for inheritance via sfeu and ujifgc, this version *breaks compatibility* with previous versions of the gem
 * v0.4.0  Support for dm-core v1.1.0
@@ -110,6 +110,6 @@ h1. Badass contributors
 * <a href="http://github.com/arbarlow">Alex Barlow (arbarlow)</a> Fixes for ruby 1.9.2
 * <a href="http://github.com/jof">Jonathan Lassoff (jof)</a> Fixes to support textual keys
 * <a href="http://github.com/sfeu">Sebastian Feuerstack (sfeu)</a> Fixes to support inheritance
-* <a href="http://github.com/sheur">Stephen Heuer (@sheur)</a> Fixes to deleted assosciations
-* <a href="http://github.com/sheur">Steve Novotny (@snovotny)</a> Fixing a bug with 'destroyed' objects
-* <a href="http://github.com/sheur">Andrew Janssen (@thecurator)</a> Fixing a bug with non-index, non-key queries
+* <a href="http://github.com/sheuer">Stephen Heuer (@sheuer)</a> Fixes to deleted assosciations
+* <a href="http://github.com/snovotny">Steve Novotny (@snovotny)</a> Fixing a bug with 'destroyed' objects
+* <a href="http://github.com/thecurator">Andrew Janssen (@thecurator)</a> Fixing a bug with non-index, non-key queries
