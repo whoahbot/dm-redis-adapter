@@ -26,4 +26,29 @@ describe DataMapper::Adapters::RedisAdapter do
       Foo.first.hostname.should == "hostname1"
     end
   end
+  
+  describe "textual keys" do
+    it "should find associated objects using textual key" do
+      class Cart
+        include DataMapper::Resource
+        property :id, String, :key => true, :unique_index => true
+        has n, :items
+      end
+      
+      class Item
+        include DataMapper::Resource
+        property :id, String, :key => true, :unique_index => true
+        property :description, String
+        belongs_to :cart
+      end
+      DataMapper.finalize
+      
+      cart = Cart.create(:id => "6e0fbb69-4e29-4719-a067-a850b5685317")
+      item = cart.items.create(:id => "246ffaed-f060-4a0c-83ef-39008899c0db", :description => "test item")
+      
+      Cart.get("6e0fbb69-4e29-4719-a067-a850b5685317").items.should == [item]
+    end
+  end
+  
+  
 end
