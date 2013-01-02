@@ -29,7 +29,7 @@ begin
     gemspec.add_dependency "dm-core", ">= 1.2.0"
     gemspec.add_dependency "dm-types", ">= 1.2.0"
     gemspec.add_dependency "hiredis", "~> 0.4.0"
-    gemspec.add_dependency "redis", "~> 2.2"
+    gemspec.add_dependency "redis", ">= 2.2"
     gemspec.files = %w(MIT-LICENSE README.textile Rakefile) + Dir.glob("{lib,spec}/**/*")
     gemspec.has_rdoc = false
     gemspec.extra_rdoc_files = ["MIT-LICENSE"]
