@@ -14,6 +14,7 @@ Please note that as of version 0.5.3 of the gem, the key names that are used for
 
 h1. Changelog
 
+* v0.8.2  Updates to RedisAdapter#initialize to support URI. (thanks @thentenaar)
 * v0.8.1  Dependency updates by @jof to support newer versions of the redis gem.
 * v0.8.0  Updates by @sfeu to support composite natural keys.
 * v0.6.4  Adding the Gemfile so that rake commands work (thanks @kellydunn!)
@@ -104,6 +105,7 @@ Validations on unique fields are now supported through indices and dm-validation
 
 h1. Badass contributors
 
+* <a href="http://github.com/thentenaar">Tim Hentenaar (thentenaar)</a>
 * <a href="http://github.com/aeden">Anthony Eden (aeden)</a> Gem cleanup, update to jeweler
 * <a href="http://github.com/sr">Simon Roset (sr)</a> Fixes for edge dm-core
 * <a href="http://github.com/cehoffman">Chris Hoffman (cehoffman)</a> Fixes for Ruby 1.9, bundler for development deps, fixes for sorting
