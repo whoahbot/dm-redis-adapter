@@ -123,7 +123,6 @@ module DataMapper
           properties_to_set = []
           properties_to_del = []
 
-
           fields = model.properties(self.name).select {|property| attributes.key?(property)}
           fields.each do |property|
             value = attributes[property]
@@ -344,6 +343,19 @@ module DataMapper
       #
       # @api semipublic
       def initialize(name, uri_or_options)
+        uri_or_options.delete_if { |k,v| v.nil? || (v.is_a?(String) && v == '') }
+
+        # If the :path ends in '.sock' assume that this really is a path, otherwise assume it's a DB name
+        uri_or_options.delete(:path) if uri_or_options[:path] == '/'
+        uri_or_options[:db] = uri_or_options.delete(:path) if uri_or_options[:path] && uri_or_options[:path].match(/\.sock$/)  
+
+        # Parse options from the URI's query string
+        if uri_or_options[:query]
+          opts = uri_or_options[:query].split(/&/)
+          uri_or_options.merge!(Hash[opts.collect { |x| x.split(/=/) }])
+          uri_or_options.delete(:query)
+        end
+
         super
         @redis = Redis.new(@options)
       end
