@@ -116,3 +116,4 @@ h1. Badass contributors
 * <a href="http://github.com/sheuer">Stephen Heuer (@sheuer)</a> Fixes to deleted assosciations
 * <a href="http://github.com/snovotny">Steve Novotny (@snovotny)</a> Fixing a bug with 'destroyed' objects
 * <a href="http://github.com/thecurator">Andrew Janssen (@thecurator)</a> Fixing a bug with non-index, non-key queries
+* <a href="http://github.com/krider2010">Claire (@krider2010)</a> Update version of redis gem dependency
