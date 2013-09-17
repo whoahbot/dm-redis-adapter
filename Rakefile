@@ -8,7 +8,7 @@ rescue LoadError
   Bundler.setup
 end
 
-require "rspec/core/rake_task"
+require 'spec/rake/spectask'
 
 GEM = 'dm-redis-adapter'
 GEM_NAME = 'dm-redis-adapter'
@@ -42,7 +42,7 @@ end
 task :default => :spec
 
 desc "Run specs"
-RSpec::Core::RakeTask.new do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rspec_opts = ['--backtrace', '--color', '--drb', '--format documentation']
+Spec::Rake::SpecTask.new do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts = %w(-fs --color)
 end
