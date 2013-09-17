@@ -34,7 +34,7 @@ h1. Install
 
 Prerequisites:
 * Redis:
-** <a href="http://code.google.com/p/redis/">Redis, >= v2.2 series</a>
+** <a href="http://code.google.com/p/redis/">Redis, >= v3.0 series</a>
 
 Install the dm-redis-adapter:
 <pre>
