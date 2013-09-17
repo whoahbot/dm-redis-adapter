@@ -42,7 +42,7 @@ end
 task :default => :spec
 
 desc "Run specs"
-RSpec::Core::RakeTask.new(:core) do |spec|
+RSpec::Core::RakeTask.new do |spec|
   spec.pattern = 'spec/**/*_spec.rb'
-  spec.rspec_opts = ['--fs', '--color']
+  spec.rspec_opts = ['--backtrace', '--color', '--drb', '--format documentation']
 end
