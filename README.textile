@@ -14,6 +14,7 @@ Please note that as of version 0.5.3 of the gem, the key names that are used for
 
 h1. Changelog
 
+* v0.8.4  Fixes for composite keys (thanks @krider2010)
 * v0.8.2  Updates to RedisAdapter#initialize to support URI. (thanks @thentenaar)
 * v0.8.1  Dependency updates by @jof to support newer versions of the redis gem.
 * v0.8.0  Updates by @sfeu to support composite natural keys.
@@ -116,4 +117,4 @@ h1. Badass contributors
 * <a href="http://github.com/sheuer">Stephen Heuer (@sheuer)</a> Fixes to deleted assosciations
 * <a href="http://github.com/snovotny">Steve Novotny (@snovotny)</a> Fixing a bug with 'destroyed' objects
 * <a href="http://github.com/thecurator">Andrew Janssen (@thecurator)</a> Fixing a bug with non-index, non-key queries
-* <a href="http://github.com/krider2010">Claire (@krider2010)</a> Update version of redis gem dependency
+* <a href="http://github.com/krider2010">Claire (@krider2010)</a> Update version of redis gem dependency, fixes for composite keys.
