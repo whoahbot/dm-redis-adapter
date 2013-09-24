@@ -150,7 +150,7 @@ module DataMapper
         value =""
         storage_name = query.model.storage_name
         query.conditions.operands.each do |operand|
-          value += operand.value  if operand.subject.key?
+          value += operand.value.to_s if operand.subject.key?
         end
 
         if @redis.sismember(key_set_for(query.model), value)
