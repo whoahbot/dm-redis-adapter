@@ -117,7 +117,7 @@ module DataMapper
           attributes = resource.dirty_attributes
 
           resource.model.properties.select {|p| p.index}.each do |property|
-            @redis.sadd("#{storage_name}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.first.to_s)
+            @redis.sadd("#{storage_name}:#{property.name}:#{encode(resource[property.name.to_s])}", resource.key.join.to_s)
           end
 
           properties_to_set = []
@@ -147,7 +147,7 @@ module DataMapper
 
       def key_query(query)
         matched_records = []
-        value =""
+        value = ""
         storage_name = query.model.storage_name
         query.conditions.operands.each do |operand|
           value += operand.value.to_s if operand.subject.key?
@@ -221,7 +221,7 @@ module DataMapper
       # Find records that match have a matching value
       #
       # @param [DataMapper::Query] query
-      #   The query used to locate the resources to be deleted.
+      #   The query used to locate the resources to be matched.
       #
       # @param [DataMapper::Operation] the operation for the query
       #
