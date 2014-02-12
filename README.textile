@@ -105,6 +105,18 @@ Validations on unique fields are now supported through indices and dm-validation
   </code>
 </pre>
 
+Set up namespaces in Redis database to separate data on different stages. Taking default naming convention and prefixing it with application name and environment, for example <code>great_app:development:users</code>
+
+<pre>
+  <code>
+    adapter = DataMapper.setup(:default, { adapter: 'redis', })
+
+    adapter.resource_naming_convention = lambda do |value|
+      ['application_name, 'stage', DataMapper::Inflector.pluralize(DataMapper::Inflector.underscore(value)).gsub('/', '_')].join(':')
+    end
+  </code>
+</pre>
+
 h1. Badass contributors
 
 * <a href="http://github.com/thentenaar">Tim Hentenaar (thentenaar)</a>
