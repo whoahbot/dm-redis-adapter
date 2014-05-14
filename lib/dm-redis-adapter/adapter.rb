@@ -1,6 +1,7 @@
 require 'redis/connection/hiredis'
 require 'redis'
 require 'base64'
+require 'dm-core'
 
 module DataMapper
   module Adapters
