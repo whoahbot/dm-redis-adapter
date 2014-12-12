@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.authors = ["Dan Herrera"]
   s.date = "2014-11-28"
+  s.license = 'MIT'
   s.description = "DataMapper adapter for the Redis key-value database"
   s.email = "whoahbot@gmail.com"
   s.extra_rdoc_files = [
