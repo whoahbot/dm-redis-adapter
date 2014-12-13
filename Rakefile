@@ -26,6 +26,7 @@ begin
     gemspec.homepage = HOMEPAGE
     gemspec.description = SUMMARY
     gemspec.authors = AUTHORS
+    gemspec.license = 'MIT'
     gemspec.add_dependency "dm-core", ">= 1.2.0"
     gemspec.add_dependency "dm-types", ">= 1.2.0"
     gemspec.add_dependency "hiredis", "~> 0.4.0"
