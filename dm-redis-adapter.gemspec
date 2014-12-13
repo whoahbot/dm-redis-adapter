@@ -36,10 +36,7 @@ Gem::Specification.new do |s|
     "spec/textual_keys_spec.rb"
   ]
   s.homepage = "http://github.com/whoahbot/dm-redis-adapter"
-<<<<<<< HEAD
-=======
   s.licenses = ["MIT"]
->>>>>>> Uses jeweler to insert license into gemspec
   s.rubygems_version = "2.2.2"
   s.summary = "DataMapper adapter for the Redis key-value database"
 
