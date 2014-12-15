@@ -347,7 +347,10 @@ module DataMapper
 
         # If the :path ends in '.sock' assume that this really is a path, otherwise assume it's a DB name
         uri_or_options.delete(:path) if uri_or_options[:path] == '/'
-        uri_or_options[:db] = uri_or_options.delete(:path) if uri_or_options[:path] && uri_or_options[:path].match(/\.sock$/)  
+
+        if uri_or_options[:path] && !uri_or_options[:path].match(/\.sock$/)
+          uri_or_options[:db] = uri_or_options.delete(:path)
+        end
 
         # Parse options from the URI's query string
         if uri_or_options[:query]
