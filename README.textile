@@ -14,6 +14,7 @@ Please note that as of version 0.5.3 of the gem, the key names that are used for
 
 h1. Changelog
 
+* v0.10.1 Bugfixes and reduced runtime dependency (thanks @JonMidhir and @rabbit!)
 * v0.9.0  Fixes for composite keys being indexed (thanks @fringley)
 * v0.8.4  Fixes for composite keys (thanks @krider2010)
 * v0.8.2  Updates to RedisAdapter#initialize to support URI. (thanks @thentenaar)
