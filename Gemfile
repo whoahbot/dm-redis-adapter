@@ -1,10 +1,10 @@
-source :gemcutter
+source 'https://rubygems.org'
 
 gem "dm-core", ">= 1.2.0"
 gem "dm-validations", ">= 1.2.0"
-gem "dm-types", ">= 1.2.0"
+gem "dm-types", ">= 1.2.2"
 gem "redis", ">= 3.0.4"
-gem "hiredis", "~> 0.4.0"
+gem "hiredis", "~> 0.6.0"
 
 group :test do
   gem "rspec", "~> 1.3.2"
